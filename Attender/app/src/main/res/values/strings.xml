@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Attender</string>
+    <string name="facebook_app_id">683953828381840</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_event_page_activity">EventPageActivity</string>
+    <string name="title_activity_event__page_">Event_Page_Activity</string>
+    <string name="title_activity_calendar_page">CalendarPageActivity</string>
+    <string name="title_activity_search_event">searchEventActivity</string>
+    <string name="title_activity_event_list_page">EventListPageActivity</string>
+
+    <string-array name="type_array">
+        <item>Type</item>
+        <item>Career&amp;Business</item>
+        <item>Community&amp;Environment</item>
+        <item>Games</item>
+        <item>Fitness</item>
+        <item>Health&amp;Wellbeing</item>
+        <item>Language&amp;Ethnic Identity</item>
+        <item>New Age&amp;Spirituality</item>
+        <item>Socializing</item>
+        <item>Tech</item>
+    </string-array>
+    <string-array name="dates_array">
+        <item>Date</item>
+        <item>1 day ahead</item>
+        <item>1 week ahead</item>
+        <item>1 month ahead</item>
+
+    </string-array>
+    <string-array name="cities_array">
+        <item>City</item>
+        <item>Jerusalem</item>
+        <item>Tel Aviv-Yafo</item>
+        <item>Haifa</item>
+        <item>Herzeliyya</item>
+        <item>Ra\'anana</item>
+        <item>Rekhovot</item>
+        <item>Ramat Gan</item>
+        <item>Kefar Sava</item>
+        <item>Netanya</item>
+        <item>Modi\'in</item>
+
+    </string-array>
+    <string name="title_activity_chat_page">Chat</string>
+
+</resources>
