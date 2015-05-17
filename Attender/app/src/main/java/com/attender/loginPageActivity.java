@@ -40,8 +40,12 @@ public class loginPageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+
+//        //check fall
+//        printAlertDialog("we are here");
+
         // facebook
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
+        FacebookSdk.sdkInitialize(this);
         callbackManager = CallbackManager.Factory.create();
 
         // gmail
@@ -83,7 +87,7 @@ public class loginPageActivity extends Activity {
         // Print out the key hash "KeyHash" at log
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.example.rita.attender",
+                    "com.attender",
                     PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
@@ -103,24 +107,30 @@ public class loginPageActivity extends Activity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
-
-        // check facebook login
-        if(AccessToken.getCurrentAccessToken() != null)
-        {
-            Intent intent = new Intent(this, CalendarPageActivity.class);
-            startActivity(intent);
-        }
-    }
+//    @Override
+//    protected void onResume()
+//    {
+//        super.onResume();
+//        // Logs 'install' and 'app activate' App Events.
+//        AppEventsLogger.activateApp(this);
+//
+//        // check facebook login
+//        if(AccessToken.getCurrentAccessToken() != null)
+//        {
+//            Intent intent = new Intent(this, CalendarPageActivity.class);
+//            startActivity(intent);
+//        }
+//    }
 
     public void confirmPressed(View v)
     {
         Intent intent=new Intent(this,CalendarPageActivity.class);
+        startActivity(intent);
+    }
+
+    public void confirmPressed2(View v)
+    {
+        Intent intent=new Intent(this,searchEventActivity.class);
         startActivity(intent);
     }
 //    @Override
