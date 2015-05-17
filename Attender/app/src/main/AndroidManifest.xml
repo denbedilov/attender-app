@@ -17,6 +17,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainPageActivity"
+            android:label="@string/title_activity_event__page_" >
+        </activity>
+        <activity
             android:name=".Event_Page_Activity"
             android:label="@string/title_activity_event__page_" >
         </activity>

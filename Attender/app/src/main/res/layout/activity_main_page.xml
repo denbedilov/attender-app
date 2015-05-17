@@ -31,7 +31,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/search_imageView"
-            android:src="@drawable/search"
+            android:src="@drawable/Search"
             android:layout_weight="2" />
 
     </LinearLayout>
@@ -70,7 +70,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/Calendar_imageView"
-                android:src="@drawable/calendar"
+                android:src="@drawable/Calendar"
                 android:layout_weight="2" />
 
         </LinearLayout>
@@ -103,7 +103,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/Chat_imageView"
-                android:src="@drawable/chat"
+                android:src="@drawable/Chat"
                 android:layout_weight="2" />
 
         </LinearLayout>
