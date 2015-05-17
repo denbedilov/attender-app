@@ -24,6 +24,8 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
+
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -36,8 +38,14 @@ public class loginPageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login_page);
+
+        // facebook
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+
+        // gmail
+
 
         // internet connection something
         StrictMode.ThreadPolicy policy = new StrictMode.
@@ -45,7 +53,7 @@ public class loginPageActivity extends Activity {
         StrictMode.setThreadPolicy(policy);
 
 
-        callbackManager = CallbackManager.Factory.create();
+
 
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
