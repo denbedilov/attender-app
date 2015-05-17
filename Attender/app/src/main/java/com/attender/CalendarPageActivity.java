@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -30,32 +32,28 @@ public class CalendarPageActivity extends Activity
         ListView listView = (ListView) findViewById(R.id.listView);
 
 
-     //   events = bl.getEvents("type", "fds", "aaa");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+        TextView Calendar_TV = (TextView) findViewById(R.id.Calendar_TXT);
+        TextView Event_TV    = (TextView) findViewById(R.id.Event_List_TXT);
+        Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
+        Calendar_TV.setTypeface(tf);
+        Event_TV.setTypeface(tf);
 
-      //  if(events == null)
-     //   {
-     //       printAlertDialog("No events to show!");
-     ////   }
-      //  else
-      //  {
-      //      EventAdapter adapter = new EventAdapter(this, events);
-       //     listView.setAdapter(adapter);
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                // private int position;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // private int position;
 
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
-                    int eventNum = position;
-                    Event testE = events.get(eventNum);
-                    myIntent.putExtra("CurrentEvent",events.get(eventNum));
-                    startActivity(myIntent);
-                }
-            });
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+            Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
+            int eventNum = position;
+            Event testE = events.get(eventNum);
+            myIntent.putExtra("CurrentEvent",events.get(eventNum));
+            startActivity(myIntent);
         }
+                  });
+    }
     //}
-    public void eventsPressed(View v)
+/*    public void eventsPressed(View v)
     {
         Intent intent=new Intent(this,searchEventActivity.class);
         startActivity(intent);
@@ -64,7 +62,7 @@ public class CalendarPageActivity extends Activity
     {
         Intent intent=new Intent(this,ChatPageActivity.class);
         startActivity(intent);
-    }
+    }*/
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

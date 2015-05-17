@@ -66,9 +66,7 @@ public class AttenderBL
                             childJSONObject.getString("attendees")
                     );
 
-
                     events.add(ev);
-
                 }
             }
         }
