@@ -8,6 +8,8 @@
     <string name="title_activity_calendar_page">CalendarPageActivity</string>
     <string name="title_activity_search_event">searchEventActivity</string>
     <string name="title_activity_event_list_page">EventListPageActivity</string>
+    <string name="title_activity_chat_page">Chat</string>
+    <string name="title_activity_main__page">MainPage</string>
 
     <string-array name="type_array">
         <item>Type</item>
@@ -42,6 +44,6 @@
         <item>Modi\'in</item>
 
     </string-array>
-    <string name="title_activity_chat_page">Chat</string>
+
 
 </resources>
