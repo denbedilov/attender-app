@@ -5,53 +5,57 @@
     android:layout_height="fill_parent"
     android:layout_marginTop="10dp"
     android:orientation="vertical"
-    android:background="#ffffffff">
+    android:background="#6d97979c"
+    android:gravity="fill_horizontal">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1">
 
         <TextView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/tvName"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="name"
             android:textColor="#ff040209"
             android:textSize="25sp"
-            android:layout_gravity="center_horizontal"
-            android:padding="5dp">
+
+            android:layout_weight="1">
         </TextView>
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="City"
             android:id="@+id/tvCity"
-            android:layout_weight="4"
             android:padding="1dp"
             android:textSize="20sp"
-            android:textColor="#d7545654" />
+            android:textColor="#d7545654"
+            android:layout_gravity="top"
+            android:layout_weight="4" />
 
         <TextView
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/tvDate"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="1dp"
             android:text="date"
             android:textColor="#ff010900"
             android:textSize="20sp"
             android:gravity="end"
+            android:layout_gravity="top"
             android:layout_weight="1">
         </TextView>
     </LinearLayout>
