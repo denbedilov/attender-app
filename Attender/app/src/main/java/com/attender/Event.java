@@ -22,7 +22,7 @@ public class Event implements Serializable
         setHost(host);
         setDateObject(dateObject);
         setPrice(price);
-        setAttendies(attendies);
+        setAttendees(attendies);
     }
     private int _id;
     private String _date;
@@ -34,7 +34,7 @@ public class Event implements Serializable
     private String _eventUrl;
     private String _host;
     private String _price;
-    private String _attendies;
+    private String _attendees;
     private Date   _dateObject;
 
 
@@ -138,7 +138,7 @@ public class Event implements Serializable
         this._price = _price;
     }
 
-    public String getAttendies() { return _attendies; }
+    public String getAttendees() { return _attendees; }
 
-    public void setAttendies(String _attendies) { this._attendies = _attendies; }
+    public void setAttendees(String _attendees) { this._attendees = _attendees; }
 }

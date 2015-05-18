@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -70,6 +71,7 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
+        Typeface myTypeFace=Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
         // getting data from spinners
         String theDate=dateSpinner.getSelectedItem().toString();
         String theType= typeSpinner.getSelectedItem().toString();
@@ -90,7 +92,7 @@ public class searchEventActivity extends Activity
             printAlertDialog("No events to show!");
         }
         else {
-            EventAdapter adapter = new EventAdapter(this, events);
+            EventAdapter adapter = new EventAdapter(this, events,myTypeFace);
             listView.setAdapter(adapter);
         }
     }

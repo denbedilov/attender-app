@@ -63,10 +63,12 @@ public class AttenderBL
                             childJSONObject.getString("host"),
                             childJSONObject.getString("price"),
                             date,
-                            childJSONObject.getString("attendies")
+                            childJSONObject.getString("attendees")
                     );
 
+
                     events.add(ev);
+
                 }
             }
         }

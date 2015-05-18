@@ -1,6 +1,7 @@
 package com.attender;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,14 @@ public class EventAdapter extends ArrayAdapter<String>
     private final Context context;
     LayoutInflater lInflater;
     private final ArrayList<Event> events;
+    Typeface tf;
 
-    public EventAdapter(Context context, ArrayList<Event> events)
+    public EventAdapter(Context context, ArrayList<Event> events,Typeface tf)
     {
         super(context, R.layout.event);
         this.context = context;
         this.events = events;
+        this.tf=tf;
         lInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -33,9 +36,13 @@ public class EventAdapter extends ArrayAdapter<String>
         }
 
         Event ev = getEvent(position);
-
         ((TextView) view.findViewById(R.id.tvName)).setText(ev.getName());
+        ((TextView) view.findViewById(R.id.tvCity)).setText(ev.getCity());
         ((TextView) view.findViewById(R.id.tvDate)).setText(ev.getDate().toString());
+        ((TextView) view.findViewById(R.id.tvName)).setTypeface(tf);
+        ((TextView) view.findViewById(R.id.tvDate)).setTypeface(tf);
+        ((TextView) view.findViewById(R.id.tvCity)).setTypeface(tf);
+
 
         return view;
     }

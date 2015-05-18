@@ -4,95 +4,61 @@
     tools:context="searchEventActivity"
     android:background="#ffffffff"
     android:orientation="vertical">
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="       Chat      "
-        android:id="@+id/chat_cmd"
-        android:layout_alignParentTop="true"
-        android:textStyle="bold"
-        android:onClick="chatPressed"/>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="      Events     "
-        android:id="@+id/events_cmd"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/chat_cmd"
-        android:textStyle="bold"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="      Explore       "
-        android:id="@+id/explore_cmd"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/events_cmd"
-        android:textStyle="bold"
-        android:onClick="explorePressed"/>
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/type_spinner"
-        android:spinnerMode="dropdown"
-        android:layout_below="@+id/chat_cmd"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/events_cmd" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/date_spinner"
-        android:layout_alignBottom="@+id/type_spinner"
-        android:layout_alignEnd="@+id/explore_cmd"
-        android:layout_alignTop="@+id/type_spinner"
-        android:layout_toEndOf="@+id/events_cmd"
-        android:spinnerMode="dropdown" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/city_spinner"
-        android:layout_alignTop="@+id/type_spinner"
-        android:layout_alignBottom="@+id/type_spinner"
-        android:spinnerMode="dropdown"
-        android:layout_alignEnd="@+id/events_cmd"
-        android:layout_toEndOf="@+id/type_spinner" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="      Search       "
-        android:id="@+id/search_cmd"
-        android:layout_below="@+id/date_spinner"
-
-        android:textStyle="bold"
-        android:onClick="searchPressed"/>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/search_cmd"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Events list"
-            android:layout_gravity="center_horizontal">
-        </TextView>
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content">
-        </ListView>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/type_spinner"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_spinner"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/city_spinner"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:onClick="searchPressed"
+                android:id="@+id/search_cmd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView" />
+        </LinearLayout>
+
     </LinearLayout>
-
-
 </RelativeLayout>

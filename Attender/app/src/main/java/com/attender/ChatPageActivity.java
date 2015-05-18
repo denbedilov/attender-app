@@ -2,6 +2,7 @@ package com.attender;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +26,7 @@ public class ChatPageActivity extends Activity
 
         events = bl.getEvents("type", "fds", "fdsf");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        EventAdapter adapter = new EventAdapter(this, events);
+        EventAdapter adapter = new EventAdapter(this, events, Typeface.createFromAsset(getAssets(), "ostrich-light.ttf"));
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
