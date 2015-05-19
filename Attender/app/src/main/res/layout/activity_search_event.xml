@@ -2,8 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="searchEventActivity"
-    android:background="#ffffffff"
-    android:orientation="vertical">
+    android:background="#b0000000"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
 
 
     <LinearLayout
@@ -19,19 +21,22 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@layout/layout_bg"
+                android:id="@+id/city_spinner"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@layout/layout_bg"
                 android:id="@+id/type_spinner"
                 android:layout_weight="1" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@layout/layout_bg"
                 android:id="@+id/date_spinner"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/city_spinner"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -45,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search"
+                android:textColor="#ffffffff"
                 android:onClick="searchPressed"
                 android:id="@+id/search_cmd" />
         </LinearLayout>
