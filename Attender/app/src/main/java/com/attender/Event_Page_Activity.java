@@ -55,9 +55,9 @@ public class Event_Page_Activity extends Activity {
         tv =(TextView)findViewById(R.id.price_lbl);  //chang to price
         tv.setText(currEvent.getPrice());
 
-//        //==========  PRICE   ==================
-//        tv =(TextView)findViewById(R.id.price_lbl);  //chang to price
-//        tv.setText(currEvent.getAttendies());
+        //==========  ATTENDEES   ==================
+        tv =(TextView)findViewById(R.id.attending_lbl);
+        tv.setText(currEvent.getAttendees());
 
     }
 

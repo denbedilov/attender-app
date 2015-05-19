@@ -22,10 +22,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:gravity="center_horizontal"
-        >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
 
     </LinearLayout>
 
@@ -34,12 +36,12 @@
         android:layout_width="match_parent"
         android:gravity="center_horizontal"
         >
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Google"
-        />
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Google"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -54,20 +56,6 @@
             android:text="I want to be a Guest"
             android:onClick="confirmPressed"
             android:id="@+id/button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="search event"
-            android:onClick="confirmPressed2"
-            android:id="@+id/button2" />
     </LinearLayout>
 
 </LinearLayout>
