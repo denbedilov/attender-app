@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.attender.rita.attender.ChatPageActivity"
-    android:background="#c0000000"
+    android:background="#ff292929"
     android:orientation="vertical"
     android:paddingTop="5dp"
     android:paddingLeft="5dp"
