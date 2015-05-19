@@ -51,7 +51,7 @@ public class AttenderBL
 
                 // change city name NULL and Unknown
                 String city = "";
-                if(childJSONObject.getString("city").compareTo("null") == 0)
+                if(childJSONObject.getString("city").compareTo("null") == 0 || childJSONObject.getString("city").compareTo("Unknown") == 0)
                     city = "somewhere in Israel";
                 else
                     city = childJSONObject.getString("city");

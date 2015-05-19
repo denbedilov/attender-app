@@ -6,13 +6,16 @@
     android:orientation="vertical"
     >
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/firstLine"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_weight="4">
 
     <TextView
         android:layout_height="wrap_content"
@@ -26,10 +29,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:id="@+id/secondLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_height="wrap_content"
@@ -57,11 +61,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/eleventhLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_height="wrap_content"
@@ -88,11 +93,12 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/thirdLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_height="wrap_content"
@@ -120,11 +126,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/forthLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_height="wrap_content"
@@ -152,11 +159,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/fifthLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_height="wrap_content"
@@ -184,11 +192,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/sixthLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_height="wrap_content"
@@ -217,11 +226,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/seventhLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_height="wrap_content"
@@ -250,11 +260,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/eighthLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_height="wrap_content"
@@ -282,11 +293,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/ninthLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="2">
 
         <TextView
             android:layout_height="wrap_content"
@@ -314,11 +326,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/tenthLine"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_weight="9">
 
         <TextView
             android:layout_height="wrap_content"
@@ -337,6 +350,7 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:scrollbars = "none"
                 android:text="Description"
                 android:id="@+id/description_lbl"
                 >
@@ -348,24 +362,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_weight="1">
 
         <Button
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Open Chat"
             android:id="@+id/chat_cmd"
-            >
-        </Button>
-    </LinearLayout>
+            android:layout_weight="1"
+            android:padding="0dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+
 
         <com.facebook.login.widget.LoginButton
             android:layout_height="wrap_content"
@@ -374,6 +384,7 @@
             android:textColor="#fff6f4ff"
             android:text="Facebook Friends Attending"
             android:id="@+id/facebook_cmd"
+            android:layout_weight="1"
             />
 
     </LinearLayout>

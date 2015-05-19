@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.text.method.ScrollingMovementMethod;
 
 
 public class Event_Page_Activity extends Activity {
@@ -42,6 +43,7 @@ public class Event_Page_Activity extends Activity {
         //==========  DESCRIPTION   ==================
         tv =(TextView)findViewById(R.id.description_lbl);    ///TO ADD
         tv.setText(currEvent.getDescription());
+        tv.setMovementMethod(new ScrollingMovementMethod());
 
         //==========  EVENT URL   ==================
         tv =(TextView)findViewById(R.id.url_lbl);
