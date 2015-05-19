@@ -49,6 +49,13 @@ public class AttenderBL
                 JSONObject childJSONObject = jsonArr.getJSONObject(i);
                 date = convertMilliSecondsToDate(childJSONObject.getString("date"));
 
+                // change city name NULL and Unknown
+                String city = "";
+                if(childJSONObject.getString("city").compareTo("null") == 0)
+                    city = "somewhere in Israel";
+                else
+                    city = childJSONObject.getString("city");
+
                 if(date != null)
                 {
                     ev = new Event(
@@ -56,7 +63,8 @@ public class AttenderBL
                             dateFormatDate.format(date),
                             childJSONObject.getString("name"),
                             dateFormatTime.format(date),
-                            childJSONObject.getString("city"),
+                            // change city name
+                            city,
                             childJSONObject.getString("address"),
                             childJSONObject.getString("description"),
                             childJSONObject.getString("event_url"),
