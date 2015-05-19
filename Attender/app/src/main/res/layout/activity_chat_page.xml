@@ -1,58 +1,42 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.attender.rita.attender.ChatPageActivity"
-    android:background="#ffdaf8"
-    android:orientation="vertical">
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="       Chat      "
-        android:id="@+id/chat_cmd"
-        android:layout_alignParentTop="true"
+    android:background="#c0000000"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingLeft="5dp"
+    android:padding="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp">
 
-        android:textStyle="bold"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="      Events     "
-        android:id="@+id/events_cmd"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/chat_cmd"
-        android:textStyle="bold"
-        android:onClick="eventsPressed"/>
+        android:text="Events Chat Room"
+        android:layout_gravity="center_horizontal"
+        android:textSize="35dp"
+        android:textColor="#ffffffff"
+        android:gravity="center_vertical|center_horizontal">
+    </TextView>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="      Explore       "
-        android:id="@+id/explore_cmd"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/events_cmd"
-        android:textStyle="bold"
-        android:onClick="explorePressed"/>
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/events_cmd"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose Events"
-            android:layout_gravity="center_horizontal">
-        </TextView>
+
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#ffffffff">
         </ListView>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
