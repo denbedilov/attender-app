@@ -9,7 +9,7 @@
     <string name="title_activity_search_event">searchEventActivity</string>
     <string name="title_activity_event_list_page">EventListPageActivity</string>
     <string name="title_activity_chat_page">Chat</string>
-    <string name="title_activity_main__page">MainPage</string>
+    <string name="title_activity_main_page">MainPage</string>
 
     <string-array name="type_array">
         <item>Type &#32;&#32;&#32;&#32;&#32;&#8895;</item>

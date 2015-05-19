@@ -18,7 +18,7 @@
         </activity>
         <activity
             android:name=".MainPageActivity"
-            android:label="@string/title_activity_main__page" >
+            android:label="@string/title_activity_main_page" >
         </activity>
         <activity
             android:name=".Event_Page_Activity"
