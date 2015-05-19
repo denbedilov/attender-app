@@ -27,7 +27,8 @@
                 android:textColor="#ff040209"
                 android:textSize="25sp"
 
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:fontFamily="Arial">
             </TextView>
 
     </LinearLayout>

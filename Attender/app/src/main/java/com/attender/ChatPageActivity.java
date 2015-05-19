@@ -24,9 +24,9 @@ public class ChatPageActivity extends Activity
         setContentView(R.layout.activity_chat_page);
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        events = bl.getEvents("type", "fds", "fdsf");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
+        events = bl.getEvents("Type", "Date", "City");  ///!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        EventAdapter adapter = new EventAdapter(this, events, Typeface.createFromAsset(getAssets(), "ostrich-light.ttf"));
+        EventAdapter adapter = new EventAdapter(this, events);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

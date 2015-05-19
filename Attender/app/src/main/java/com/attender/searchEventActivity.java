@@ -71,7 +71,6 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
-        Typeface myTypeFace=Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
         // getting data from spinners
         String theDate=dateSpinner.getSelectedItem().toString();
         String theType= typeSpinner.getSelectedItem().toString();
@@ -92,7 +91,7 @@ public class searchEventActivity extends Activity
             printAlertDialog("No events to show!");
         }
         else {
-            EventAdapter adapter = new EventAdapter(this, events,myTypeFace);
+            EventAdapter adapter = new EventAdapter(this, events);
             listView.setAdapter(adapter);
         }
     }
