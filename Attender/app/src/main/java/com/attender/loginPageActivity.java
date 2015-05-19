@@ -38,14 +38,10 @@ public class loginPageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
 
-
-//        //check fall
-//        printAlertDialog("we are here");
-
         // facebook
-        FacebookSdk.sdkInitialize(this);
         callbackManager = CallbackManager.Factory.create();
 
         // gmail
@@ -107,20 +103,20 @@ public class loginPageActivity extends Activity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-//    @Override
-//    protected void onResume()
-//    {
-//        super.onResume();
-//        // Logs 'install' and 'app activate' App Events.
-//        AppEventsLogger.activateApp(this);
-//
-//        // check facebook login
-//        if(AccessToken.getCurrentAccessToken() != null)
-//        {
-//            Intent intent = new Intent(this, CalendarPageActivity.class);
-//            startActivity(intent);
-//        }
-//    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+
+        // check facebook login
+        if(AccessToken.getCurrentAccessToken() != null)
+        {
+            Intent intent = new Intent(this, MainPageActivity.class);
+            startActivity(intent);
+        }
+    }
 
     public void confirmPressed(View v)
     {
@@ -128,11 +124,6 @@ public class loginPageActivity extends Activity {
         startActivity(intent);
     }
 
-    public void confirmPressed2(View v)
-    {
-        Intent intent=new Intent(this,searchEventActivity.class);
-        startActivity(intent);
-    }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.

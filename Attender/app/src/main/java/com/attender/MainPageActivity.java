@@ -3,6 +3,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
+import com.facebook.AccessToken;
+import com.facebook.HttpMethod;
+import com.facebook.Profile;
+
 
 /**
  * Created by Shai on 17/05/2015.
@@ -14,6 +20,14 @@ public class MainPageActivity  extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+        TextView userName = (TextView)findViewById(R.id.User_Name_textView);
+
+
+
+        if(AccessToken.getCurrentAccessToken() != null)
+            userName.setText(Profile.getCurrentProfile().getName());
+        else
+            userName.setText("guest");
     }
 
 
