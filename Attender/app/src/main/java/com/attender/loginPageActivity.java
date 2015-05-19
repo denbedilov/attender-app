@@ -124,7 +124,7 @@ public class loginPageActivity extends Activity {
 
     public void confirmPressed(View v)
     {
-        Intent intent=new Intent(this,searchEventActivity.class);
+        Intent intent=new Intent(this,MainPageActivity.class);
         startActivity(intent);
     }
 
