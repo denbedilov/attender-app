@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:context="com.attender.rita.attender.Event_Page_Activity"
-    android:background="#C0000000"
+    android:background="#ff292929"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
