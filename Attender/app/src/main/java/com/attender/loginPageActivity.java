@@ -33,6 +33,7 @@ import java.security.NoSuchAlgorithmException;
 public class loginPageActivity extends Activity {
 
     CallbackManager callbackManager;
+    AttenderBL bl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class loginPageActivity extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
 
+        // dal
+        bl = new AttenderBL();
         // facebook
         callbackManager = CallbackManager.Factory.create();
 
@@ -54,12 +57,13 @@ public class loginPageActivity extends Activity {
 
 
 
-
+        // facebook login
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
+
             }
 
             @Override
@@ -76,7 +80,10 @@ public class loginPageActivity extends Activity {
         // check facebook login
         if(AccessToken.getCurrentAccessToken() != null)
         {
-            Intent intent = new Intent(this, CalendarPageActivity.class);
+            // send id and token to own server
+            String serverResponse = bl.loginToServer(AccessToken.USER_ID_KEY, AccessToken.getCurrentAccessToken().toString());
+            Intent intent = new Intent(this, MainPageActivity.class);
+            intent.putExtra("serverResponse", serverResponse);
             startActivity(intent);
         }
 
@@ -113,7 +120,10 @@ public class loginPageActivity extends Activity {
         // check facebook login
         if(AccessToken.getCurrentAccessToken() != null)
         {
+            // send id and token to own server
+            String serverResponse = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().getToken());
             Intent intent = new Intent(this, MainPageActivity.class);
+            intent.putExtra("serverResponse", serverResponse);
             startActivity(intent);
         }
     }
@@ -166,4 +176,5 @@ public class loginPageActivity extends Activity {
         });
         builder.show();
     }
+
 }

@@ -92,10 +92,6 @@ public class AttenderBL
     private Date convertMilliSecondsToDate(String miliSecDateString)
     {
         Date date = new Date();
-
-        //int parsMili = Integer.parseInt(childJSONObject.getString("date").trim(), 16 );
-        //date = convertMilliSecondsToDate("1431264600000");
-
         try
         {
             long milliSeconds = Long.parseLong(miliSecDateString);
@@ -111,5 +107,8 @@ public class AttenderBL
 
     //=============================================================================================================================
 
-
+    public String loginToServer(String id, String token)
+    {
+        return dal.loginToServer(id, token);
+    }
 }

@@ -1,5 +1,7 @@
 package com.attender;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +24,8 @@ public class MainPageActivity  extends Activity
         setContentView(R.layout.activity_main_page);
         TextView userName = (TextView)findViewById(R.id.User_Name_textView);
 
-
+        // print server response to login
+        printAlertDialog(getIntent().getStringExtra("serverResponse"));
 
         if(AccessToken.getCurrentAccessToken() != null)
             userName.setText(Profile.getCurrentProfile().getName());
@@ -48,5 +51,24 @@ public class MainPageActivity  extends Activity
         startActivity(intent);
     }
 
+    private void printAlertDialog(String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("LOGIN DIALOG");
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
+        builder.show();
+    }
 
 }
