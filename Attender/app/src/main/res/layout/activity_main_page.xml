@@ -77,16 +77,15 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="2">
 
-                <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="fill_parent"
+                <com.facebook.login.widget.LoginButton
                     android:layout_height="wrap_content"
-                    android:text="Log-Out"
-                    android:id="@+id/button"
+                    android:layout_width="fill_parent"
+                    android:background="#ff1215ff"
                     android:textColor="#ffffffff"
-                    android:textSize="20dp"
-                    android:background="#18ffffff"
-                    android:gravity="center_vertical|center_horizontal" />
+                    android:text="Log-Out"
+                    android:id="@+id/logOut_cmd"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:onClick="log_out_to_home" />
             </LinearLayout>
 
         </LinearLayout>

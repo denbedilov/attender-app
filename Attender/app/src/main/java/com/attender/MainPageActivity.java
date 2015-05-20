@@ -33,6 +33,13 @@ public class MainPageActivity  extends Activity
             userName.setText("guest");
     }
 
+    public void log_out_to_home(View v)
+    {
+        Intent intent = new Intent(this,loginPageActivity.class);
+        startActivity(intent);
+        AccessToken.setCurrentAccessToken(null);
+    }
+
 
     public void chat_pressed(View v)
     {
