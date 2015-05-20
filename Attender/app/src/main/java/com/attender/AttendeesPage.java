@@ -1,10 +1,13 @@
 package com.attender;
 
 import android.app.Activity;
+import android.database.DataSetObserver;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.facebook.AccessToken;
 
@@ -19,10 +22,15 @@ public class AttendeesPage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendees_page);
 
+        ListView listView = (ListView) findViewById(R.id.listView);
         bl = new AttenderBL();
-        ArrayList<Attendee> attendees = new ArrayList<Attendee>();
+        ArrayList<Attendee> attendees;
         attendees = bl.getAttendees(getIntent().getStringExtra("eventId"), AccessToken.getCurrentAccessToken().getToken());
-
+        if(attendees != null)
+        {
+            AttendeesAdapter attendeesAdapter = new AttendeesAdapter(this, attendees);
+            listView.setAdapter(attendeesAdapter);
+        }
     }
 
 
