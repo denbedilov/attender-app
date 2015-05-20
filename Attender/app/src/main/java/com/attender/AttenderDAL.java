@@ -108,5 +108,31 @@ public class AttenderDAL {
         jsonData=serverConnection(query);
         return jsonData;
     }
+    public String Attend(String token,String eventId)
+    {
+        String query="attend?";
+        query+="token="+token+"&eventid="+eventId;
+        String jsonData="";
+        jsonData=serverConnection(query);
+        return jsonData;
+    }
+    public JSONArray getAttendees(String eventId, String token)
+    {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+        String query="attendees?";
+        query+="eventid="+eventId+"&token="+token;
+        String jsonData="";
+        jsonData=serverConnection(query);
+        try{
+        jsonObject = new JSONObject(jsonData);
+        jsonArray = jsonObject.getJSONArray("Events");
+
+    } catch (Exception e) {
+        return null;
+    }
+
+    return jsonArray;
+    }
 
 }

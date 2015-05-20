@@ -105,10 +105,53 @@ public class AttenderBL
     }
 
 
-    //=============================================================================================================================
+    //============================================Login===========================================================
 
     public String loginToServer(String id, String token)
     {
         return dal.loginToServer(id, token);
+    }
+    //=============================================Attend============================================================
+    public String Attend(String token,String eventId)
+    {
+        return dal.Attend(token,eventId);
+    }
+    //=============================================getAttendees===================================================
+    public ArrayList<Attendee> getAttendees(String eventId, String token)
+    {
+        Attendee at;
+        ArrayList<Attendee> attendees=new ArrayList<Attendee>();
+        JSONArray attendeesJson=dal.getAttendees(eventId,token);
+        if(attendeesJson == null)
+            return null;
+        try
+        {
+            // JSONArray jEventArr = jo.getJSONArray("Events");
+            for (int i = 0; i < attendeesJson.length() - 1; i++)
+            {
+                JSONObject childJSONObject = attendeesJson.getJSONObject(i);
+
+                // change city name NULL and Unknown
+                boolean ff = false;
+                if(childJSONObject.getString("fbf").compareTo("true") == 0)
+                    ff = true;
+                at= new Attendee(
+                            childJSONObject.getString("name"),
+                            childJSONObject.getString("lastname"),
+                            ff
+                    );
+
+                    attendees.add(at);
+                }
+
+        }
+        catch(JSONException e)
+        {
+            attendees = null;
+        }
+
+        return attendees;
+
+
     }
 }
