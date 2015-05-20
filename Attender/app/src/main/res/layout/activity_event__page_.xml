@@ -1,394 +1,469 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="com.attender.rita.attender.Event_Page_Activity"
-    android:background="#43969696"
+    android:background="#C0000000"
     android:orientation="vertical"
-    >
-
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:id="@+id/firstLine"
-        android:padding="10dp"
-        android:layout_weight="4">
+        android:id="@+id/headLine"
+        android:padding="10dp">
 
     <TextView
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:text="Event Name"
         android:textStyle="bold|italic"
         android:textSize="20dp"
-        android:id="@+id/evName_lbl">
+        android:id="@+id/evName_lbl"
+        android:textColor="#ffffffff"
+        android:gravity="center_vertical|center_horizontal">
     </TextView>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:id="@+id/secondLine"
-        android:padding="5dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Details"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#ffffffff">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
-
-            <CheckBox
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Attend"
-                android:id="@+id/attend_check"
-                android:checked="true">
-            </CheckBox>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/eleventhLine"
-        android:padding="5dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Date"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:orientation="horizontal"
+            android:id="@+id/detailsLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="1/11/1111"
-                android:id="@+id/date_lbl"
-                >
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Details"
+                android:textStyle="bold|italic"
+                android:layout_weight="1"
+                android:id="@+id/details_TEX"
+                android:textSize="15dp">
             </TextView>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/thirdLine"
-        android:padding="5dp"
-        android:layout_weight="1">
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="City"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical|right"
+                android:layout_weight="3">
+
+                <CheckBox
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="Attend"
+                    android:id="@+id/attend_check"
+                    android:checked="true"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="15dp">
+                </CheckBox>
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/dateLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="city name"
-                android:id="@+id/cityName_lbl"
-                >
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Date"
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
             </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="1/11/1111"
+                    android:id="@+id/date_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/forthLine"
-        android:padding="5dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Address"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/cityLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="address name"
-                android:id="@+id/address_lbl"
-                >
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="City"
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
             </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="city name"
+                    android:id="@+id/cityName_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/fifthLine"
-        android:padding="5dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Time"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/addressLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="00:00"
-                android:id="@+id/time_lbl"
-                >
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Address"
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
             </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="address name"
+                    android:id="@+id/address_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/sixthLine"
-        android:padding="5dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Price"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/timeLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Free"
-                android:id="@+id/price_lbl"
-                >
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Time"
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
             </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="00:00"
+                    android:id="@+id/time_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/seventhLine"
-        android:padding="5dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Attending"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/priceLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="80/100"
-                android:id="@+id/attending_lbl"
-                >
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Price"
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
             </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="Free"
+                    android:id="@+id/price_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/eighthLine"
-        android:padding="5dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Host"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/attendingLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Host name"
-                android:id="@+id/host_lbl"
-                >
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Attending"
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
             </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="80/100"
+                    android:id="@+id/attending_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/ninthLine"
-        android:padding="5dp"
-        android:layout_weight="2">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Event URL"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/hostLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="URL"
-                android:id="@+id/url_lbl"
-                >
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Host"
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
             </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="Host name"
+                    android:id="@+id/host_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:id="@+id/tenthLine"
-        android:padding="5dp"
-        android:layout_weight="9">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Description"
-            android:textStyle="bold|italic"
-            >
-        </TextView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/eventUrlLine"
+            android:padding="5dp">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:scrollbars = "none"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Event URL"
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:text="URL"
+                    android:id="@+id/url_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/descriptionLine"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
                 android:text="Description"
-                android:id="@+id/description_lbl"
-                >
+                android:textStyle="bold|italic"
+                android:layout_weight="3"
+                android:textSize="15dp">
             </TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:scrollbars = "none"
+                    android:text="Description"
+                    android:id="@+id/description_lbl"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="15dp">
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_weight="1">
+        android:id="@+id/footerLine"
+        android:layout_weight="5"
+        android:paddingTop="5dp">
 
-        <Button
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Open Chat"
-            android:id="@+id/chat_cmd"
-            android:layout_weight="1"
-            android:padding="0dp" />
+            android:layout_weight="1">
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2" />
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:text="Open Chat"
+                android:id="@+id/chat_cmd"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2" />
+        </LinearLayout>
 
 
-
-        <com.facebook.login.widget.LoginButton
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="#ff1215ff"
-            android:textColor="#fff6f4ff"
-            android:text="Facebook Friends Attending"
-            android:id="@+id/facebook_cmd"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1">
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="6" />
+
+            <com.facebook.login.widget.LoginButton
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:background="#ff1215ff"
+                android:textColor="#fff6f4ff"
+                android:text="Facebook Friends Attending"
+                android:id="@+id/facebook_cmd"
+                android:layout_weight="2"
+                />
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="6" />
+        </LinearLayout>
 
     </LinearLayout>
-
 
 
 </LinearLayout>
