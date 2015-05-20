@@ -1,6 +1,8 @@
 package com.attender;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.text.method.ScrollingMovementMethod;
+
+import com.facebook.AccessToken;
 
 
 public class Event_Page_Activity extends Activity {
@@ -89,8 +93,29 @@ public class Event_Page_Activity extends Activity {
 
     public void attendeesPressed(View v)
     {
-        Intent intent=new Intent(this,AttendeesPage.class);
-        intent.putExtra("eventId", currEvent.getId());
-        startActivity(intent);
+        if(AccessToken.getCurrentAccessToken() == null)
+        {
+           printAlertDialog("You must log in to view attendees");
+        }
+        else
+        {
+            Intent intent = new Intent(this, AttendeesPage.class);
+            intent.putExtra("eventId", currEvent.getId());
+            startActivity(intent);
+        }
+    }
+
+    private void printAlertDialog(String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Please Log-in");
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
+        builder.show();
     }
 }
