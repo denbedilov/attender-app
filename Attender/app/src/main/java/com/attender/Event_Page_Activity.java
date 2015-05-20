@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.text.method.ScrollingMovementMethod;
 
@@ -24,6 +25,11 @@ public class Event_Page_Activity extends Activity {
         setContentView(R.layout.activity_event__page_);
         Intent myIntent=getIntent();
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
+
+        //==========  ATTEND   =====================
+        CheckBox attend = (CheckBox) findViewById(R.id.attend_check);
+        if(AccessToken.getCurrentAccessToken() == null)
+            attend.setClickable(false);
 
         //==========  DATE   ==================
         tv =(TextView)findViewById(R.id.date_lbl);  //TODO - ADD DATE
