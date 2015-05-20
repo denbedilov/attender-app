@@ -36,7 +36,10 @@ public class MainPageActivity  extends Activity
     public void log_out_to_home(View v)
     {
         Intent intent = new Intent(this,loginPageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish(); // call this to finish the current activity
+
         AccessToken.setCurrentAccessToken(null);
     }
 
