@@ -24,21 +24,35 @@
                 android:background="@layout/layout_bg"
 
                 android:id="@+id/city_spinner"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="fill_parent" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@layout/layout_bg"
                 android:id="@+id/type_spinner"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="fill_parent" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@layout/layout_bg"
                 android:id="@+id/date_spinner"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
 
         </LinearLayout>
 

@@ -3,10 +3,12 @@ package com.attender;
 /**
  * Created by Rita on 5/20/2015.
  */
-public class Attendee {
+public class Attendee
+{
     private String _firstName;
     private String _lastName;
     private boolean _ff;
+
     public Attendee(String firstName,String lastName,boolean ff)
     {
         _firstName = firstName;

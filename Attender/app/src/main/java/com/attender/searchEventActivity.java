@@ -27,7 +27,8 @@ public class searchEventActivity extends Activity
     ListView listView;
     ArrayList<Event> events;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_event);
@@ -67,6 +68,7 @@ public class searchEventActivity extends Activity
         typeSpinner.setAdapter(type_adapter);
         citySpinner.setAdapter(city_adapter);
 
+        searchPressed(getCurrentFocus());
     }
 
     public void searchPressed(View v)
