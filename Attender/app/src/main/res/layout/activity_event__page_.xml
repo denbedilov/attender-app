@@ -447,13 +447,13 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="6" />
 
-            <com.facebook.login.widget.LoginButton
+            <Button
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:background="#ff1215ff"
                 android:textColor="#fff6f4ff"
-                android:text="Facebook Friends Attending"
-                android:id="@+id/facebook_cmd"
+                android:text="Attendees"
+                android:id="@+id/attendees_cmd"
+                android:onClick="attendeesPressed"
                 android:layout_weight="2"
                 />
 

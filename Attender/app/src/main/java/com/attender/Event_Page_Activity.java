@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.text.method.ScrollingMovementMethod;
 
@@ -85,4 +86,11 @@ public class Event_Page_Activity extends Activity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+    public void attendeesPressed(View v)
+    {
+        Intent intent=new Intent(this,AttendeesPage.class);
+        intent.putExtra("eventId", currEvent.getId());
+        startActivity(intent);
+    }
 }
