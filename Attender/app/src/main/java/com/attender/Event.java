@@ -24,7 +24,7 @@ public class Event implements Serializable
         setPrice(price);
         setAttendees(attendies);
     }
-    private int _id;
+    private String _id;
     private String _date;
     private String _name;
     private String _time;
@@ -38,21 +38,11 @@ public class Event implements Serializable
     private Date   _dateObject;
 
 
-    public int getId() {
+    public String getId() {
         return _id;
     }
 
-    public void setId(String id) {
-        try {
-            _id = Integer.parseInt(id);
-        }
-        catch(NumberFormatException e)  //TODO - temperery!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        {
-            Random rand = new Random();
-
-            _id = rand.nextInt(999999999) + 1;
-        }
-    }
+    public void setId(String id) { _id = id;  }
 
     public String getDate() {
         return _date;

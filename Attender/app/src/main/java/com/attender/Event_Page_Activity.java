@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.text.method.ScrollingMovementMethod;
 
@@ -16,14 +18,32 @@ import com.facebook.AccessToken;
 
 public class Event_Page_Activity extends Activity {
     Event currEvent;
+    AttenderBL bl;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        TextView tv;
         super.onCreate(savedInstanceState);
+        TextView tv;
+        bl = new AttenderBL();
         setContentView(R.layout.activity_event__page_);
         Intent myIntent=getIntent();
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
+
+        //==========  ATTEND   =====================
+        CheckBox attend = (CheckBox) findViewById(R.id.attend_check);
+        if(AccessToken.getCurrentAccessToken() == null)
+            attend.setClickable(false);
+        attend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if ( isChecked )
+                {
+                    printAlertDialog(bl.Attend(AccessToken.getCurrentAccessToken().getToken(), currEvent.getId()));
+                }
+            }
+        });
+
 
         //==========  DATE   ==================
         tv =(TextView)findViewById(R.id.date_lbl);  //TODO - ADD DATE

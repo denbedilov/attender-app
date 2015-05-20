@@ -64,7 +64,7 @@
                     android:layout_width="fill_parent"
                     android:text="Attend"
                     android:id="@+id/attend_check"
-                    android:checked="true"
+                    android:checked="false"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
                     android:textSize="15dp">
