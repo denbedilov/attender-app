@@ -57,17 +57,32 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:text="Search"
                 android:textColor="#ffffffff"
                 android:onClick="searchPressed"
-                android:id="@+id/search_cmd" />
+                android:id="@+id/search_cmd"
+                android:background="#ff494949"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2" />
         </LinearLayout>
 
         <LinearLayout
