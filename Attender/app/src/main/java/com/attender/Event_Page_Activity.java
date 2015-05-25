@@ -39,7 +39,7 @@ public class Event_Page_Activity extends Activity {
             {
                 if ( isChecked )
                 {
-                    printAlertDialog(bl.Attend(AccessToken.getCurrentAccessToken().getToken(), currEvent.getId()));
+                    printAlertDialog(bl.Attend(AccessToken.getCurrentAccessToken().getToken(), currEvent.getId(), true));
                 }
             }
         });

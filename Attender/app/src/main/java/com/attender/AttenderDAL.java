@@ -108,10 +108,10 @@ public class AttenderDAL {
         jsonData=serverConnection(query);
         return jsonData;
     }
-    public String Attend(String token,String eventId)
+    public String Attend(String token,String eventId, String isAttend)
     {
         String query="attend?";
-        query+="token="+token+"&eventid="+eventId;
+        query+="token="+token+"&eventid="+eventId+"&isAttend="+isAttend;
         String jsonData="";
         jsonData=serverConnection(query);
         return jsonData;

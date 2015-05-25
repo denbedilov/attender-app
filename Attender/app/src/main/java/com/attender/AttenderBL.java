@@ -112,9 +112,12 @@ public class AttenderBL
         return dal.loginToServer(id, token);
     }
     //=============================================Attend============================================================
-    public String Attend(String token,String eventId)
+    public String Attend(String token,String eventId, boolean isAttend)
     {
-        return dal.Attend(token,eventId);
+        if(isAttend)
+            return dal.Attend(token,eventId, "true");
+        else
+            return dal.Attend(token,eventId, "false");
     }
     //=============================================getAttendees===================================================
     public ArrayList<Attendee> getAttendees(String eventId, String token)
