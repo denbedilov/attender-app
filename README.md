@@ -1,4 +1,4 @@
-# attender-app
+# attender - ANDROID app
 app side of Attender
 
 ![ATTENDER logo] (http://upng.co.il/uploads/c084432472f865031d251430cb09504c.png)
