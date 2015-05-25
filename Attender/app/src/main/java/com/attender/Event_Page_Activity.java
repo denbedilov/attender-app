@@ -120,6 +120,7 @@ public class Event_Page_Activity extends Activity {
         else
         {
             Intent intent = new Intent(this, AttendeesPage.class);
+            String id = currEvent.getId();
             intent.putExtra("eventId", currEvent.getId());
             startActivity(intent);
         }
