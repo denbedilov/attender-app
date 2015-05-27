@@ -76,7 +76,7 @@
                 android:textColor="#ffffffff"
                 android:onClick="searchPressed"
                 android:id="@+id/search_cmd"
-                android:background="#ff494949"
+                android:background="@drawable/button_pressed"
                 android:layout_weight="1" />
 
             <Space
