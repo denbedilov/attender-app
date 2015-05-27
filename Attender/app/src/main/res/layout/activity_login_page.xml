@@ -13,64 +13,55 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="2">
+        android:layout_weight="3">
 
         <Space
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" />
+            android:layout_height="30dp" />
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ATTENDER"
+            android:id="@+id/attender_main_txt"
+            android:textColor="#ffffffff"
+            android:textSize="65dp" />
+
+        <Space
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="4"
-            android:background="#9a878787"
-            android:paddingLeft="20dp"
-            android:gravity="center_vertical">
+            android:layout_height="10dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Welcome to ATTENDER!"
-                android:id="@+id/textView"
-                android:textColor="#ffffffff"
-                android:textSize="20dp" />
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="search . attend . meet"
+            android:id="@+id/attender_sub_txt"
+            android:textColor="#ffffffff"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOGIN:"
+            android:id="@+id/login_txt"
+            android:textColor="#ffffffff"
+            android:textSize="30dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="40dp" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="4">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center_horizontal">
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="Connect as Guest"
-                android:onClick="confirmPressed"
-                android:id="@+id/button"
-                android:background="@drawable/button_pressed"
-                android:layout_weight="1" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <Space
-        android:layout_width="fill_parent"
-        android:layout_height="20dp" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="4">
+        android:layout_weight="5">
 
         <LinearLayout
             android:layout_height="fill_parent"
@@ -106,6 +97,49 @@
                 android:background="#ff0055ff" />
 
 
+        </LinearLayout>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR:"
+            android:id="@+id/or_txt"
+            android:textColor="#ffffffff"
+            android:textSize="30dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="40dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="5">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Connect as Guest"
+                android:onClick="confirmPressed"
+                android:id="@+id/button"
+                android:background="@drawable/button_pressed"
+                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
 

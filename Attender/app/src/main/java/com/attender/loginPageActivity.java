@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Base64;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -41,43 +43,58 @@ public class loginPageActivity extends Activity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
-
-        // dal
         bl = new AttenderBL();
-        // facebook
-        callbackManager = CallbackManager.Factory.create();
-
-        // gmail
 
 
-        // internet connection something
+        //=============================================== Text Style ==============================================================================
+        TextView Main_TV = (TextView) findViewById(R.id.attender_main_txt);
+        TextView Sub_TV = (TextView) findViewById(R.id.attender_sub_txt);
+        TextView Login_TV = (TextView) findViewById(R.id.login_txt);
+        TextView Or_TV = (TextView) findViewById(R.id.or_txt);
+        Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
+        Main_TV.setTypeface(tf);
+        Sub_TV.setTypeface(tf);
+        Login_TV.setTypeface(tf);
+        Or_TV.setTypeface(tf);
+
+        //=============================================== Login =================================================================================
+
+
+        //================================== internet connection ===============================
+
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
 
+        //======================================= Facebook =====================================
 
-        // facebook login
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        callbackManager = CallbackManager.Factory.create();
+
+        // ======== facebook login ========
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>()
+        {
             @Override
-            public void onSuccess(LoginResult loginResult) {
+            public void onSuccess(LoginResult loginResult)
+            {
                 // App code
                 AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
-
             }
 
             @Override
-            public void onCancel() {
+            public void onCancel()
+            {
                 // App code
             }
 
             @Override
-            public void onError(FacebookException exception) {
+            public void onError(FacebookException exception)
+            {
                 // App code
             }
         });
 
-        // check facebook login
+        //  ======== check facebook login ========
         if(AccessToken.getCurrentAccessToken() != null)
         {
             // send id and token to own server
@@ -87,7 +104,7 @@ public class loginPageActivity extends Activity {
             startActivity(intent);
         }
 
-        // Print out the key hash "KeyHash" at log
+        //  ======== Print out the key hash "KeyHash" at log ========
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.attender",

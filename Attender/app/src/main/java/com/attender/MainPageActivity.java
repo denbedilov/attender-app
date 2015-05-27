@@ -25,7 +25,7 @@ public class MainPageActivity  extends Activity
         TextView userName = (TextView)findViewById(R.id.User_Name_textView);
 
         // print server response to login
-        printAlertDialog(getIntent().getStringExtra("serverResponse"));
+        //printAlertDialog(getIntent().getStringExtra("serverResponse"));
 
         if(AccessToken.getCurrentAccessToken() != null)
             userName.setText(Profile.getCurrentProfile().getName());
