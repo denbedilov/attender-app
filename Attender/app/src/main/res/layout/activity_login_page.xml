@@ -13,8 +13,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
-        android:background="@drawable/login">
+        android:layout_weight="2">
 
         <Space
             android:layout_width="fill_parent"
@@ -58,7 +57,7 @@
                 android:text="Connect as Guest"
                 android:onClick="confirmPressed"
                 android:id="@+id/button"
-                android:background="#ffb7ed2b"
+                android:background="@drawable/button_pressed"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
