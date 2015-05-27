@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.text.method.ScrollingMovementMethod;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
@@ -134,15 +135,7 @@ public class Event_Page_Activity extends Activity {
 
     private void printAlertDialog(String message)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Please Log-in");
-        builder.setMessage(message);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //do things
-            }
-        });
-        builder.show();
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
