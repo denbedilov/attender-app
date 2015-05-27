@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -23,6 +24,18 @@ public class MainPageActivity  extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         TextView userName = (TextView)findViewById(R.id.User_Name_textView);
+
+        if(AccessToken.getCurrentAccessToken() == null)
+        {
+            LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
+            layout.setVisibility(View.INVISIBLE);
+            layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
+            layout.setAlpha(.5f);
+            layout.setEnabled(false);
+            layout = (LinearLayout) findViewById(R.id.Chat_Layout);
+            layout.setAlpha(.5f);
+            layout.setEnabled(false);
+        }
 
         // print server response to login
         //printAlertDialog(getIntent().getStringExtra("serverResponse"));
