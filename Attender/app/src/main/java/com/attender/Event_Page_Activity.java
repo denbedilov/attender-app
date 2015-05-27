@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -31,8 +32,18 @@ public class Event_Page_Activity extends Activity {
 
         //==========  ATTEND   =====================
         CheckBox attend = (CheckBox) findViewById(R.id.attend_check);
-        if(AccessToken.getCurrentAccessToken() == null)
+        if(AccessToken.getCurrentAccessToken() == null) {
+            Button attendeesBTN=(Button)findViewById(R.id.attendees_cmd);
+            Button chatBTN=(Button)findViewById(R.id.chat_cmd);
+            chatBTN.setAlpha(.5f);
+            chatBTN.setEnabled(false);
+            attendeesBTN.setAlpha(.5f);
+            attendeesBTN.setEnabled(false);
+
             attend.setClickable(false);
+            attend.setAlpha(.5f);
+
+        }
         attend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
@@ -113,17 +124,12 @@ public class Event_Page_Activity extends Activity {
 
     public void attendeesPressed(View v)
     {
-        if(AccessToken.getCurrentAccessToken() == null)
-        {
-           printAlertDialog("You must log in to view attendees");
-        }
-        else
-        {
+
             Intent intent = new Intent(this, AttendeesPage.class);
             String id = currEvent.getId();
             intent.putExtra("eventId", currEvent.getId());
             startActivity(intent);
-        }
+
     }
 
     private void printAlertDialog(String message)
