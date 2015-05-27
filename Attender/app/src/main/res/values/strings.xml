@@ -12,7 +12,7 @@
     <string name="title_activity_main_page">MainPage</string>
 
     <string-array name="type_array">
-        <item>Type &#8895;</item>
+        <item>Type ___&#8895;</item>
         <item>Career&amp;Business</item>
         <item>Community&amp;Environment</item>
         <item>Games</item>
@@ -24,14 +24,14 @@
         <item>Tech</item>
     </string-array>
     <string-array name="dates_array">
-        <item>Date &#8895;</item>
+        <item>Date ___&#8895;</item>
         <item>1 day ahead</item>
         <item>1 week ahead</item>
         <item>1 month ahead</item>
 
     </string-array>
     <string-array name="cities_array">
-        <item>City &#8895;</item>
+        <item>City ___&#8895;</item>
         <item>Jerusalem</item>
         <item>Tel Aviv-Yafo</item>
         <item>Haifa</item>
