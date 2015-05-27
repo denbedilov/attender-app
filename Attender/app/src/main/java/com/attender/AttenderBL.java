@@ -136,11 +136,11 @@ public class AttenderBL
 
                 // change city name NULL and Unknown
                 boolean ff = false;
-                if(childJSONObject.getString("fbf ").compareTo("true") == 0)
+                if(childJSONObject.getString("fbf").compareTo("true") == 0)
                     ff = true;
                 at= new Attendee(
-                            childJSONObject.getString("name "),
-                            childJSONObject.getString("lastname "),
+                            childJSONObject.getString("name"),
+                            childJSONObject.getString("lastname"),
                             ff
                     );
 

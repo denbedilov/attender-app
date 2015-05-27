@@ -125,27 +125,17 @@ public class AttenderDAL {
         String jsonData = "";
         try{
             jsonData = "{ Attendees:\n";
-            String answer = "";
-            answer = serverConnection(query);
-            answer = repareJson(answer);
-            jsonData += answer;
+            jsonData += serverConnection(query);
             jsonData += "}";
 
             jsonObject = new JSONObject(jsonData);
             jsonArray = jsonObject.getJSONArray("Attendees");
 
-    } catch (Exception e) {
-        return null;
-    }
+        } catch (Exception e) {
+            return null;
+        }
 
     return jsonArray;
-    }
-
-    private String repareJson(String temp)
-    {
-        temp = temp.substring(1, temp.length()-1);
-        temp = temp.replace('\\',' ');
-        return temp;
     }
 
 }
