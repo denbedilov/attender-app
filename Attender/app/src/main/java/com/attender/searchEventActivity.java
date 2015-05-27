@@ -2,12 +2,16 @@ package com.attender;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,15 +24,20 @@ import java.util.ArrayList;
 
 public class searchEventActivity extends Activity
 {
-    AttenderBL bl;
-    Spinner typeSpinner;
-    Spinner dateSpinner;
-    Spinner citySpinner;
-    ListView listView;
-    ArrayList<Event> events;
+    private AttenderBL bl;
+    private Spinner typeSpinner;
+    private Spinner dateSpinner;
+    private Spinner citySpinner;
+    private  ListView listView;
+    private ArrayList<Event> events;
+    private static ProgressDialog progress;
+    private static Context context;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_event);
@@ -38,7 +47,6 @@ public class searchEventActivity extends Activity
 
         listView = (ListView) findViewById(R.id.listView);
         Button search_button=(Button)findViewById(R.id.search_cmd);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             // private int position;
 
@@ -73,29 +81,49 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
-        // getting data from spinners
-        String theDate=dateSpinner.getSelectedItem().toString();
-        String theType= typeSpinner.getSelectedItem().toString();
-        theType=theType.replaceAll("\\s","%20");
-        String theCity=citySpinner.getSelectedItem().toString();
-        theCity=theCity.replaceAll("\\s","%20");
-        switch(theDate)
-        {
-           case "1 day ahead":      theDate="1d";   break;
-           case "1 week ahead":     theDate="1w";   break;
-           case "1 month ahead":    theDate="1m";   break;
-        }
-        // getting events from the server
-        events = bl.getEvents(theType, theDate, theCity);
-        if(events == null)
-        {
-            listView.setAdapter(null);
-            printAlertDialog("No events to show!");
-        }
-        else {
-            EventAdapter adapter = new EventAdapter(this, events);
-            listView.setAdapter(adapter);
-        }
+        progress = ProgressDialog.show(this, "Loading Events",
+                "Please wait..", true);
+
+        context = this;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+                // getting data from spinners
+                String theDate=dateSpinner.getSelectedItem().toString();
+                String theType= typeSpinner.getSelectedItem().toString();
+                theType=theType.replaceAll("\\s","%20");
+                String theCity=citySpinner.getSelectedItem().toString();
+                theCity=theCity.replaceAll("\\s","%20");
+                switch(theDate)
+                {
+                    case "1 day ahead":      theDate="1d";   break;
+                    case "1 week ahead":     theDate="1w";   break;
+                    case "1 month ahead":    theDate="1m";   break;
+                }
+                // getting events from the server
+                events = bl.getEvents(theType, theDate, theCity);
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        if(events == null)
+                        {
+                            listView.setAdapter(null);
+                            printAlertDialog("No events to show!");
+                        }
+                        else {
+                            EventAdapter adapter = new EventAdapter(context, events);
+                            listView.setAdapter(adapter);
+                        }
+                        progress.dismiss();
+                    }
+                });
+            }
+        }).start();
     }
     public void itemPressed(View v)
     {
@@ -152,4 +180,6 @@ public class searchEventActivity extends Activity
         });
         builder.show();
     }
-}
+
+
+    }
