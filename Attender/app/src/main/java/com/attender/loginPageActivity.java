@@ -30,6 +30,7 @@ import com.facebook.login.LoginResult;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 
 public class loginPageActivity extends Activity {
@@ -71,7 +72,10 @@ public class loginPageActivity extends Activity {
 
         callbackManager = CallbackManager.Factory.create();
 
-        // ======== facebook login ========
+        // =================================== facebook login ==================================
+        LoginManager.getInstance().logInWithReadPermissions(
+                this,
+                Arrays.asList("user_friends"));
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>()
         {
             @Override
