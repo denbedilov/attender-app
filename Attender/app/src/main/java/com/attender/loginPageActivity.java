@@ -25,7 +25,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-
+import com.facebook.login.widget.LoginButton;
 
 
 import java.security.MessageDigest;
@@ -73,9 +73,8 @@ public class loginPageActivity extends Activity {
         callbackManager = CallbackManager.Factory.create();
 
         // =================================== facebook login ==================================
-        LoginManager.getInstance().logInWithReadPermissions(
-                this,
-                Arrays.asList("user_friends"));
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("user_friends");
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>()
         {
             @Override
