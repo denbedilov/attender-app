@@ -65,15 +65,13 @@
         android:layout_below="@+id/calendarView"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:background="#ffffffff"
         android:paddingTop="10dp">
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="#ffffffff">
+            android:layout_weight="1">
         </ListView>
     </LinearLayout>
 
