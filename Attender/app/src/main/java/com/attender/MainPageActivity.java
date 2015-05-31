@@ -25,6 +25,12 @@ public class MainPageActivity  extends Activity
         setContentView(R.layout.activity_main_page);
         TextView userName = (TextView)findViewById(R.id.User_Name_textView);
 
+        //=============================  Global AppData Set  ======================================
+
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        AppData appData = (AppData) getApplicationContext();
+
+
 
         //========================  Guest Check  ==================================================
         if(AccessToken.getCurrentAccessToken() == null)
@@ -40,17 +46,18 @@ public class MainPageActivity  extends Activity
         }
 
         if(AccessToken.getCurrentAccessToken() != null)
+        {
             userName.setText(Profile.getCurrentProfile().getName());
+            //Set name and email in global/application context
+            appData.resetData(AccessToken.getCurrentAccessToken().getToken());
+        }
         else
+        {
             userName.setText("guest");
+            //Set name and email in global/application context
+            appData.resetData(null);
+        }
 
-        //=============================  Global AppData Set  ======================================
-
-        // Calling Application class (see application tag in AndroidManifest.xml)
-        AppData appData = (AppData) getApplicationContext();
-
-        //Set name and email in global/application context
-        appData.resetData(AccessToken.getCurrentAccessToken().getToken());
 
     }
 

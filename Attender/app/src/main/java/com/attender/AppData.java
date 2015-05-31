@@ -26,7 +26,7 @@ public class AppData extends Application
 
     public void resetData(String userToken)
     {
-        if(userToken.equals(null))
+        if(userToken == null)
         {
             set_isGuest(true);
             set_userEventList(null);
