@@ -85,7 +85,64 @@ public class AttenderBL
 
         return events;
     }
+    //==============================================Get user Events==========================================================================================
+    public ArrayList<Event> getUserEvents(String token)
+    {
+        Date date;
+        Event ev;
+        JSONArray jsonArr;
+        ArrayList<Event> userEvents = new ArrayList<Event>();
+        DateFormat dateFormatDate = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormatTime = new SimpleDateFormat("HH:mm");
 
+        jsonArr = dal.getUserEvents(token);
+        if(jsonArr == null)
+            return null;
+
+        try
+        {
+            // JSONArray jEventArr = jo.getJSONArray("Events");
+            for (int i = 0; i < jsonArr.length() - 1; i++)
+            {
+                JSONObject childJSONObject = jsonArr.getJSONObject(i);
+                date = convertMilliSecondsToDate(childJSONObject.getString("date"));
+
+                // change city name NULL and Unknown
+                String city = "";
+                if(childJSONObject.getString("city").compareTo("null") == 0 || childJSONObject.getString("city").compareTo("Unknown") == 0)
+                    city = "somewhere in Israel";
+                else
+                    city = childJSONObject.getString("city");
+
+                if(date != null)
+                {
+                    ev = new Event(
+                            childJSONObject.getString("id"),
+                            dateFormatDate.format(date),
+                            childJSONObject.getString("name"),
+                            dateFormatTime.format(date),
+                            // change city name
+                            city,
+                            childJSONObject.getString("address"),
+                            childJSONObject.getString("description"),
+                            childJSONObject.getString("event_url"),
+                            childJSONObject.getString("host"),
+                            childJSONObject.getString("price"),
+                            date,
+                            childJSONObject.getString("attendees")
+                    );
+
+                    userEvents.add(ev);
+                }
+            }
+        }
+        catch(JSONException e)
+        {
+            userEvents = null;
+        }
+
+        return userEvents;
+    }
     //=============================================== CONVERT MILI-SEC TO DATE ==============================================================================
 
     //Convert the mili-sec string to date object, in case of fail, return null

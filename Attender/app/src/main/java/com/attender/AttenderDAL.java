@@ -137,5 +137,27 @@ public class AttenderDAL {
 
     return jsonArray;
     }
+    public JSONArray getUserEvents(String token)
+    {
+        JSONObject jsonObject = null;
+        JSONArray jsonArray = null;
+        String jsonData = "";
+        String query="calendar?token="+token;
+
+        try {
+            jsonData = "{ Events:\n";
+            jsonData+=serverConnection(query);
+            jsonData += "}";
+
+            jsonObject = new JSONObject(jsonData);
+            jsonArray = jsonObject.getJSONArray("Events");
+
+        } catch (Exception e) {
+            return null;
+        }
+
+        return jsonArray;
+
+    }
 
 }
