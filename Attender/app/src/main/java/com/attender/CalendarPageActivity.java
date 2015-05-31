@@ -10,49 +10,76 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 //import static com.example.rita.attender.R.id.listView;
 
 public class CalendarPageActivity extends Activity
 {
-    AttenderBL bl;
-    ArrayList<Event> events;
+    private AttenderBL bl;
+    private CalendarView myCal;
+    private ArrayList<Event> userEvents;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-
+    protected void onCreate(Bundle savedInstanceState) {
+        userEvents = new ArrayList<Event>();
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_page);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        //=============================  Global AppData Set  ======================================
 
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        final AppData appData = (AppData) getApplicationContext();
+
+
+        //=============================  load date  ======================================
+
+        final ListView listView = (ListView) findViewById(R.id.listView);
+        myCal = (CalendarView) findViewById(R.id.calendarView);
 
         TextView Calendar_TV = (TextView) findViewById(R.id.Calendar_TXT);
-        TextView Event_TV    = (TextView) findViewById(R.id.Event_List_TXT);
-        Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
+        TextView Event_TV = (TextView) findViewById(R.id.Event_List_TXT);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "ostrich-regular.ttf");
         Calendar_TV.setTypeface(tf);
         Event_TV.setTypeface(tf);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             // private int position;
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-            Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
-            int eventNum = position;
-            Event testE = events.get(eventNum);
-            myIntent.putExtra("CurrentEvent",events.get(eventNum));
-            startActivity(myIntent);
-        }
-                  });
+                Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
+                int eventNum = position;
+                Event testE = userEvents.get(eventNum);
+                myIntent.putExtra("CurrentEvent", userEvents.get(eventNum));
+                startActivity(myIntent);
+            }
+        });
+        myCal.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
+        {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth)
+            {
+
+                if(appData.get_userEventList() != null)
+                    for(Event ev : appData.get_userEventList())
+                    {
+                        if(ev.isDateEquals(year, month,dayOfMonth))
+                            userEvents.add(ev);
+                    }
+                else
+                    printAlertDialog("NO EVENTS");
+            }
+        });
+
     }
-    //}
 /*    public void eventsPressed(View v)
     {
         Intent intent=new Intent(this,searchEventActivity.class);

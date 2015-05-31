@@ -20,6 +20,7 @@ public class MainPageActivity  extends Activity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
+
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
@@ -45,11 +46,13 @@ public class MainPageActivity  extends Activity
             layout.setEnabled(false);
         }
 
+
         if(AccessToken.getCurrentAccessToken() != null)
         {
             userName.setText(Profile.getCurrentProfile().getName());
             //Set name and email in global/application context
-            appData.resetData(AccessToken.getCurrentAccessToken().getToken());
+            String accessToken = AccessToken.getCurrentAccessToken().getToken();
+            appData.resetData(accessToken);
         }
         else
         {
@@ -60,7 +63,6 @@ public class MainPageActivity  extends Activity
 
 
     }
-
     public void log_out_to_home(View v)
     {
         Intent intent = new Intent(this,loginPageActivity.class);

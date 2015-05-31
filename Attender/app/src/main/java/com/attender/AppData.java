@@ -35,7 +35,7 @@ public class AppData extends Application
         }
         else
         {
-            set_isGuest(true);
+            set_isGuest(false);
             set_attenderBL(new AttenderBL());
             set_userToken(userToken);
             set_userEventList(_attenderBL.getUserEvents(_userToken));   //get arry list of user marked events

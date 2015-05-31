@@ -131,4 +131,14 @@ public class Event implements Serializable
     public String getAttendees() { return _attendees; }
 
     public void setAttendees(String _attendees) { this._attendees = _attendees; }
+
+    public boolean isDateEquals(int year, int month, int dayOfMonth)
+    {
+        String date_dayOfTheWeek = (String) android.text.format.DateFormat.format("EE", getDateObject());//Thursday
+        String date_stringMonth = (String) android.text.format.DateFormat.format("MMM", getDateObject()); //Jun
+        String date_intMonth = (String) android.text.format.DateFormat.format("MM", getDateObject()); //06
+        String date_year = (String) android.text.format.DateFormat.format("yyyy", getDateObject()); //2013
+       // if(date_dayOfTheWeek.equals(day)&&)
+        return true;
+    }
 }
