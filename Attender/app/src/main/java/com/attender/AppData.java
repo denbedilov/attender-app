@@ -24,7 +24,7 @@ public class AppData extends Application
     }
 
 
-    public AppData(String userToken)
+    public void resetData(String userToken)
     {
         if(userToken.equals(null))
         {
@@ -41,7 +41,6 @@ public class AppData extends Application
             set_userEventList(_attenderBL.getUserEvents(_userToken));   //get arry list of user marked events
         }
     }
-
 
     public boolean is_isGuest() {
         return _isGuest;

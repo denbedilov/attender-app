@@ -25,6 +25,8 @@ public class MainPageActivity  extends Activity
         setContentView(R.layout.activity_main_page);
         TextView userName = (TextView)findViewById(R.id.User_Name_textView);
 
+
+        //========================  Guest Check  ==================================================
         if(AccessToken.getCurrentAccessToken() == null)
         {
             LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
@@ -37,13 +39,19 @@ public class MainPageActivity  extends Activity
             layout.setEnabled(false);
         }
 
-        // print server response to login
-        //printAlertDialog(getIntent().getStringExtra("serverResponse"));
-
         if(AccessToken.getCurrentAccessToken() != null)
             userName.setText(Profile.getCurrentProfile().getName());
         else
             userName.setText("guest");
+
+        //=============================  Global AppData Set  ======================================
+
+        // Calling Application class (see application tag in AndroidManifest.xml)
+        AppData appData = (AppData) getApplicationContext();
+
+        //Set name and email in global/application context
+        appData.resetData(AccessToken.getCurrentAccessToken().getToken());
+
     }
 
     public void log_out_to_home(View v)
