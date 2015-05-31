@@ -35,9 +35,15 @@ public class AttendeesAdapter extends ArrayAdapter<String>
         }
 
         Attendee at = getAttendee(position);
-        ((TextView) view.findViewById(R.id.tvName)).setText(at.get_firstName());
-        ((TextView) view.findViewById(R.id.tvCity)).setText(at.get_lastName());
-
+        ((TextView) view.findViewById(R.id.tvName)).setText(at.get_firstName() + " " + at.get_lastName());
+        if(at.get_firstName().compareTo("Rita") == 0)
+            ((TextView) view.findViewById(R.id.tvCity)).setText("blonda");
+        else
+            ((TextView) view.findViewById(R.id.tvCity)).setText("good man");
+        if(at.is_ff())
+            ((TextView) view.findViewById(R.id.tvDate)).setText("friend");
+        else
+            ((TextView) view.findViewById(R.id.tvDate)).setText("not friend");
 
         return view;
     }
