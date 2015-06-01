@@ -49,10 +49,7 @@ public class Event_Page_Activity extends Activity {
         {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                if ( isChecked )
-                {
-                    printAlertDialog(bl.Attend(AccessToken.getCurrentAccessToken().getToken(), currEvent.getId(), true));
-                }
+                    printToastDialog(bl.Attend(AccessToken.getCurrentAccessToken().getToken(), currEvent.getId(), isChecked));
             }
         });
 
@@ -133,7 +130,7 @@ public class Event_Page_Activity extends Activity {
 
     }
 
-    private void printAlertDialog(String message)
+    private void printToastDialog(String message)
     {
         Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
         toast.show();

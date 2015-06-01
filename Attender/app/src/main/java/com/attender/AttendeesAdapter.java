@@ -39,7 +39,7 @@ public class AttendeesAdapter extends ArrayAdapter<String>
         if(at.get_firstName().compareTo("Rita") == 0)
             ((TextView) view.findViewById(R.id.tvCity)).setText("blonda");
         else
-            ((TextView) view.findViewById(R.id.tvCity)).setText("good man");
+            ((TextView) view.findViewById(R.id.tvCity)).setText("fat man");
         if(at.is_ff())
             ((TextView) view.findViewById(R.id.tvDate)).setText("friend");
         else

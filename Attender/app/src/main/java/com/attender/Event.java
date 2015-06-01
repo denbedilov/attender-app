@@ -1,7 +1,11 @@
 package com.attender;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 /**
@@ -134,11 +138,37 @@ public class Event implements Serializable
 
     public boolean isDateEquals(int year, int month, int dayOfMonth)
     {
-        String date_dayOfTheWeek = (String) android.text.format.DateFormat.format("EE", getDateObject());//Thursday
-        String date_stringMonth = (String) android.text.format.DateFormat.format("MMM", getDateObject()); //Jun
-        String date_intMonth = (String) android.text.format.DateFormat.format("MM", getDateObject()); //06
-        String date_year = (String) android.text.format.DateFormat.format("yyyy", getDateObject()); //2013
-       // if(date_dayOfTheWeek.equals(day)&&)
-        return true;
+        String dd = getDate();
+        String dayString="";
+        String monthString="";
+
+            if(dayOfMonth<10)
+                dayString= "0"+Integer.toString(dayOfMonth);
+            else
+                dayString= Integer.toString(dayOfMonth);
+
+             if(month<10)
+                 monthString= "0"+Integer.toString(month);
+             else
+                 monthString= "0"+Integer.toString(month);
+
+
+        if(dd.compareTo(dayString + "/" + monthString + "/"  + year) == 0)
+            return true;
+        return false;
+
+
+    }
+
+
+    public static String getDate(long milliSeconds, String dateFormat)
+    {
+        // Create a DateFormatter object for displaying date in specified format.
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
     }
 }

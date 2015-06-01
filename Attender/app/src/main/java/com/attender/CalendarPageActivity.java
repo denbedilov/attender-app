@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -68,14 +69,26 @@ public class CalendarPageActivity extends Activity
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth)
             {
 
+                userEvents.clear();
                 if(appData.get_userEventList() != null)
                     for(Event ev : appData.get_userEventList())
                     {
-                        if(ev.isDateEquals(year, month,dayOfMonth))
+                        if(ev.isDateEquals(year, month+1,dayOfMonth))
                             userEvents.add(ev);
                     }
                 else
-                    printAlertDialog("NO EVENTS");
+                    printToastDialog("no events to show");
+
+
+                if(userEvents.size()==0)
+                {
+                    listView.setAdapter(null);
+                    printToastDialog("No events to show!");
+                }
+                else {
+                    EventAdapter adapter = new EventAdapter(getBaseContext(),userEvents);
+                    listView.setAdapter(adapter);
+                }
             }
         });
 
@@ -132,6 +145,10 @@ public class CalendarPageActivity extends Activity
         });
         builder.show();
     }
-
+    private void printToastDialog(String message)
+    {
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
 }
