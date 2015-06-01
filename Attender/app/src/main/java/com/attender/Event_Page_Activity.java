@@ -17,22 +17,35 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
+import java.util.ArrayList;
+
 
 public class Event_Page_Activity extends Activity {
     Event currEvent;
     AttenderBL bl;
+    ArrayList<Event> userEvents;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        final AppData appData = (AppData) getApplicationContext();
         super.onCreate(savedInstanceState);
         TextView tv;
         bl = new AttenderBL();
+        userEvents=new ArrayList<Event>();
         setContentView(R.layout.activity_event__page_);
         Intent myIntent=getIntent();
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
 
         //==========  ATTEND   =====================
         CheckBox attend = (CheckBox) findViewById(R.id.attend_check);
+        userEvents=appData.get_userEventList();
+        if(userEvents!=null)
+        {
+            if(userEvents.indexOf(currEvent)!=-1)
+                attend.setChecked(true);
+            else
+                attend.setChecked(false);
+        }
         if(AccessToken.getCurrentAccessToken() == null) {
             Button attendeesBTN=(Button)findViewById(R.id.attendees_cmd);
             Button chatBTN=(Button)findViewById(R.id.chat_cmd);
