@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -70,6 +72,7 @@ public class CalendarPageActivity extends Activity
             {
 
                 userEvents.clear();
+                appData.resetData(AccessToken.getCurrentAccessToken().getToken());
                 if(appData.get_userEventList() != null)
                     for(Event ev : appData.get_userEventList())
                     {

@@ -30,20 +30,24 @@ public class Event_Page_Activity extends Activity {
         final AppData appData = (AppData) getApplicationContext();
         super.onCreate(savedInstanceState);
         TextView tv;
+        boolean checkedFlag=false;
         bl = new AttenderBL();
         userEvents=new ArrayList<Event>();
         setContentView(R.layout.activity_event__page_);
         Intent myIntent=getIntent();
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
-
-        //==========  ATTEND   =====================
+        appData.resetData(AccessToken.getCurrentAccessToken().getToken());
+          //==========  ATTEND   =====================
         CheckBox attend = (CheckBox) findViewById(R.id.attend_check);
         userEvents=appData.get_userEventList();
         if(userEvents!=null)
         {
-            if(userEvents.indexOf(currEvent)!=-1)
-                attend.setChecked(true);
-            else
+            for(Event ev: userEvents)
+                if(ev.equals(currEvent)) {
+                    attend.setChecked(true);
+                    checkedFlag = true;
+                }
+           if(!checkedFlag)
                 attend.setChecked(false);
         }
         if(AccessToken.getCurrentAccessToken() == null) {
@@ -63,6 +67,7 @@ public class Event_Page_Activity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
                     printToastDialog(bl.Attend(AccessToken.getCurrentAccessToken().getToken(), currEvent.getId(), isChecked));
+
             }
         });
 
