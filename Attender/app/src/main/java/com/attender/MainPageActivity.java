@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
 import com.facebook.Profile;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 
 
@@ -35,7 +36,7 @@ public class MainPageActivity  extends Activity
 
 
         //========================  Guest Check  ==================================================
-        if(AccessToken.getCurrentAccessToken() == null)
+        if(AccessToken.getCurrentAccessToken() == null && !appData.get_googleApiClient().isConnected())
         {
             LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
             layout.setVisibility(View.INVISIBLE);
@@ -52,18 +53,20 @@ public class MainPageActivity  extends Activity
         {
             userName.setText(Profile.getCurrentProfile().getName());
             //Set name and email in global/application context
-            String accessToken = AccessToken.getCurrentAccessToken().getToken();
-            appData.resetData(accessToken);
+            //appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken(), null);
         }
-        else if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
+        else if(appData.get_googleApiClient().isConnected())
         {
 
+            String name = Plus.PeopleApi.getCurrentPerson(appData.get_googleApiClient()).getDisplayName();
+            userName.setText(name);
+            //appData.resetData("google", null, appData.get_googleApiClient());
         }
         else
         {
             userName.setText("guest");
             //Set name and email in global/application context
-            appData.resetData(null);
+            //appData.resetData("guest", null, null);
         }
 
 

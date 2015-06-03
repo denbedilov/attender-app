@@ -72,7 +72,7 @@ public class CalendarPageActivity extends Activity
             {
 
                 userEvents.clear();
-                appData.resetData(AccessToken.getCurrentAccessToken().getToken());
+                //appData.resetData(AccessToken.getCurrentAccessToken().getToken());
                 if(appData.get_userEventList() != null)
                     for(Event ev : appData.get_userEventList())
                     {

@@ -36,7 +36,7 @@ public class Event_Page_Activity extends Activity {
         setContentView(R.layout.activity_event__page_);
         Intent myIntent=getIntent();
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
-        appData.resetData(AccessToken.getCurrentAccessToken().getToken());
+        //appData.resetData(AccessToken.getCurrentAccessToken().getToken());
           //==========  ATTEND   =====================
         CheckBox attend = (CheckBox) findViewById(R.id.attend_check);
         userEvents=appData.get_userEventList();

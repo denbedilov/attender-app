@@ -10,11 +10,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,23 +29,18 @@ import com.facebook.login.widget.LoginButton;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import android.app.Activity;
 import android.content.IntentSender.SendIntentException;
-import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.gms.auth.GoogleAuthException;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.plus.Account;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.auth.GoogleAuthUtil;
-import com.google.android.gms.plus.model.people.Person;
 
 public class loginPageActivity extends Activity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -61,7 +55,7 @@ public class loginPageActivity extends Activity implements
     private boolean mIntentInProgress;
 
     AccountManager manager;
-    Account[] accounts;
+    android.accounts.Account[] accounts;
 
     CallbackManager callbackManager;
     AttenderBL bl;
@@ -76,7 +70,7 @@ public class loginPageActivity extends Activity implements
         bl = new AttenderBL();
 
 
-        //=============================================== Text Style ==============================================================================
+        //=============================================== Text Style =======================
         TextView Main_TV = (TextView) findViewById(R.id.attender_main_txt);
         TextView Sub_TV = (TextView) findViewById(R.id.attender_sub_txt);
         TextView Login_TV = (TextView) findViewById(R.id.login_txt);
@@ -96,7 +90,7 @@ public class loginPageActivity extends Activity implements
                 .build();
 
         manager = AccountManager.get(this);
-        accounts = (Account[]) manager.getAccountsByType("com.google");
+        accounts = manager.getAccountsByType("com.google");
         //================================== internet connection ===============================
 
         StrictMode.ThreadPolicy policy = new StrictMode.
@@ -194,22 +188,10 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        String token = "";
-        if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-            try {
-                GoogleAuthUtil.getToken(getBaseContext(), (android.accounts.Account) accounts[0], "profile");
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (GoogleAuthException e) {
-                e.printStackTrace();
-            }
-        }
-
+        AppData appData = (AppData) getApplicationContext();
+        appData.resetData("google", null, mGoogleApiClient);
         Intent intent = new Intent(this, MainPageActivity.class);
-        intent.putExtra("token", token);
         startActivity(intent);
-        // We've resolved any connection errors.  mGoogleApiClient can be used to
-        // access Google APIs on behalf of the user.
     }
 
     @Override
