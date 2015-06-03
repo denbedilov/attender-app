@@ -1,5 +1,6 @@
 package com.attender;
 
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -28,6 +29,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -36,11 +38,14 @@ import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.gms.auth.GoogleAuthException;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.plus.Account;
 import com.google.android.gms.plus.Plus;
-import com.google.android.gms.plus.*;
+import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.plus.model.people.Person;
 
 public class loginPageActivity extends Activity implements
@@ -54,6 +59,9 @@ public class loginPageActivity extends Activity implements
     /* Client used to interact with Google APIs. */
     private GoogleApiClient mGoogleApiClient;
     private boolean mIntentInProgress;
+
+    AccountManager manager;
+    Account[] accounts;
 
     CallbackManager callbackManager;
     AttenderBL bl;
@@ -87,6 +95,8 @@ public class loginPageActivity extends Activity implements
                 .addScope(new Scope("profile"))
                 .build();
 
+        manager = AccountManager.get(this);
+        accounts = (Account[]) manager.getAccountsByType("com.google");
         //================================== internet connection ===============================
 
         StrictMode.ThreadPolicy policy = new StrictMode.
@@ -184,13 +194,19 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        String serverResponse = "";
+        String token = "";
         if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-            Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-            serverResponse = currentPerson.getDisplayName();
+            try {
+                GoogleAuthUtil.getToken(getBaseContext(), (android.accounts.Account) accounts[0], "profile");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (GoogleAuthException e) {
+                e.printStackTrace();
+            }
         }
+
         Intent intent = new Intent(this, MainPageActivity.class);
-        intent.putExtra("serverResponse", serverResponse);
+        intent.putExtra("token", token);
         startActivity(intent);
         // We've resolved any connection errors.  mGoogleApiClient can be used to
         // access Google APIs on behalf of the user.
