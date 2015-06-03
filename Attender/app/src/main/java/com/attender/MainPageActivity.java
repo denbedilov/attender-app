@@ -58,8 +58,8 @@ public class MainPageActivity  extends Activity
         else if(appData.get_googleApiClient().isConnected())
         {
 
-            String name = Plus.PeopleApi.getCurrentPerson(appData.get_googleApiClient()).getDisplayName();
-            userName.setText(name);
+            //String name = Plus.PeopleApi.getCurrentPerson(appData.get_googleApiClient()).getDisplay();
+            userName.setText("google name");
             //appData.resetData("google", null, appData.get_googleApiClient());
         }
         else
