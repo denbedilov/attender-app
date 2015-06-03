@@ -11,47 +11,71 @@ import java.util.ArrayList;
  */
 public class AppData extends Application
 {
-    private boolean          _isGuest;
     private ArrayList<Event> _userEventList;
     private AttenderBL       _attenderBL;
     private String           _userToken;
-    private GoogleApiClient  _mGoogleApiClient;
-
+    private GoogleApiClient  _googleApiClient;
+    private String           _loginType;
 
     public AppData()
     {
-        set_isGuest(true);
         set_userEventList(null);
         set_attenderBL(null);
         set_userToken(null);
-        set_mGoogleApiClient(null);
+        set_googleApiClient(null);
+        set_loginType("");
     }
 
 
-    public void resetData(String userToken)
+    public void resetData(String loginType, String facebookTok, GoogleApiClient  googleApiClient)
     {
-        if(userToken == null)
+        if(facebookTok != null || googleApiClient != null)
         {
-            set_isGuest(true);
-            set_userEventList(null);
-            set_attenderBL(null);
-            set_userToken(null);
+            switch(loginType)
+            {
+                case "google":
+                    if(googleApiClient != null)     setGoogleLogin(googleApiClient);
+                    else                            setGuest();
+                    break;
+
+                case "facebook":
+                    if(facebookTok != null)     setFacebookLogin(facebookTok);
+                    else                        setGuest();
+                    break;
+            }
         }
         else
         {
-            set_isGuest(false);
-            set_attenderBL(new AttenderBL());
-            set_userToken(userToken);
-            set_userEventList(_attenderBL.getUserEvents(_userToken));   //get array list of user marked events
+            setGuest();
         }
     }
 
-    public boolean is_isGuest() {
-        return _isGuest;
+    //If tok is not null, return true, else return false
+    private void setGuest()
+    {
+        set_loginType("guest");
+        set_userEventList(null);
+        set_attenderBL(null);
+        set_userToken(null);
+        set_googleApiClient(null);
     }
 
-    public void set_isGuest(boolean _isGuest) {
-        this._isGuest = _isGuest;
+    private void setGoogleLogin(GoogleApiClient googleApiClient)
+    {
+        set_loginType("google");
+        set_attenderBL(new AttenderBL());
+        set_userToken(null);
+        set_googleApiClient(googleApiClient);
+        set_userEventList(_attenderBL.getUserEvents(_userToken));   //get array list of user marked events
+    }
+
+    private void setFacebookLogin(String userToken)
+    {
+        set_loginType("facebook");
+        set_attenderBL(new AttenderBL());
+        set_userToken(userToken);
+        set_googleApiClient(null);
+        set_userEventList(_attenderBL.getUserEvents(_userToken));   //get array list of user marked events
     }
 
     public ArrayList<Event> get_userEventList() {
@@ -78,11 +102,21 @@ public class AppData extends Application
         this._userToken = _userToken;
     }
 
-    public GoogleApiClient get_mGoogleApiClient() {
-        return _mGoogleApiClient;
+    public GoogleApiClient get_googleApiClient() {
+        return _googleApiClient;
     }
 
-    public void set_mGoogleApiClient(GoogleApiClient _mGoogleApiClient) {
-        this._mGoogleApiClient = _mGoogleApiClient;
+    public void set_googleApiClient(GoogleApiClient _googleApiClient) {
+        this._googleApiClient = _googleApiClient;
+    }
+
+    public String get_loginType()
+    {
+        return _loginType;
+    }
+
+    public void set_loginType(String _loginType)
+    {
+        this._loginType = _loginType;
     }
 }
