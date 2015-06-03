@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -108,6 +109,8 @@ public class Event_Page_Activity extends Activity {
         //==========  PRICE   ==================
         tv =(TextView)findViewById(R.id.price_lbl);  //chang to price
         tv.setText(currEvent.getPrice());
+        if(!(tv.toString().contains("free")))
+           tv.setMovementMethod(LinkMovementMethod.getInstance());
 
         //==========  ATTENDEES   ==================
         tv =(TextView)findViewById(R.id.attending_lbl);
