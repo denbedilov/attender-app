@@ -44,7 +44,7 @@ public class AttenderBL
         try
         {
            // JSONArray jEventArr = jo.getJSONArray("Events");
-            for (int i = 0; i < jsonArr.length() - 1; i++)
+            for (int i = 0; i < jsonArr.length(); i++)
             {
                 JSONObject childJSONObject = jsonArr.getJSONObject(i);
                 date = convertMilliSecondsToDate(childJSONObject.getString("date"));
@@ -102,7 +102,7 @@ public class AttenderBL
         try
         {
             // JSONArray jEventArr = jo.getJSONArray("Events");
-            for (int i = 0; i < jsonArr.length() - 1; i++)
+            for (int i = 0; i < jsonArr.length(); i++)
             {
                 JSONObject childJSONObject = jsonArr.getJSONObject(i);
                 date = convertMilliSecondsToDate(childJSONObject.getString("date"));

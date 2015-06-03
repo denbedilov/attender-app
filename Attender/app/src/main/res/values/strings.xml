@@ -15,13 +15,14 @@
         <item>Type ___&#8895;</item>
         <item>Career&amp;Business</item>
         <item>Community&amp;Environment</item>
-        <item>Games</item>
+        <item>Entertainment</item>
         <item>Fitness</item>
         <item>Health&amp;Wellbeing</item>
-        <item>Language&amp;Ethnic Identity</item>
+        <item>Politics</item>
         <item>New Age&amp;Spirituality</item>
         <item>Socializing</item>
         <item>Tech</item>
+        <item>Transport</item>
     </string-array>
     <string-array name="dates_array">
         <item>Date ___&#8895;</item>
