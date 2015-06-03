@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
 import com.facebook.Profile;
+import com.google.android.gms.plus.Plus;
 
 
 /**
@@ -53,6 +54,10 @@ public class MainPageActivity  extends Activity
             //Set name and email in global/application context
             String accessToken = AccessToken.getCurrentAccessToken().getToken();
             appData.resetData(accessToken);
+        }
+        else if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
+        {
+
         }
         else
         {

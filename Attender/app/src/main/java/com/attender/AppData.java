@@ -2,6 +2,8 @@ package com.attender;
 
 import android.app.Application;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.util.ArrayList;
 
 /**
@@ -13,6 +15,7 @@ public class AppData extends Application
     private ArrayList<Event> _userEventList;
     private AttenderBL       _attenderBL;
     private String           _userToken;
+    private GoogleApiClient  _mGoogleApiClient;
 
 
     public AppData()
@@ -21,6 +24,7 @@ public class AppData extends Application
         set_userEventList(null);
         set_attenderBL(null);
         set_userToken(null);
+        set_mGoogleApiClient(null);
     }
 
 
@@ -38,7 +42,7 @@ public class AppData extends Application
             set_isGuest(false);
             set_attenderBL(new AttenderBL());
             set_userToken(userToken);
-            set_userEventList(_attenderBL.getUserEvents(_userToken));   //get arry list of user marked events
+            set_userEventList(_attenderBL.getUserEvents(_userToken));   //get array list of user marked events
         }
     }
 
@@ -72,5 +76,13 @@ public class AppData extends Application
 
     public void set_userToken(String _userToken) {
         this._userToken = _userToken;
+    }
+
+    public GoogleApiClient get_mGoogleApiClient() {
+        return _mGoogleApiClient;
+    }
+
+    public void set_mGoogleApiClient(GoogleApiClient _mGoogleApiClient) {
+        this._mGoogleApiClient = _mGoogleApiClient;
     }
 }

@@ -63,13 +63,6 @@ public class loginPageActivity extends Activity implements
 
         super.onCreate(savedInstanceState);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Plus.API)
-                .addScope(new Scope("profile"))
-                .build();
-
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
         bl = new AttenderBL();
@@ -86,8 +79,13 @@ public class loginPageActivity extends Activity implements
         Login_TV.setTypeface(tf);
         Or_TV.setTypeface(tf);
 
-        //=============================================== Login =================================================================================
-
+        //================================== Gmail Login ===================================
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Plus.API)
+                .addScope(new Scope("profile"))
+                .build();
 
         //================================== internet connection ===============================
 
@@ -189,7 +187,7 @@ public class loginPageActivity extends Activity implements
         String serverResponse = "";
         if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
             Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-            serverResponse = currentPerson.getId();
+            serverResponse = currentPerson.getDisplayName();
         }
         Intent intent = new Intent(this, MainPageActivity.class);
         intent.putExtra("serverResponse", serverResponse);
