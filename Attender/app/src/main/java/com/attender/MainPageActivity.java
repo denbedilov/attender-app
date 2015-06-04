@@ -11,14 +11,15 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
 import com.facebook.Profile;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
-
 
 /**
  * Created by Shai on 17/05/2015.
  */
-public class MainPageActivity  extends Activity
+public class MainPageActivity  extends Activity implements View.OnClickListener
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,19 +52,21 @@ public class MainPageActivity  extends Activity
 
         if(AccessToken.getCurrentAccessToken() != null)
         {
+            // facebook login
             userName.setText(Profile.getCurrentProfile().getName());
             //Set name and email in global/application context
             //appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken(), null);
         }
         else if(appData.get_googleApiClient().isConnected())
         {
-
-            //String name = Plus.PeopleApi.getCurrentPerson(appData.get_googleApiClient()).getDisplay();
-            userName.setText("google name");
-            //appData.resetData("google", null, appData.get_googleApiClient());
+            // google login
+            // String name = Plus.PeopleApi.getCurrentPerson(appData.get_googleApiClient()).getDisplay();
+            userName.setText(getIntent().getStringExtra("google name"));
+            // appData.resetData("google", null, appData.get_googleApiClient());
         }
         else
         {
+            // guest login
             userName.setText("guest");
             //Set name and email in global/application context
             //appData.resetData("guest", null, null);
@@ -99,24 +102,10 @@ public class MainPageActivity  extends Activity
         startActivity(intent);
     }
 
-    private void printAlertDialog(String message)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("LOGIN DIALOG");
-        builder.setMessage(message);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //do things
-            }
-        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //do things
-            }
-        });
-        builder.show();
+    @Override
+    public void onClick(View v) {
+        AppData appData = (AppData) getApplicationContext();
+        appData.get_googleApiClient().disconnect();
     }
 
 }

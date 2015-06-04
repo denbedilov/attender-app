@@ -57,6 +57,7 @@ public class loginPageActivity extends Activity implements
     AccountManager manager;
     android.accounts.Account[] accounts;
 
+    /* facebook login callback */
     CallbackManager callbackManager;
     AttenderBL bl;
 
@@ -190,7 +191,9 @@ public class loginPageActivity extends Activity implements
     public void onConnected(Bundle connectionHint) {
         AppData appData = (AppData) getApplicationContext();
         appData.resetData("google", null, mGoogleApiClient);
+        String name = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
         Intent intent = new Intent(this, MainPageActivity.class);
+        intent.putExtra("google name", name);
         startActivity(intent);
     }
 
