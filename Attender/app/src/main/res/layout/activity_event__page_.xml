@@ -378,7 +378,9 @@
                 android:text="Description"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="15dp">
+                android:textSize="15dp"
+                android:id="@+id/desc_txt"
+                android:onClick="descCloseClick">
             </TextView>
 
             <LinearLayout

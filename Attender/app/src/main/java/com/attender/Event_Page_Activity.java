@@ -154,8 +154,22 @@ public class Event_Page_Activity extends Activity {
     public void onInfoClick(View v)
     {
         TextView tv =(TextView)findViewById(R.id.description_lbl);    ///TO ADD
-         tv.setText(currEvent.getDescription());
+        TextView desc=(TextView)findViewById(R.id.desc_txt);
+        tv.setText(currEvent.getDescription());
         tv.setClickable(false);
+        desc.setText(R.string.description_close);
+        desc.setClickable(true);
+
+    }
+    public void descCloseClick(View v)
+    {
+        TextView tv =(TextView)findViewById(R.id.description_lbl);    ///TO ADD
+        TextView desc=(TextView)findViewById(R.id.desc_txt);
+        tv.setText(R.string.description);
+        tv.setClickable(true);
+        desc.setText("Description");
+        desc.setClickable(false);
+
     }
     public void attendeesPressed(View v)
     {
