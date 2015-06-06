@@ -96,8 +96,11 @@ public class Event_Page_Activity extends Activity {
 
         //==========  DESCRIPTION   ==================
         tv =(TextView)findViewById(R.id.description_lbl);    ///TO ADD
-        tv.setText(currEvent.getDescription());
-        
+       // tv.setText(currEvent.getDescription());
+        tv.setText(R.string.description);
+        tv.setClickable(true);
+
+
 
         //==========  EVENT URL   ==================
         tv =(TextView)findViewById(R.id.url_lbl);
@@ -148,7 +151,12 @@ public class Event_Page_Activity extends Activity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
-
+    public void onInfoClick(View v)
+    {
+        TextView tv =(TextView)findViewById(R.id.description_lbl);    ///TO ADD
+         tv.setText(currEvent.getDescription());
+        tv.setClickable(false);
+    }
     public void attendeesPressed(View v)
     {
 

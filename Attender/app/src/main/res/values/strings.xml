@@ -10,6 +10,7 @@
     <string name="title_activity_event_list_page">EventListPageActivity</string>
     <string name="title_activity_chat_page">Chat</string>
     <string name="title_activity_main_page">MainPage</string>
+    <string name="description"><u><b><i>Click For Description</i></b></u></string>
 
     <string-array name="type_array">
         <item>Type ___&#8895;</item>
