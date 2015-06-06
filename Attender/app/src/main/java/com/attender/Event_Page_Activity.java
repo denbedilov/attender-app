@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -96,11 +97,14 @@ public class Event_Page_Activity extends Activity {
         //==========  DESCRIPTION   ==================
         tv =(TextView)findViewById(R.id.description_lbl);    ///TO ADD
         tv.setText(currEvent.getDescription());
-        tv.setMovementMethod(new ScrollingMovementMethod());
+        
 
         //==========  EVENT URL   ==================
         tv =(TextView)findViewById(R.id.url_lbl);
-        tv.setText(currEvent.getEventUrl());
+        tv.setClickable(true);
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
+        String text = "<a href='"+currEvent.getEventUrl()+"'> Event Info </a>";
+        tv.setText(Html.fromHtml(text));
 
         //==========  HOST   ==================
         tv =(TextView)findViewById(R.id.host_lbl);
@@ -109,9 +113,13 @@ public class Event_Page_Activity extends Activity {
         //==========  PRICE   ==================
         tv =(TextView)findViewById(R.id.price_lbl);  //chang to price
         tv.setText(currEvent.getPrice());
-        if(!(tv.toString().contains("free")))
-           tv.setMovementMethod(LinkMovementMethod.getInstance());
+        if(!(currEvent.getPrice().contains("free"))) {
+            tv.setClickable(true);
+            tv.setMovementMethod(LinkMovementMethod.getInstance());
+            text = "<a href='"+currEvent.getPrice()+"'> Price Info </a>";
+            tv.setText(Html.fromHtml(text));
 
+        }
         //==========  ATTENDEES   ==================
         tv =(TextView)findViewById(R.id.attending_lbl);
         tv.setText(currEvent.getAttendees());
