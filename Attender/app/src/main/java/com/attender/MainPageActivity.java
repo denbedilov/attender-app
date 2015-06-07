@@ -19,7 +19,7 @@ import com.google.android.gms.plus.Plus;
 /**
  * Created by Shai on 17/05/2015.
  */
-public class MainPageActivity  extends Activity implements View.OnClickListener
+public class MainPageActivity  extends Activity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
