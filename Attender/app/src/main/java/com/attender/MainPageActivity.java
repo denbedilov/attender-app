@@ -37,7 +37,7 @@ public class MainPageActivity  extends Activity implements View.OnClickListener
 
 
         //========================  Guest Check  ==================================================
-        if(AccessToken.getCurrentAccessToken() == null && !appData.get_googleApiClient().isConnected())
+        if(AccessToken.getCurrentAccessToken() == null && appData.get_googleApiClient() == null)
         {
             LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
             layout.setVisibility(View.INVISIBLE);
@@ -57,12 +57,17 @@ public class MainPageActivity  extends Activity implements View.OnClickListener
             //Set name and email in global/application context
             //appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken(), null);
         }
-        else if(appData.get_googleApiClient().isConnected())
+        else if(appData.get_googleApiClient() != null)
         {
+            if(appData.get_googleApiClient().isConnected())
+            {
             // google login
             // String name = Plus.PeopleApi.getCurrentPerson(appData.get_googleApiClient()).getDisplay();
             userName.setText(getIntent().getStringExtra("google name"));
             // appData.resetData("google", null, appData.get_googleApiClient());
+            }
+            else
+                userName.setText("google login failed");
         }
         else
         {
