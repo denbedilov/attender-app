@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.HttpMethod;
@@ -21,18 +22,22 @@ import com.google.android.gms.plus.Plus;
  */
 public class MainPageActivity  extends Activity
 {
+    private AppData appData;
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        printDialog(getIntent().getStringExtra("user_type"));
+
         TextView userName = (TextView)findViewById(R.id.User_Name_textView);
 
         //=============================  Global AppData Set  ======================================
 
         // Calling Application class (see application tag in AndroidManifest.xml)
-        AppData appData = (AppData) getApplicationContext();
+        appData = (AppData) getApplicationContext();
 
 
 
@@ -70,6 +75,7 @@ public class MainPageActivity  extends Activity
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish(); // call this to finish the current activity
+        appData.resetData("guest", null);
         AccessToken.setCurrentAccessToken(null);
     }
 
@@ -89,5 +95,11 @@ public class MainPageActivity  extends Activity
     {
         Intent intent=new Intent(this,searchEventActivity.class);
         startActivity(intent);
+    }
+
+    private void printDialog(String message)
+    {
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

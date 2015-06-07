@@ -34,6 +34,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import android.content.IntentSender.SendIntentException;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.common.ConnectionResult;
@@ -70,6 +71,7 @@ public class loginPageActivity extends Activity implements
         setContentView(R.layout.activity_login_page);
         bl = new AttenderBL();
         appData = (AppData) getApplicationContext();
+        appData.resetData("guest", null);
 
 
         //=============================================== Text Style =======================
@@ -114,6 +116,7 @@ public class loginPageActivity extends Activity implements
             {
                 // App code
                 AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
+                appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken());
             }
 
             @Override
@@ -254,6 +257,10 @@ public class loginPageActivity extends Activity implements
         AppEventsLogger.activateApp(this);
 
         // check facebook login
+//        if(AccessToken.getCurrentAccessToken() != null)
+//        {
+//            appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken());
+//        }
         if(appData.get_loginType().compareTo("guest") != 0)
         {
             // send id and token to own server
@@ -271,6 +278,7 @@ public class loginPageActivity extends Activity implements
                     break;
             }
             Intent intent = new Intent(this, MainPageActivity.class);
+            intent.putExtra("user_type", appData.get_loginType());
             startActivity(intent);
         }
     }
@@ -305,24 +313,10 @@ public class loginPageActivity extends Activity implements
 //    }
 
 
-    private void printAlertDialog(String message)
+    private void printDialog(String message)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("LOGIN DIALOG");
-        builder.setMessage(message);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //do things
-            }
-        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //do things
-            }
-        });
-        builder.show();
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
 }
