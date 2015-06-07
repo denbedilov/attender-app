@@ -80,7 +80,7 @@
     </LinearLayout>
 
     <GridView
-        android:id="@+id/calendar"
+        android:id="@+id/calendar_grid"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:numColumns="7"></GridView>
