@@ -129,13 +129,24 @@ public class loginPageActivity extends Activity implements
             }
         });
 
-        //  ======== check facebook login ========
-        if(AccessToken.getCurrentAccessToken() != null)
+        //  ======== login check ========
+        if(appData.get_loginType().compareTo("guest") != 0)
         {
             // send id and token to own server
-            String serverResponse = bl.loginToServer(AccessToken.USER_ID_KEY, AccessToken.getCurrentAccessToken().toString());
+            switch(appData.get_loginType())
+            {
+                case "facebook":
+                    bl.loginToServer(AccessToken.USER_ID_KEY, AccessToken.getCurrentAccessToken().toString());
+                    break;
+                //TODO: send to own server google user id and google token
+                case "google":
+                    break;
+                case "server":
+                    break;
+                default:
+                    break;
+            }
             Intent intent = new Intent(this, MainPageActivity.class);
-            intent.putExtra("serverResponse", serverResponse);
             startActivity(intent);
         }
 
@@ -243,11 +254,22 @@ public class loginPageActivity extends Activity implements
         AppEventsLogger.activateApp(this);
 
         // check facebook login
-        if(AccessToken.getCurrentAccessToken() != null)
+        if(appData.get_loginType().compareTo("guest") != 0)
         {
             // send id and token to own server
-            bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().getToken());
-            appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken());
+            switch(appData.get_loginType())
+            {
+                case "facebook":
+                    bl.loginToServer(AccessToken.USER_ID_KEY, AccessToken.getCurrentAccessToken().toString());
+                    break;
+                //TODO: send to own server google user id and google token
+                case "google":
+                    break;
+                case "server":
+                    break;
+                default:
+                    break;
+            }
             Intent intent = new Intent(this, MainPageActivity.class);
             startActivity(intent);
         }
