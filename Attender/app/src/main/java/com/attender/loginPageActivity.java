@@ -246,9 +246,9 @@ public class loginPageActivity extends Activity implements
         if(AccessToken.getCurrentAccessToken() != null)
         {
             // send id and token to own server
-            String serverResponse = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().getToken());
+            bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().getToken());
+            appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken());
             Intent intent = new Intent(this, MainPageActivity.class);
-            intent.putExtra("serverResponse", serverResponse);
             startActivity(intent);
         }
     }
