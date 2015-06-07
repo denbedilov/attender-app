@@ -37,7 +37,7 @@ public class MainPageActivity  extends Activity implements View.OnClickListener
 
 
         //========================  Guest Check  ==================================================
-        if(AccessToken.getCurrentAccessToken() == null && appData.get_googleApiClient() == null)
+        if(appData.get_loginType().compareTo("guest") == 0)
         {
             LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
             layout.setVisibility(View.INVISIBLE);
@@ -49,43 +49,27 @@ public class MainPageActivity  extends Activity implements View.OnClickListener
             layout.setEnabled(false);
         }
 
-
-        if(AccessToken.getCurrentAccessToken() != null)
+        //====================== Hello "name" ======================================
+        switch(appData.get_loginType())
         {
-            // facebook login
-            userName.setText(Profile.getCurrentProfile().getName());
-            //Set name and email in global/application context
-            //appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken(), null);
+            case "facebook":
+                userName.setText(Profile.getCurrentProfile().getName());
+                break;
+            case "guest":
+                userName.setText("guest");
+                break;
+            default:
+                userName.setText(getIntent().getStringExtra("google name"));
+                break;
         }
-        else if(appData.get_googleApiClient() != null)
-        {
-            if(appData.get_googleApiClient().isConnected())
-            {
-            // google login
-            // String name = Plus.PeopleApi.getCurrentPerson(appData.get_googleApiClient()).getDisplay();
-            userName.setText(getIntent().getStringExtra("google name"));
-            // appData.resetData("google", null, appData.get_googleApiClient());
-            }
-            else
-                userName.setText("google login failed");
-        }
-        else
-        {
-            // guest login
-            userName.setText("guest");
-            //Set name and email in global/application context
-            //appData.resetData("guest", null, null);
-        }
-
-
     }
+
     public void log_out_to_home(View v)
     {
         Intent intent = new Intent(this,loginPageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish(); // call this to finish the current activity
-
         AccessToken.setCurrentAccessToken(null);
     }
 
@@ -106,11 +90,4 @@ public class MainPageActivity  extends Activity implements View.OnClickListener
         Intent intent=new Intent(this,searchEventActivity.class);
         startActivity(intent);
     }
-
-    @Override
-    public void onClick(View v) {
-        AppData appData = (AppData) getApplicationContext();
-        appData.get_googleApiClient().disconnect();
-    }
-
 }
