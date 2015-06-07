@@ -112,6 +112,24 @@
 
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="fill_parent" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Button"
+                    android:onClick="loginPressed"
+                    android:id="@+id/login_cmd" />
+            </LinearLayout>
         </LinearLayout>
 
         <Space
@@ -144,7 +162,8 @@
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:layout_weight="1">
 
                 <Button
                     android:layout_width="fill_parent"
@@ -156,6 +175,24 @@
                     android:layout_weight="1"
                     android:textColor="#ffffffff" />
             </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Register"
+                    android:onClick="registerPressed"
+                    android:id="@+id/register_cmd"
+                    android:background="@drawable/guest_button_pressed"
+                    android:layout_weight="1"
+                    android:textColor="#ffffffff" />
+                </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
