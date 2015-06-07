@@ -200,6 +200,7 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onConnected(Bundle connectionHint) {
+        //TODO: add google token to replace null
         appData.resetData("google", null);
         String name = "";
         if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
@@ -211,7 +212,7 @@ public class loginPageActivity extends Activity implements
             name = "google name failed";
         }
         Intent intent = new Intent(this, MainPageActivity.class);
-        intent.putExtra("google name", name);
+        intent.putExtra("name", name);
         startActivity(intent);
     }
 
