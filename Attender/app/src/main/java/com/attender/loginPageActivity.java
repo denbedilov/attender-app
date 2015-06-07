@@ -191,10 +191,18 @@ public class loginPageActivity extends Activity implements
     public void onConnected(Bundle connectionHint) {
         AppData appData = (AppData) getApplicationContext();
         appData.resetData("google", null, mGoogleApiClient);
-        //String name = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
+        String name = "";
+        if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
+        {
+            Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
+        }
+        else
+        {
+            name = "google name failed";
+        }
         Intent intent = new Intent(this, MainPageActivity.class);
-       // intent.putExtra("google name", name);
-        //startActivity(intent);
+        intent.putExtra("google name", name);
+        startActivity(intent);
     }
 
     @Override
