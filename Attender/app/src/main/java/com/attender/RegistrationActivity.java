@@ -34,19 +34,27 @@ AttenderBL bl;
         EditText password= (EditText)findViewById(R.id.password_txt);
         EditText confPass=(EditText)findViewById(R.id.confPass_txt);
         Button confirm_btn=(Button)findViewById(R.id.confirm_cmd);
-        if(firstName.toString().equals("") || lastName.toString().equals("") || password.toString().equals("") ||email.toString().equals("")||confPass.toString().equals("") )
-            printToastDialog("Please fill all Fields");
 
-        if(!password.toString().equals(confPass.toString()))
+        if(firstName.getText().toString().compareTo("") == 0 ||
+                lastName.getText().toString().compareTo("") ==0 ||
+                password.getText().toString().compareTo("") ==0 ||
+                email.getText().toString().compareTo("") == 0 ||
+                confPass.getText().toString().compareTo("") == 0 ) {
+            printToastDialog("Please fill all Fields");
+            this.onStart();
+        }
+        else if(password.getText().toString().compareTo(confPass.getText().toString()) != 0)
             printToastDialog("passwords are not equal!");
         else {
-            userToken = bl.userRegistration(firstName.toString(), lastName.toString(), email.toString(), password.toString().hashCode());
+            userToken = bl.userRegistration(firstName.getText().toString(),
+                    lastName.getText().toString(),
+                    email.getText().toString(),
+                    password.getText().toString().hashCode());
             printToastDialog(userToken);
             appData.resetData("server",userToken);
             Intent intent=new Intent(this,MainPageActivity.class);
-            intent.putExtra("name", firstName.toString()+" "+lastName.toString());
+            intent.putExtra("name", firstName.getText().toString()+" "+lastName.getText().toString());
             startActivity(intent);
-
         }
     }
     @Override

@@ -59,7 +59,7 @@ public class MainPageActivity  extends Activity
                 userName.setText("guest");
                 break;
             default:
-                userName.setText(getIntent().getStringExtra("google name"));
+                userName.setText(getIntent().getStringExtra("name"));
                 break;
         }
     }
