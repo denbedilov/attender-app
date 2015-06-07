@@ -255,6 +255,7 @@ public class loginPageActivity extends Activity implements
 
     public void confirmPressed(View v)
     {
+        appData.resetData("guest", null);
         Intent intent=new Intent(this,MainPageActivity.class);
         startActivity(intent);
     }
