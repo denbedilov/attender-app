@@ -26,7 +26,10 @@
             android:text="ATTENDER"
             android:id="@+id/attender_main_txt"
             android:textColor="#ffffffff"
-            android:textSize="65dp" />
+            android:textSize="65dp"
+            android:focusableInTouchMode="false"
+            android:focusable="false"
+            android:enabled="false" />
 
         <Space
             android:layout_width="fill_parent"

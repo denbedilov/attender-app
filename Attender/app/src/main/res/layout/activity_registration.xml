@@ -23,7 +23,7 @@
             android:layout_width="fill_parent"
             android:text="Registration"
             android:textStyle="bold|italic"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:textColor="#ffffffff"
             android:gravity="center_vertical|center_horizontal"
             android:layout_weight="1">
@@ -35,20 +35,21 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:background="#ffffffff">
+        android:background="#ff292929">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:paddingTop="50dp">
+            android:paddingTop="100dp"
+            android:background="#ffffffff">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:id="@+id/nameLine"
-                android:padding="5dp">
+                android:padding="15dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -56,7 +57,8 @@
                     android:text="First Name:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="15dp">
+                    android:textSize="20dp"
+                    android:textColor="#ff1f7b7c">
                 </TextView>
 
                 <LinearLayout
@@ -72,7 +74,8 @@
                         android:id="@+id/name_text"
                         android:gravity="center_vertical"
                         android:layout_weight="5"
-                        android:textSize="15dp">
+                        android:textSize="15dp"
+                        android:textColor="#ffffffff">
                     </EditText>
                 </LinearLayout>
             </LinearLayout>
@@ -83,7 +86,7 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/LastNameLine"
-                android:padding="5dp">
+                android:padding="15dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -91,7 +94,8 @@
                     android:text="Last Name:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="15dp">
+                    android:textSize="20dp"
+                    android:textColor="#ff1f7b7c">
                 </TextView>
 
                 <LinearLayout
@@ -107,7 +111,8 @@
                         android:id="@+id/LastName_text"
                         android:layout_weight="5"
                         android:gravity="center_vertical|right"
-                        android:textSize="15dp">
+                        android:textSize="15dp"
+                        android:textColor="#ffffffff">
                     </EditText>
                 </LinearLayout>
             </LinearLayout>
@@ -118,7 +123,7 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/EmailLine"
-                android:padding="5dp">
+                android:padding="15dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -126,7 +131,8 @@
                     android:text="Email:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="15dp">
+                    android:textSize="20dp"
+                    android:textColor="#ff1f7b7c">
                 </TextView>
 
                 <LinearLayout
@@ -145,7 +151,8 @@
                         android:id="@+id/email_txt"
                         android:layout_weight="3"
                         android:gravity="center_vertical|right"
-                        android:textSize="15dp">
+                        android:textSize="15dp"
+                        android:textColor="#ffffffff">
                     </EditText>
 
                 </LinearLayout>
@@ -157,7 +164,7 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/passwordLine"
-                android:padding="5dp">
+                android:padding="15dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -165,7 +172,8 @@
                     android:text="Password:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="15dp">
+                    android:textSize="20dp"
+                    android:textColor="#ff1f7b7c">
                 </TextView>
 
                 <LinearLayout
@@ -183,7 +191,8 @@
                         android:id="@+id/password_txt"
                         android:layout_weight="3"
                         android:gravity="center_vertical|right"
-                        android:textSize="15dp">
+                        android:textSize="15dp"
+                        android:textColor="#ffffffff">
                     </EditText>
                 </LinearLayout>
 
@@ -195,7 +204,7 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/confirmPasswordLine"
-                android:padding="5dp">
+                android:padding="15dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -203,7 +212,8 @@
                     android:text="Confirm Password:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="15dp">
+                    android:textSize="20dp"
+                    android:textColor="#ff1f7b7c">
                 </TextView>
 
                 <LinearLayout
@@ -219,9 +229,10 @@
                         android:inputType="textPassword"
                         android:ems="10"
                         android:id="@+id/confPass_txt"
-                        android:layout_weight="3"
+                        android:layout_weight="2"
                         android:gravity="center_vertical|right"
-                        android:textSize="15dp">
+                        android:textSize="15dp"
+                        android:textColor="#ffffffff">
                     </EditText>
                 </LinearLayout>
             </LinearLayout>
