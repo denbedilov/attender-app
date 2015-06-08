@@ -91,8 +91,8 @@ public class AttenderDAL {
         try {
             URL url = new URL(API_URL + query);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            jsonData += readJsonStream(con.getInputStream());
             responseCode = con.getResponseCode();
+            jsonData += readJsonStream(con.getInputStream());
 
         } catch (Exception e) {
             return null;
