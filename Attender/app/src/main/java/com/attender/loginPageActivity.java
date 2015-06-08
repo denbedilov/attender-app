@@ -256,11 +256,7 @@ public class loginPageActivity extends Activity implements
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
 
-        // check facebook login
-//        if(AccessToken.getCurrentAccessToken() != null)
-//        {
-//            appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken());
-//        }
+        // check login
         if(appData.get_loginType().compareTo("guest") != 0)
         {
             // send id and token to own server
