@@ -68,6 +68,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".RegistrationActivity"
+            android:label="@string/title_activity_registration"
+            android:screenOrientation="portrait">
+            </activity>
+        <activity
             android:name=".CalendarGrid"
             android:label="@string/title_activity_calendar_grid" >
         </activity>

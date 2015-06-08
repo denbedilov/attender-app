@@ -50,6 +50,7 @@
     <string name="title_activity_attendees_page">AttendeesPage</string>
     <string name="title_activity_calendar_grid">CalendarGrid</string>
     <string name="title_activity_calendar_grid_cell">CalendarGridCell</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
 
 
 </resources>
