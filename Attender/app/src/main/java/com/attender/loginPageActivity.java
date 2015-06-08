@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -238,18 +239,9 @@ public class loginPageActivity extends Activity implements
     @Override
     public void onConnected(Bundle connectionHint) {
         //TODO: add google token to replace null
-        appData.resetData("google", null);
-        String name;
-        if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
-        {
-            name = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
-        }
-        else
-        {
-            name = "google name failed";
-        }
+        appData.resetData("google", bl.googleLogin);
         Intent intent = new Intent(this, MainPageActivity.class);
-        intent.putExtra("name", name);
+        intent.putExtra("name", "your google nickname");
         startActivity(intent);
     }
 
@@ -330,5 +322,9 @@ public class loginPageActivity extends Activity implements
 //
 //        return super.onOptionsItemSelected(item);
 //    }
-
+    private void printDialog(String message)
+    {
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }
