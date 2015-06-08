@@ -14,7 +14,7 @@ package com.attender;
  * Created by Shai Pe'er on 03/05/2015.
  */
 public class AttenderDAL {
-    final String API_URL = "http://attender-mobile.appspot.com/";     //api url
+    final String API_URL = "https://attender-mobile.appspot.com/";     //api url
 
 
     //=============================================== BUILDER ==============================================================================
