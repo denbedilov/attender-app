@@ -81,7 +81,7 @@ public class AttenderDAL {
         return jsonStreamString;
     }
 
-    //===================================Server Connection==============================================================
+    //===================================Server Connection==============================================================================
 
     public String serverConnection(String query)
     {
@@ -99,7 +99,7 @@ public class AttenderDAL {
         }
         return jsonData;
     }
-//=================================================login======================================================================
+//=================================================Facebook login======================================================================
     public String loginToServer(String id, String token)
     {
         String query="login?";
@@ -108,6 +108,7 @@ public class AttenderDAL {
         jsonData=serverConnection(query);
         return jsonData;
     }
+    //============================================Attend=============================================================================
     public String Attend(String token,String eventId, String isAttend)
     {
         String query="attend?";
@@ -116,6 +117,7 @@ public class AttenderDAL {
         jsonData=serverConnection(query);
         return jsonData;
     }
+    //=========================================get Attendees===============================================================================
     public JSONArray getAttendees(String eventId, String token)
     {
         JSONObject jsonObject;
@@ -137,6 +139,7 @@ public class AttenderDAL {
 
     return jsonArray;
     }
+    //===============================================get User Events============================================================================
     public JSONArray getUserEvents(String token)
     {
         JSONObject jsonObject = null;
@@ -159,5 +162,21 @@ public class AttenderDAL {
         return jsonArray;
 
     }
+    //====================================================Registration===================================================================
+public  String userRegistration(String firstName,String lastName,String email,int password)
+{
+    String query="userlogin?email="+email+"&password="+password+"&firstname="+firstName+"&lastname="+lastName;
+    String serverResponse=serverConnection(query);
+    return serverResponse;
+
+}
+//======================================================userLogin=======================================================================
+public  String userLogin(String email,int password)
+{
+    String query="userlogin?email="+email+"&password="+password;
+    String serverResponse=serverConnection(query);
+    return serverResponse;
+
+}
 
 }

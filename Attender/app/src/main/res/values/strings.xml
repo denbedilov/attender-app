@@ -48,6 +48,7 @@
 
     </string-array>
     <string name="title_activity_attendees_page">AttendeesPage</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
 
 
 </resources>

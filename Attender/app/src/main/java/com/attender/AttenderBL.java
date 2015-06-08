@@ -162,11 +162,21 @@ public class AttenderBL
     }
 
 
-    //============================================Login===========================================================
+    //============================================Facebook Login===========================================================
 
     public String loginToServer(String id, String token)
     {
         return dal.loginToServer(id, token);
+    }
+    //=======================================user Registration/login==========================================================
+
+    public String userRegistration(String name,String lastName,String email,int password)
+    {
+        return dal.userRegistration(name,lastName,email,password);
+    }
+    public String userLogin(String email,int password)
+    {
+        return dal.userLogin(email,password);
     }
     //=============================================Attend============================================================
     public String Attend(String token,String eventId, boolean isAttend)
