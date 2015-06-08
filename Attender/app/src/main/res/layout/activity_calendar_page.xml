@@ -30,6 +30,8 @@
         android:background="#b0000000"
         android:layout_gravity="left">
 
+        <include layout="@layout/activity_calendar_grid"/>
+
     </LinearLayout>
 
     <Space

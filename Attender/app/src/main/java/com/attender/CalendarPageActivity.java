@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CalendarView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ import java.util.Calendar;
 public class CalendarPageActivity extends Activity
 {
     private AttenderBL bl;
-    private CalendarView myCal;
+    private GridView calendarGrid;
     private ArrayList<Event> userEvents;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +35,13 @@ public class CalendarPageActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_page);
 
-        //=============================  Global AppData Set  ======================================
+        //=========================  Global AppData Set  ======================================
 
         // Calling Application class (see application tag in AndroidManifest.xml)
         final AppData appData = (AppData) getApplicationContext();
 
 
-        //=============================  load date  ======================================
-
-        final ListView listView = (ListView) findViewById(R.id.listView);
-        myCal = (CalendarView) findViewById(R.id.calendarView);
-
+        //===========================  Text Fonts =======================================
         TextView Calendar_TV = (TextView) findViewById(R.id.Calendar_TXT);
         TextView Event_TV = (TextView) findViewById(R.id.Event_List_TXT);
         Typeface tf = Typeface.createFromAsset(getAssets(), "ostrich-regular.ttf");
@@ -52,7 +49,13 @@ public class CalendarPageActivity extends Activity
         Event_TV.setTypeface(tf);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        //=============================  load date  ======================================
+
+        final ListView listView = (ListView) findViewById(R.id.listView);
+        calendarGrid = (GridView) findViewById(R.id.calendar_grid);
+
+
+        listView.setOnItemClickListener( new AdapterView.OnItemClickListener()
         {
             // private int position;
 
@@ -65,7 +68,8 @@ public class CalendarPageActivity extends Activity
                 startActivity(myIntent);
             }
         });
-        myCal.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
+
+  /*      myCal.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
         {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth)
@@ -94,41 +98,13 @@ public class CalendarPageActivity extends Activity
                 }
             }
         });
-
+*/
     }
-/*    public void eventsPressed(View v)
-    {
-        Intent intent=new Intent(this,searchEventActivity.class);
-        startActivity(intent);
-    }
-    public void chatPressed(View v)
-    {
-        Intent intent=new Intent(this,ChatPageActivity.class);
-        startActivity(intent);
-    }*/
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_calendar_page, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
+
+
+    //==============  Alert Dialog ===============
     private void printAlertDialog(String message)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
