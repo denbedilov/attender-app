@@ -9,7 +9,6 @@ import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.text.Layout;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -125,27 +124,6 @@ public class loginPageActivity extends Activity implements
             }
         });
 
-        //  ======== login check ========
-        if(appData.get_loginType().compareTo("guest") != 0)
-        {
-            // send id and token to own server
-            switch(appData.get_loginType())
-            {
-                case "facebook":
-                    bl.loginToServer(AccessToken.USER_ID_KEY, AccessToken.getCurrentAccessToken().toString());
-                    break;
-                //TODO: send to own server google user id and google token
-                case "google":
-                    break;
-                case "server":
-                    break;
-                default:
-                    break;
-            }
-            Intent intent = new Intent(this, MainPageActivity.class);
-            startActivity(intent);
-        }
-
         //  ======== Print out the key hash "KeyHash" at log ========
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
@@ -159,6 +137,8 @@ public class loginPageActivity extends Activity implements
         } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException ignored) {
 
         }
+        //  ======== login check ========
+        onResume();
     }
 
     @Override
@@ -262,10 +242,12 @@ public class loginPageActivity extends Activity implements
     @Override
     public void onConnected(Bundle connectionHint) {
         //TODO: add google token to replace null
-        appData.resetData("google", bl.googleLogin());
-        Intent intent = new Intent(this, MainPageActivity.class);
-        intent.putExtra("name", "your google nickname");
-        startActivity(intent);
+        if(mGoogleApiClient.isConnected()) {
+            appData.resetData("google", bl.googleLogin());
+            Intent intent = new Intent(this, MainPageActivity.class);
+            intent.putExtra("name", "your google nickname");
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -295,13 +277,13 @@ public class loginPageActivity extends Activity implements
         AppEventsLogger.activateApp(this);
 
         // check login
-        if(appData.get_loginType().compareTo("guest") != 0)
+        if(appData.get_loginType().compareTo("guest") != 0 && appData.get_loginType().compareTo("") != 0)
         {
             // send id and token to own server
             switch(appData.get_loginType())
             {
                 case "facebook":
-                    bl.loginToServer(AccessToken.USER_ID_KEY, AccessToken.getCurrentAccessToken().toString());
+                    bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().toString());
                     break;
                 //TODO: send to own server google user id and google token
                 case "google":
