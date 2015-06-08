@@ -1,6 +1,7 @@
 package com.attender;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,11 +14,13 @@ import android.widget.Toast;
 
 public class RegistrationActivity extends Activity {
 AttenderBL bl;
+    AppData appData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         bl=new AttenderBL();
+        appData = (AppData) getApplicationContext();
 
 
     }
@@ -36,9 +39,15 @@ AttenderBL bl;
 
         if(!password.toString().equals(confPass.toString()))
             printToastDialog("passwords are not equal!");
-        else
-            userToken=bl.userRegistration(firstName.toString(),lastName.toString(),email.toString(),password.toString().hashCode());
+        else {
+            userToken = bl.userRegistration(firstName.toString(), lastName.toString(), email.toString(), password.toString().hashCode());
+            printToastDialog(userToken);
+            appData.resetData("server",userToken);
+            Intent intent=new Intent(this,MainPageActivity.class);
+            intent.putExtra("name", firstName.toString()+" "+lastName.toString());
+            startActivity(intent);
 
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
