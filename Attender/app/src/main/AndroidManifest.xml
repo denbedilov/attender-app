@@ -73,14 +73,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".CalendarGrid"
-            android:label="@string/title_activity_calendar_grid" >
-        </activity>
-        <activity
-            android:name=".CalendarGridCell"
-            android:label="@string/title_activity_calendar_grid_cell" >
-        </activity>
-        <activity
             android:name=".UserLoginActivity"
             android:label="@string/title_activity_user_login" >
         </activity>

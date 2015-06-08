@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ import com.facebook.AccessToken;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 //import static com.example.rita.attender.R.id.listView;
 
@@ -28,8 +30,13 @@ public class CalendarPageActivity extends Activity
     private AttenderBL bl;
     private GridView calendarGrid;
     private ArrayList<Event> userEvents;
+
+
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         userEvents = new ArrayList<Event>();
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
@@ -69,6 +76,24 @@ public class CalendarPageActivity extends Activity
             }
         });
 
+
+
+        //=================================================================================================
+        //=================================================================================================
+        //=================================================================================================
+        //=================================================================================================
+
+        createGrid();
+
+
+
+
+
+        //=================================================================================================
+        //=================================================================================================
+        //=================================================================================================
+        //=================================================================================================
+
   /*      myCal.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
         {
             @Override
@@ -101,8 +126,24 @@ public class CalendarPageActivity extends Activity
 */
     }
 
+    private void createGrid()
+    {
+        ArrayList<String> items = new ArrayList<>();
+        /*String items[];
+        = { "1", "is", "a", "really", "really2", "really3",
+                "really4", "really5", "silly", "list" };
+*/
+        for(int i = 1 ; i <= 43 ; i++)
+        {
+            items.add("" + i);
+        }
 
+        GridView calGrid = (GridView) findViewById(R.id.calendar_grid);
 
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items );
+
+        calGrid.setAdapter(aa);
+    }
 
     //==============  Alert Dialog ===============
     private void printAlertDialog(String message)
