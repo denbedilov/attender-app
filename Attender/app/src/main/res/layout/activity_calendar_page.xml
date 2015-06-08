@@ -30,17 +30,6 @@
         android:background="#b0000000"
         android:layout_gravity="left">
 
-        <CalendarView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/calendarView"
-            android:layout_below="@+id/chat_cmd"
-            android:layout_alignParentStart="true"
-            android:layout_alignEnd="@+id/explore_cmd"
-            android:layout_weight="1"
-            android:background="#ffffffff"
-            android:onClick="onInfoClick" />
-
     </LinearLayout>
 
     <Space

@@ -89,7 +89,7 @@ public class loginPageActivity extends Activity implements
                 .addApi(Plus.API)
                 .addScope(new Scope("profile"))
                 .build();
-
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
         manager = AccountManager.get(this);
         accounts = manager.getAccountsByType("com.google");
         //================================== internet connection ===============================
@@ -158,7 +158,7 @@ public class loginPageActivity extends Activity implements
     @Override
     protected void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+//        mGoogleApiClient.connect();
     }
 
     @Override
@@ -191,10 +191,18 @@ public class loginPageActivity extends Activity implements
     public void onConnected(Bundle connectionHint) {
         AppData appData = (AppData) getApplicationContext();
         appData.resetData("google", null, mGoogleApiClient);
-        //String name = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
+        String name = "";
+        if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
+        {
+            name = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
+        }
+        else
+        {
+            name = "google name failed";
+        }
         Intent intent = new Intent(this, MainPageActivity.class);
-       // intent.putExtra("google name", name);
-        //startActivity(intent);
+        intent.putExtra("google name", name);
+        startActivity(intent);
     }
 
     @Override
