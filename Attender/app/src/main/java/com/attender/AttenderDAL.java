@@ -10,6 +10,8 @@ package com.attender;
         import java.net.HttpURLConnection;
         import java.net.URL;
 
+        import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by Shai Pe'er on 03/05/2015.
  */
@@ -90,7 +92,7 @@ public class AttenderDAL {
 
         try {
             URL url = new URL(API_URL + query);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             responseCode = con.getResponseCode();
             jsonData += readJsonStream(con.getInputStream());
 
