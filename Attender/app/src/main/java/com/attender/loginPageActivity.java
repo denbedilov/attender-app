@@ -60,7 +60,7 @@ public class loginPageActivity extends Activity implements
     /* facebook login callback */
     CallbackManager callbackManager;
     AttenderBL bl;
-
+    AppData appData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,6 +69,7 @@ public class loginPageActivity extends Activity implements
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
         bl = new AttenderBL();
+        appData = (AppData) getApplicationContext();
 
 
         //=============================================== Text Style =======================
@@ -171,7 +172,17 @@ public class loginPageActivity extends Activity implements
     public void onClick(View v) {
        mGoogleApiClient.connect();
     }
-
+    //===========================================user register==========================================
+    public void registerPressed(View v)
+    {
+        Intent intent=new Intent(this,RegistrationActivity.class);
+        startActivity(intent);
+    }
+    public void loginPressed(View v)
+    {
+        Intent intent=new Intent(this,UserLoginActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         if (!mIntentInProgress && result.hasResolution()) {
@@ -189,8 +200,7 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        AppData appData = (AppData) getApplicationContext();
-        appData.resetData("google", null, mGoogleApiClient);
+        appData.resetData("google", null);
         String name = "";
         if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
         {
