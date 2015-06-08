@@ -1,16 +1,13 @@
 package com.attender;
 
-import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender.SendIntentException;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.os.StrictMode;
 import android.util.Base64;
 import android.util.Log;
@@ -26,22 +23,15 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import android.content.IntentSender.SendIntentException;
-import android.widget.Toast;
-
-import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
-import com.google.android.gms.auth.GoogleAuthUtil;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import static android.content.pm.PackageManager.GET_SIGNATURES;
 
 public class loginPageActivity extends Activity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -55,12 +45,11 @@ public class loginPageActivity extends Activity implements
     private GoogleApiClient mGoogleApiClient;
     private boolean mIntentInProgress;
 
-    AccountManager manager;
-    android.accounts.Account[] accounts;
-
     /* facebook login callback */
     CallbackManager callbackManager;
     AttenderBL bl;
+
+    /* saved data */
     AppData appData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +82,8 @@ public class loginPageActivity extends Activity implements
                 .addScope(new Scope("profile"))
                 .build();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        manager = AccountManager.get(this);
-        accounts = manager.getAccountsByType("com.google");
+//        manager = AccountManager.get(this);
+//        accounts = manager.getAccountsByType("com.google");
         //================================== internet connection ===============================
 
         StrictMode.ThreadPolicy policy = new StrictMode.
@@ -157,15 +146,13 @@ public class loginPageActivity extends Activity implements
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.attender",
-                    PackageManager.GET_SIGNATURES);
+                    GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
+        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException ignored) {
 
         }
     }
@@ -216,7 +203,7 @@ public class loginPageActivity extends Activity implements
     public void onConnected(Bundle connectionHint) {
         //TODO: add google token to replace null
         appData.resetData("google", null);
-        String name = "";
+        String name;
         if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
         {
             name = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
@@ -307,12 +294,5 @@ public class loginPageActivity extends Activity implements
 //
 //        return super.onOptionsItemSelected(item);
 //    }
-
-
-    private void printDialog(String message)
-    {
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-        toast.show();
-    }
 
 }
