@@ -97,8 +97,16 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:text="Sun"
+                android:id="@+id/textView15"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:text="Mon"
-                android:id="@+id/textView"
+                android:id="@+id/textView16"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
 
@@ -142,13 +150,6 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Sun"
-                android:id="@+id/textView15"
-                android:layout_weight="1"
-                android:gravity="center_vertical|center_horizontal" />
         </LinearLayout>
 
         <LinearLayout
@@ -166,7 +167,8 @@
                 android:choiceMode="singleChoice"
                 android:gravity="fill_horizontal|center_vertical"
                 android:layout_weight="1"
-                tools:listitem="@android:layout/simple_list_item_1" />
+                tools:listitem="@android:layout/simple_list_item_1"
+                android:clickable="true" />
         </LinearLayout>
 
     </LinearLayout>

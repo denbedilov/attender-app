@@ -35,12 +35,14 @@ public class CalendarPageActivity extends Activity
     private AttenderBL bl;
     private GridView calendarGrid;
     private ArrayList<Event> userEvents;
-    Calendar _calendar;
-
+    private Calendar _calendar;
+    private int releventDaysGap;
+    private ArrayList<Event> eventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        //==============================  Reset Data  ==========================================
         userEvents = new ArrayList<Event>();
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
@@ -51,7 +53,6 @@ public class CalendarPageActivity extends Activity
         // Calling Application class (see application tag in AndroidManifest.xml)
         final AppData appData = (AppData) getApplicationContext();
 
-
         //===========================  Text Fonts =======================================
         TextView Calendar_TV = (TextView) findViewById(R.id.Calendar_TXT);
         TextView Event_TV = (TextView) findViewById(R.id.Event_List_TXT);
@@ -61,6 +62,7 @@ public class CalendarPageActivity extends Activity
 
 
         //=============================  Event List  ======================================
+        eventList = appData.get_userEventList();    //get the updated user event list
 
         final ListView listView = (ListView) findViewById(R.id.listView);
 
@@ -94,26 +96,73 @@ public class CalendarPageActivity extends Activity
         });
 
 
-
 /*
-        gridView.setOnTouchListener(new View.OnTouchListener()
+        final GridView calendarGrid = (GridView) findViewById(R.id.calendar_grid);
+        calendarGrid.setOnTouchListener(new View.OnTouchListener()
         {
-            public boolean onTouch(View v, MotionEvent me) {
-
+            public boolean onTouch(View v, MotionEvent me)
+            {
                 int action = me.getActionMasked();
                 float currentXPosition = me.getX();
                 float currentYPosition = me.getY();
-                int position = gridView.pointToPosition((int) currentXPosition, (int) currentYPosition);
+                int position = calendarGrid.pointToPosition((int) currentXPosition, (int) currentYPosition);
 
                 // Change the color of the key pressed
-                ((TextView) gridView.getItemAtPosition(position)).setBackgroundColor(Color.RED);
+                ((TextView) calendarGrid.getItemAtPosition(position)).setBackgroundColor(Color.RED);
                 return true;
             }
-        }
+        });
 */
+        //========================  On Calendar Click Listener  ====================================
+
+        AdapterView.OnItemClickListener myOnItemClickListener = new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                String prompt = (String)parent.getItemAtPosition(position) + getYear() + " - " + (getMonth() + 1) + " - " + (position - releventDaysGap);
+                Toast.makeText(getApplicationContext(), prompt, Toast.LENGTH_SHORT).show();
 
 
-        //============================  Calendar Grid =============================================
+                //==================  Event List  ================================
+
+                if(position - releventDaysGap > 0 && position - releventDaysGap <= getMonthLength())
+                {
+                    userEvents.clear();
+
+                    if (eventList != null) {
+                        for (Event ev : eventList) {
+                            if (ev.isDateEquals(getYear(), getMonth() + 1, position - releventDaysGap))
+                                userEvents.add(ev);
+                        }
+                    }
+
+                    if (userEvents.size() == 0) {
+                        listView.setAdapter(null);
+                        printToastDialog("No events to show!");
+                    } else {
+                        EventAdapter adapter = new EventAdapter(getBaseContext(), userEvents);
+                        listView.setAdapter(adapter);
+                    }
+                }
+                else
+                    printToastDialog("Choose only this month dates!");
+            }
+        };
+
+        GridView calendarGrid = (GridView) findViewById(R.id.calendar_grid);
+        calendarGrid.setOnItemClickListener(myOnItemClickListener);
+
+
+
+
+
+
+
+
+
+
+        //============================  Calendar Grid Create =============================================
 
         _calendar = Calendar.getInstance();                     //Set Current Date
         refreshCalendarGrid();
@@ -195,11 +244,13 @@ public class CalendarPageActivity extends Activity
         int lastMonthLength = getLastMonthLength();
         int dayOfWeek = _calendar.get(Calendar.DAY_OF_WEEK);
 
-        for(int i = lastMonthLength - dayOfWeek; i < lastMonthLength ; i++)
+        for(int i = lastMonthLength - dayOfWeek + 2; i <= lastMonthLength ; i++)
         {
             items.add("" + i);
             numOfItems++;
         }
+
+        releventDaysGap = numOfItems - 1;
 
         //==============  Adding this month dates  ======================
 
@@ -212,6 +263,12 @@ public class CalendarPageActivity extends Activity
         //==============  Adding next month first dates  =================
         if(numOfItems > 35)
             for(int i = 1 ; numOfItems <= 41 ; i++)
+            {
+                items.add("" + i);
+                numOfItems++;
+            }
+        else if(numOfItems <= 35)
+            for(int i = 1 ; numOfItems <= 35-numOfItems ; i++)
             {
                 items.add("" + i);
                 numOfItems++;
