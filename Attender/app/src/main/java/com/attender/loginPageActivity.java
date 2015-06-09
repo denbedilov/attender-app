@@ -9,9 +9,12 @@ import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.Layout;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -179,11 +182,44 @@ public class loginPageActivity extends Activity implements
         Intent intent=new Intent(this,RegistrationActivity.class);
         startActivity(intent);
     }
+    //=======================================user login=================================================
+    public void userLoginPressed(View v)
+    {
+        LinearLayout emailLayout= (LinearLayout)findViewById(R.id.email_layout);
+        emailLayout.setVisibility(LinearLayout.VISIBLE);
+        LinearLayout passwordLayout= (LinearLayout)findViewById(R.id.password_layout);
+        passwordLayout.setVisibility(LinearLayout.VISIBLE);
+        LinearLayout loginLayout= (LinearLayout)findViewById(R.id.login_layout);
+        loginLayout.setVisibility(LinearLayout.VISIBLE);
+
+    }
     public void loginPressed(View v)
     {
-        Intent intent=new Intent(this,UserLoginActivity.class);
-        startActivity(intent);
+        EditText email=(EditText)findViewById(R.id.email_txt);
+        EditText password=(EditText)findViewById(R.id.password_txt);
+        String userToken="";
+        if(email.getText().toString().compareTo("")==0 || password.getText().toString().compareTo("")==0) {
+            printDialog("please enter all fields");
+            this.onStart();
+        }
+        else{
+            userToken=bl.userLogin(email.getText().toString(), password.getText().toString().hashCode());
+//            if(!(response.contains("200:")))
+//            {
+//                printDialog("Email or password are not correct");
+//                this.onStart();
+//            }
+//            else{
+                appData.resetData("server",userToken);
+                Intent intent=new Intent(this,MainPageActivity.class);
+                intent.putExtra("name","den"+" "+"bed");
+                startActivity(intent);
+         //   }
+
+        }
+
     }
+    //======================================================================================================
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         if (!mIntentInProgress && result.hasResolution()) {

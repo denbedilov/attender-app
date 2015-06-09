@@ -52,43 +52,25 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:id="@+id/email_layout"
+                android:visibility="invisible">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/textView"
-                    android:layout_weight="1" />
+                    android:text="Email:"
+                    android:id="@+id/email_lbl"
+                    android:layout_weight="1"
+                    android:textColor="#ffffffff"
+                    android:visibility="visible" />
 
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:ems="10"
-                    android:id="@+id/editText"
-                    android:layout_weight="2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/textView10"
-                    android:layout_weight="1" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:id="@+id/editText2"
+                    android:id="@+id/email_txt"
                     android:layout_weight="2" />
             </LinearLayout>
 
@@ -97,14 +79,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:id="@+id/password_layout"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Password:"
+                    android:id="@+id/password_lbl"
+                    android:layout_weight="1"
+                    android:textColor="#ffffffff"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/password_txt"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/login_layout"
+                android:visibility="invisible">
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Button"
-                    android:id="@+id/button2"
-                    android:gravity="center" />
+                    android:text="Login"
+                    android:id="@+id/login_cmd"
+                    android:gravity="center"
+                    android:onClick="loginPressed" />
             </LinearLayout>
         </LinearLayout>
 
@@ -194,9 +205,10 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Button"
-                    android:onClick="loginPressed"
-                    android:id="@+id/login_cmd" />
+                    android:text="User Login"
+                    android:onClick="userLoginPressed"
+                    android:id="@+id/userLogin_cmd"
+                    android:nestedScrollingEnabled="false" />
             </LinearLayout>
         </LinearLayout>
 

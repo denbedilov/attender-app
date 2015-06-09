@@ -15,7 +15,7 @@ package com.attender;
  */
 public class AttenderDAL {
     final String API_URL = "https://attender-mobile.appspot.com/";     //api url
-
+    private int responseCode;
 
     //=============================================== BUILDER ==============================================================================
 
@@ -92,7 +92,7 @@ public class AttenderDAL {
             URL url = new URL(API_URL + query);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             jsonData += readJsonStream(con.getInputStream());
-
+            responseCode = con.getResponseCode();
 
         } catch (Exception e) {
             return null;
@@ -175,7 +175,7 @@ public  String userLogin(String email,int password)
 {
     String query="userlogin?email="+email+"&password="+password;
     String serverResponse=serverConnection(query);
-    return serverResponse;
+    return responseCode + serverResponse;
 
 }
 
