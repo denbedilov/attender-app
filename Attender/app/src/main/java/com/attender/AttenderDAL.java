@@ -178,5 +178,11 @@ public  String userLogin(String email,int password)
     return responseCode + serverResponse;
 
 }
-
+//=====================================================google login======================================================================
+    public String googleLogin()
+    {
+        String query="googlelogin";
+        String serverResponse=serverConnection(query);
+        return serverResponse;
+    }
 }
