@@ -31,10 +31,14 @@
         android:layout_gravity="left"
         android:id="@+id/Calendar_Layout">
 
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="20px" />
+
         <LinearLayout
             android:id="@+id/Controll"
             android:layout_width="fill_parent"
-            android:layout_height="40sp"
+            android:layout_height="35sp"
             android:height="60sp"
             android:gravity="left|top"
             android:orientation="horizontal" >
@@ -135,7 +139,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:numColumns="7"
-            android:choiceMode="singleChoice" />
+            android:choiceMode="singleChoice"
+            android:gravity="fill_horizontal|center_vertical" />
 
     </LinearLayout>
 
