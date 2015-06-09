@@ -131,8 +131,8 @@ public class CalendarPageActivity extends Activity
 
     private ArrayList<String> calendarDateGenerator()
     {
-        ArrayList<String> items = new ArrayList<>();
-        for(int i = 1 ; i <= 43 ; i++)
+        ArrayList<String> items = new ArrayList<String>();
+        for(int i = 1 ; i <= 28 ; i++)
         {
             items.add("" + i);
         }
