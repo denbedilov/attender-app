@@ -26,7 +26,8 @@
             android:textSize="30dp"
             android:textColor="#ffffffff"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/register_lbl">
         </TextView>
     </LinearLayout>
 
@@ -58,7 +59,8 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="20dp"
-                    android:textColor="#ff1f7b7c">
+                    android:textColor="#ff1f7b7c"
+                    android:id="@+id/name_lbl">
                 </TextView>
 
                 <LinearLayout
@@ -95,7 +97,8 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="20dp"
-                    android:textColor="#ff1f7b7c">
+                    android:textColor="#ff1f7b7c"
+                    android:id="@+id/lName_lbl">
                 </TextView>
 
                 <LinearLayout
@@ -132,7 +135,8 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="20dp"
-                    android:textColor="#ff1f7b7c">
+                    android:textColor="#ff1f7b7c"
+                    android:id="@+id/email_lbl">
                 </TextView>
 
                 <LinearLayout
@@ -173,7 +177,8 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="20dp"
-                    android:textColor="#ff1f7b7c">
+                    android:textColor="#ff1f7b7c"
+                    android:id="@+id/password_lbl">
                 </TextView>
 
                 <LinearLayout
@@ -213,7 +218,8 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="20dp"
-                    android:textColor="#ff1f7b7c">
+                    android:textColor="#ff1f7b7c"
+                    android:id="@+id/confPass_lbl">
                 </TextView>
 
                 <LinearLayout

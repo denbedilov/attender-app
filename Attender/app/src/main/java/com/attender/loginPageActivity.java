@@ -12,7 +12,10 @@ import android.os.StrictMode;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -121,27 +124,6 @@ public class loginPageActivity extends Activity implements
             }
         });
 
-        //  ======== login check ========
-        if(appData.get_loginType().compareTo("guest") != 0)
-        {
-            // send id and token to own server
-            switch(appData.get_loginType())
-            {
-                case "facebook":
-                    bl.loginToServer(AccessToken.USER_ID_KEY, AccessToken.getCurrentAccessToken().toString());
-                    break;
-                //TODO: send to own server google user id and google token
-                case "google":
-                    break;
-                case "server":
-                    break;
-                default:
-                    break;
-            }
-            Intent intent = new Intent(this, MainPageActivity.class);
-            startActivity(intent);
-        }
-
         //  ======== Print out the key hash "KeyHash" at log ========
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
@@ -155,6 +137,8 @@ public class loginPageActivity extends Activity implements
         } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException ignored) {
 
         }
+        //  ======== login check ========
+        onResume();
     }
 
     @Override
@@ -179,11 +163,67 @@ public class loginPageActivity extends Activity implements
         Intent intent=new Intent(this,RegistrationActivity.class);
         startActivity(intent);
     }
+    //=======================================user login=================================================
+    public void userLoginPressed(View v)
+    {
+        LinearLayout emailLayout= (LinearLayout)findViewById(R.id.email_layout);
+        emailLayout.setVisibility(LinearLayout.VISIBLE);
+        LinearLayout passwordLayout= (LinearLayout)findViewById(R.id.password_layout);
+        passwordLayout.setVisibility(LinearLayout.VISIBLE);
+        LinearLayout loginLayout= (LinearLayout)findViewById(R.id.login_layout);
+        loginLayout.setVisibility(LinearLayout.VISIBLE);
+
+    }
     public void loginPressed(View v)
     {
-        Intent intent=new Intent(this,UserLoginActivity.class);
-        startActivity(intent);
+        EditText email=(EditText)findViewById(R.id.email_txt);
+        EditText password=(EditText)findViewById(R.id.password_txt);
+        String userToken="";
+        String response="";
+        String status="";
+
+        if(email.getText().toString().compareTo("")==0 || password.getText().toString().compareTo("")==0) {
+            printDialog("please enter all fields");
+            this.onStart();
+        }
+        else{
+            response=bl.userLogin(email.getText().toString(), password.getText().toString().hashCode());
+            status=response.substring(0,3);
+            userToken=response.substring(4,response.length());
+            if(status.compareTo("200")==0)
+            {
+                appData.resetData("server",userToken);
+                printDialog(userToken);
+                Intent intent=new Intent(this,MainPageActivity.class);
+                intent.putExtra("name","first"+" "+"last");
+                startActivity(intent);
+            }
+            else{
+                switch(status){
+                    case "403":
+                        printDialog("invalid mail");
+                        this.onStart();
+                        break;
+                    case "500":
+                        printDialog("wrong password");
+                        this.onStart();
+                        break;
+                    case "501":
+                        printDialog("user does not exist");
+                        this.onStart();
+                        break;
+
+                }
+            }
+
+
+
+
+
+        }
+
     }
+    //======================================================================================================
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         if (!mIntentInProgress && result.hasResolution()) {
@@ -202,19 +242,12 @@ public class loginPageActivity extends Activity implements
     @Override
     public void onConnected(Bundle connectionHint) {
         //TODO: add google token to replace null
-        appData.resetData("google", null);
-        String name;
-        if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null)
-        {
-            name = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
+        if(mGoogleApiClient.isConnected()) {
+            appData.resetData("google", bl.googleLogin());
+            Intent intent = new Intent(this, MainPageActivity.class);
+            intent.putExtra("name", "your google nickname");
+            startActivity(intent);
         }
-        else
-        {
-            name = "google name failed";
-        }
-        Intent intent = new Intent(this, MainPageActivity.class);
-        intent.putExtra("name", name);
-        startActivity(intent);
     }
 
     @Override
@@ -244,13 +277,13 @@ public class loginPageActivity extends Activity implements
         AppEventsLogger.activateApp(this);
 
         // check login
-        if(appData.get_loginType().compareTo("guest") != 0)
+        if(appData.get_loginType().compareTo("guest") != 0 && appData.get_loginType().compareTo("") != 0)
         {
             // send id and token to own server
             switch(appData.get_loginType())
             {
                 case "facebook":
-                    bl.loginToServer(AccessToken.USER_ID_KEY, AccessToken.getCurrentAccessToken().toString());
+                    bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().toString());
                     break;
                 //TODO: send to own server google user id and google token
                 case "google":
@@ -294,5 +327,9 @@ public class loginPageActivity extends Activity implements
 //
 //        return super.onOptionsItemSelected(item);
 //    }
-
+    private void printDialog(String message)
+    {
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }

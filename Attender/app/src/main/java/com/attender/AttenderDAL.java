@@ -10,12 +10,14 @@ package com.attender;
         import java.net.HttpURLConnection;
         import java.net.URL;
 
+        import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by Shai Pe'er on 03/05/2015.
  */
 public class AttenderDAL {
     final String API_URL = "https://attender-mobile.appspot.com/";     //api url
-
+    private int responseCode;
 
     //=============================================== BUILDER ==============================================================================
 
@@ -90,9 +92,9 @@ public class AttenderDAL {
 
         try {
             URL url = new URL(API_URL + query);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+            responseCode = con.getResponseCode();
             jsonData += readJsonStream(con.getInputStream());
-
 
         } catch (Exception e) {
             return null;
@@ -175,8 +177,14 @@ public  String userLogin(String email,int password)
 {
     String query="userlogin?email="+email+"&password="+password;
     String serverResponse=serverConnection(query);
-    return serverResponse;
+    return responseCode + serverResponse;
 
 }
-
+//=====================================================google login======================================================================
+    public String googleLogin()
+    {
+        String query="googlelogin";
+        String serverResponse=serverConnection(query);
+        return serverResponse;
+    }
 }

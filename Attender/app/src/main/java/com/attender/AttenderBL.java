@@ -178,6 +178,11 @@ public class AttenderBL
     {
         return dal.userLogin(email,password);
     }
+    //============================================googlelogin=======================================================
+    public String googleLogin()
+    {
+        return dal.googleLogin();
+    }
     //=============================================Attend============================================================
     public String Attend(String token,String eventId, boolean isAttend)
     {
