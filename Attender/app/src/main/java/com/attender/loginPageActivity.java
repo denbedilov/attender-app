@@ -199,23 +199,46 @@ public class loginPageActivity extends Activity implements
         EditText email=(EditText)findViewById(R.id.email_txt);
         EditText password=(EditText)findViewById(R.id.password_txt);
         String userToken="";
+        String response="";
+        String status="";
+
         if(email.getText().toString().compareTo("")==0 || password.getText().toString().compareTo("")==0) {
             printDialog("please enter all fields");
             this.onStart();
         }
         else{
-            userToken=bl.userLogin(email.getText().toString(), password.getText().toString().hashCode());
-//            if(!(response.contains("200:")))
-//            {
-//                printDialog("Email or password are not correct");
-//                this.onStart();
-//            }
-//            else{
+            response=bl.userLogin(email.getText().toString(), password.getText().toString().hashCode());
+            status=response.substring(0,3);
+            userToken=response.substring(4,response.length());
+            if(status.compareTo("200")==0)
+            {
                 appData.resetData("server",userToken);
+                printDialog(userToken);
                 Intent intent=new Intent(this,MainPageActivity.class);
-                intent.putExtra("name","den"+" "+"bed");
+                intent.putExtra("name","first"+" "+"last");
                 startActivity(intent);
-         //   }
+            }
+            else{
+                switch(status){
+                    case "403":
+                        printDialog("invalid mail");
+                        this.onStart();
+                        break;
+                    case "500":
+                        printDialog("wrong password");
+                        this.onStart();
+                        break;
+                    case "501":
+                        printDialog("user does not exist");
+                        this.onStart();
+                        break;
+
+                }
+            }
+
+
+
+
 
         }
 
@@ -239,7 +262,7 @@ public class loginPageActivity extends Activity implements
     @Override
     public void onConnected(Bundle connectionHint) {
         //TODO: add google token to replace null
-        appData.resetData("google", bl.googleLogin);
+        appData.resetData("google", bl.googleLogin());
         Intent intent = new Intent(this, MainPageActivity.class);
         intent.putExtra("name", "your google nickname");
         startActivity(intent);
