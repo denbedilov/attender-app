@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,9 +33,7 @@ public class CalendarPageActivity extends Activity
     private AttenderBL bl;
     private GridView calendarGrid;
     private ArrayList<Event> userEvents;
-    Calendar calendar = Calendar.getInstance();
-
-
+    Calendar _calendar;
 
 
     @Override
@@ -63,12 +62,10 @@ public class CalendarPageActivity extends Activity
 
         final ListView listView = (ListView) findViewById(R.id.listView);
 
-        listView.setOnItemClickListener( new AdapterView.OnItemClickListener()
-        {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             // private int position;
 
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
                 int eventNum = position;
                 Event testE = userEvents.get(eventNum);
@@ -77,8 +74,37 @@ public class CalendarPageActivity extends Activity
             }
         });
 
+
+        //======================  Set Next Button  ==========================
+        ImageView next = (ImageView) findViewById(R.id.Calendar_Next_Image);
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNextMonth();
+            }
+        });
+
+        //======================  Set Prev Button  ==========================
+        ImageView prev = (ImageView) findViewById(R.id.Calendar_Prev_Image);
+        prev.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setPrevMonth();
+            }
+        });
+
+
+
         //============================  Calendar Grid =============================================
-        refreshCalendarGrid(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+        _calendar = Calendar.getInstance();                     //Set Current Date
+        refreshCalendarGrid();
+
+
+
+
+
+
+
+
 
   /*      myCal.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
         {
@@ -113,18 +139,24 @@ public class CalendarPageActivity extends Activity
 
     }
 
-    private void refreshCalendarGrid(int year, int mounth, int day)
+
+
+
+    //==============================================================================================
+    //                               Calendar Functions
+    //==============================================================================================
+
+    private void refreshCalendarGrid()
     {
-        mounth += 1; // Jan = 0, Dec = 11
+        //====== Set Calendar Header =========
+        TextView monthName = (TextView) findViewById(R.id.Date_Name_TXT);
+        monthName.setText(getMounthNameByNum(getMonth() ));
+        TextView yearName = (TextView) findViewById(R.id.Date_Year_TXT);
+        yearName.setText(getYear() + "");
 
-        Calendar calendar = new GregorianCalendar(2014,9,14,12,51,56);
-
-
-
+        //=============== Update Clendar Values =======================
         GridView calGrid = (GridView) findViewById(R.id.calendar_grid);
-
         ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, calendarDateGenerator() );
-
         calGrid.setAdapter(aa);
     }
 
@@ -132,31 +164,42 @@ public class CalendarPageActivity extends Activity
     private ArrayList<String> calendarDateGenerator()
     {
         ArrayList<String> items = new ArrayList<String>();
-        for(int i = 1 ; i <= 28 ; i++)
+
+        int numOfItems = 0;
+
+        //==============  Adding last month final dates  ======================
+        int lastMonthLength = getLastMonthLength();
+        int dayOfWeek = _calendar.get(Calendar.DAY_OF_WEEK);
+
+        for(int i = lastMonthLength - dayOfWeek; i < lastMonthLength ; i++)
         {
             items.add("" + i);
+            numOfItems++;
         }
 
-        return items;
+        //==============  Adding this month dates  ======================
 
-/*      January - 31 days
-        February - 28 days; 29 days in Leap Years
-        March - 31 days
-        April - 30 days
-        May - 31 days
-        June - 30 days
-        July - 31 days
-        August - 31 days
-        September - 30 days
-        October - 31 days
-        November - 30 days
-        December - 31 days
-*/
+        for(int i = 1 ; i <= getMonthLength() ; i++)
+        {
+            items.add("" + i);
+            numOfItems++;
+        }
+
+        //==============  Adding next month first dates  =================
+        if(numOfItems > 35)
+            for(int i = 1 ; numOfItems <= 41 ; i++)
+            {
+                items.add("" + i);
+                numOfItems++;
+            }
+
+        return items;
     }
 
-    private String getDateNameByNum(int dateNum)
+    private String getMounthNameByNum(int mounthNum)
     {
-        switch(dateNum)
+        mounthNum += 1; // Jan = 0, Dec = 11
+        switch(mounthNum)
         {
             case 1:   return "January";
             case 2:   return "February";
@@ -172,6 +215,53 @@ public class CalendarPageActivity extends Activity
             case 12:  return "December";
             default:  return "";
         }
+    }
+
+    private int getMonthLength()
+    {
+        Calendar tempCal = new GregorianCalendar(getYear(), getMonth(), 1);
+        return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+    }
+
+    private int getLastMonthLength()
+    {
+        int month = getMonth();
+        int year  = getYear();
+
+        if(month == 1)  year -= 1;
+
+        Calendar tempCal = new GregorianCalendar(year, month -1, 1);
+        return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+    }
+
+    //============= Calendar Setters and Getters  ======================
+
+    private void setCalendar(int year, int mounth, int day) {   _calendar = new GregorianCalendar(year, mounth, day);   }
+
+    private int getYear()   {   return _calendar.get(Calendar.YEAR);  }
+    private int getMonth()  {   return _calendar.get(Calendar.MONTH);  }
+    private int getDay()    {   return _calendar.get(Calendar.DAY_OF_MONTH);  }
+
+
+    //=================  Button Functions ===============================
+
+    private void setNextMonth()
+    {
+        if(getMonth() == 11)
+            _calendar = new GregorianCalendar(getYear() + 1, 0, 1);
+        else
+            _calendar = new GregorianCalendar(getYear(), getMonth() + 1, 1);
+
+        refreshCalendarGrid();
+    }
+    private void setPrevMonth()
+    {
+        if(getMonth() == 1)
+            _calendar = new GregorianCalendar(getYear() - 1, 11, 1);
+        else
+            _calendar = new GregorianCalendar(getYear(), getMonth() - 1, 1);
+
+        refreshCalendarGrid();
     }
 
     //==============  Alert Dialog ===============

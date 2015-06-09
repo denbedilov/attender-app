@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.attender.rita.attender.CalendarPageActivity"
+    tools:context="com.attender.CalendarPageActivity"
     android:background="#ff292929"
     android:orientation="vertical"
     android:paddingLeft="5dp"
@@ -44,7 +44,7 @@
             android:orientation="horizontal" >
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/Calendar_Prev_Image"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -53,22 +53,38 @@
                 android:layout_weight="2" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/Date_Name_TXT"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#FFFFFF" />
+                android:textColor="#ff000000"
+                android:text="mounth"
+                android:textSize="25sp"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/Date_Year_TXT"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#ff000000"
+                android:text="2015"
+                android:textSize="25sp"
+                android:textIsSelectable="false" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/Calendar_Next_Image"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="10sp"
                 android:src="@drawable/calendar_next"
-                android:layout_weight="2" />
+                android:layout_weight="2"
+                android:nestedScrollingEnabled="true" />
         </LinearLayout>
 
         <LinearLayout
