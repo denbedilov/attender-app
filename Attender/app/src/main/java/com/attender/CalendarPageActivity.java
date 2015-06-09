@@ -115,23 +115,63 @@ public class CalendarPageActivity extends Activity
 
     private void refreshCalendarGrid(int year, int mounth, int day)
     {
-        ArrayList<String> items = new ArrayList<>();
-
         mounth += 1; // Jan = 0, Dec = 11
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");
         Calendar calendar = new GregorianCalendar(2014,9,14,12,51,56);
 
+
+
+        GridView calGrid = (GridView) findViewById(R.id.calendar_grid);
+
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, calendarDateGenerator() );
+
+        calGrid.setAdapter(aa);
+    }
+
+
+    private ArrayList<String> calendarDateGenerator()
+    {
+        ArrayList<String> items = new ArrayList<>();
         for(int i = 1 ; i <= 43 ; i++)
         {
             items.add("" + i);
         }
 
-        GridView calGrid = (GridView) findViewById(R.id.calendar_grid);
+        return items;
 
-        ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items );
+/*      January - 31 days
+        February - 28 days; 29 days in Leap Years
+        March - 31 days
+        April - 30 days
+        May - 31 days
+        June - 30 days
+        July - 31 days
+        August - 31 days
+        September - 30 days
+        October - 31 days
+        November - 30 days
+        December - 31 days
+*/
+    }
 
-        calGrid.setAdapter(aa);
+    private String getDateNameByNum(int dateNum)
+    {
+        switch(dateNum)
+        {
+            case 1:   return "January";
+            case 2:   return "February";
+            case 3:   return "March";
+            case 4:   return "April";
+            case 5:   return "May";
+            case 6:   return "June";
+            case 7:   return "July";
+            case 8:   return "August";
+            case 9:   return "September";
+            case 10:  return "October";
+            case 11:  return "November";
+            case 12:  return "December";
+            default:  return "";
+        }
     }
 
     //==============  Alert Dialog ===============
