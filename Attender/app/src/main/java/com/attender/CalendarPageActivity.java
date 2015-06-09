@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -93,6 +95,24 @@ public class CalendarPageActivity extends Activity
 
 
 
+/*
+        gridView.setOnTouchListener(new View.OnTouchListener()
+        {
+            public boolean onTouch(View v, MotionEvent me) {
+
+                int action = me.getActionMasked();
+                float currentXPosition = me.getX();
+                float currentYPosition = me.getY();
+                int position = gridView.pointToPosition((int) currentXPosition, (int) currentYPosition);
+
+                // Change the color of the key pressed
+                ((TextView) gridView.getItemAtPosition(position)).setBackgroundColor(Color.RED);
+                return true;
+            }
+        }
+*/
+
+
         //============================  Calendar Grid =============================================
 
         _calendar = Calendar.getInstance();                     //Set Current Date
@@ -158,6 +178,10 @@ public class CalendarPageActivity extends Activity
         GridView calGrid = (GridView) findViewById(R.id.calendar_grid);
         ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, calendarDateGenerator() );
         calGrid.setAdapter(aa);
+
+
+
+        //markDates(calGrid);
     }
 
 
@@ -233,6 +257,23 @@ public class CalendarPageActivity extends Activity
         Calendar tempCal = new GregorianCalendar(year, month -1, 1);
         return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
+
+/*
+    private void markDates(GridView calendarGrid)
+    {
+//        ((TextView) gridView.getItemAtPosition(position)).setBackgroundColor(Color.RED);
+//        What I really needed was the method getChildAt and not getItemAtPosition (which returns a String)
+        int action = me.getActionMasked();
+        float currentXPosition = me.getX();
+        float currentYPosition = me.getY();
+        int position = gridView.pointToPosition((int) currentXPosition, (int) currentYPosition);
+
+        String s = (String) calendarGrid.getItemAtPosition(position);
+        TextView tv = (TextView) gridView.getChildAt(position);
+        tv.setBackgroundColor(Color.RED);
+    }
+*/
+
 
     //============= Calendar Setters and Getters  ======================
 

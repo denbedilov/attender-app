@@ -33,15 +33,16 @@
 
         <Space
             android:layout_width="fill_parent"
-            android:layout_height="20px" />
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:id="@+id/Controll"
             android:layout_width="fill_parent"
-            android:layout_height="35sp"
+            android:layout_height="fill_parent"
             android:height="60sp"
             android:gravity="left|top"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_weight="6">
 
             <ImageView
                 android:id="@+id/Calendar_Prev_Image"
@@ -89,7 +90,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="15dp"
             android:layout_gravity="center"
             android:id="@+id/Days">
 
@@ -150,13 +151,23 @@
                 android:gravity="center_vertical|center_horizontal" />
         </LinearLayout>
 
-        <GridView
-            android:id="@+id/calendar_grid"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:numColumns="7"
-            android:choiceMode="singleChoice"
-            android:gravity="fill_horizontal|center_vertical" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:id="@+id/Calendar_Grid_Layout">
+
+            <GridView
+                android:id="@+id/calendar_grid"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:numColumns="7"
+                android:choiceMode="singleChoice"
+                android:gravity="fill_horizontal|center_vertical"
+                android:layout_weight="1"
+                tools:listitem="@android:layout/simple_list_item_1" />
+        </LinearLayout>
 
     </LinearLayout>
 
