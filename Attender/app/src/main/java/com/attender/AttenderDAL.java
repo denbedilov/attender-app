@@ -16,22 +16,22 @@ package com.attender;
  * Created by Shai Pe'er on 03/05/2015.
  */
 public class AttenderDAL {
-    final String API_URL = "https://attender-mobile.appspot.com/";     //api url
+    final String API_URL = "http://attender-mobile.appspot.com/";     //api url
     private int responseCode;
 
-    //=============================================== BUILDER ==============================================================================
+    /* =============================================== BUILDER ============================================================================== */
 
     public AttenderDAL() {
 
     }
 
 
-    //=============================================== GET EVENTS ==============================================================================
+    /* =============================================== GET EVENTS ============================================================================== */
 
     public JSONArray getEvents(String eventType, String eventDate, String eventLocation) {
-        JSONObject jsonObject = null;
-        JSONArray jsonArray = null;
-        String jsonData = "";
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+        String jsonData;
 
         // Query format: ?[category=***]&[time=***]&[city=***]";
         String query = "api?";
@@ -92,7 +92,7 @@ public class AttenderDAL {
 
         try {
             URL url = new URL(API_URL + query);
-            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
             responseCode = con.getResponseCode();
             jsonData += readJsonStream(con.getInputStream());
 
@@ -142,28 +142,28 @@ public class AttenderDAL {
     return jsonArray;
     }
     //===============================================get User Events============================================================================
-    public JSONArray getUserEvents(String token)
-    {
-        JSONObject jsonObject = null;
-        JSONArray jsonArray = null;
-        String jsonData = "";
-        String query="calendar?token="+token;
-
-        try {
-            jsonData = "{ Events:\n";
-            jsonData+=serverConnection(query);
-            jsonData += "}";
-
-            jsonObject = new JSONObject(jsonData);
-            jsonArray = jsonObject.getJSONArray("Events");
-
-        } catch (Exception e) {
-            return null;
-        }
-
-        return jsonArray;
-
-    }
+//    public JSONArray getUserEvents(String token)
+//    {
+//        JSONObject jsonObject = null;
+//        JSONArray jsonArray = null;
+//        String jsonData = "";
+//        String query="calendar?token="+token;
+//
+//        try {
+//            jsonData = "{ Events:\n";
+//            jsonData+=serverConnection(query);
+//            jsonData += "}";
+//
+//            jsonObject = new JSONObject(jsonData);
+//            jsonArray = jsonObject.getJSONArray("Events");
+//
+//        } catch (Exception e) {
+//            return null;
+//        }
+//
+//        return jsonArray;
+//
+//    }
     //====================================================Registration===================================================================
 public  String userRegistration(String firstName,String lastName,String email,int password)
 {

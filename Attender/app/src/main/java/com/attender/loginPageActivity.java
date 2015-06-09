@@ -178,9 +178,9 @@ public class loginPageActivity extends Activity implements
     {
         EditText email=(EditText)findViewById(R.id.email_txt);
         EditText password=(EditText)findViewById(R.id.password_txt);
-        String userToken="";
-        String response="";
-        String status="";
+        String userToken;
+        String response;
+        String status;
 
         if(email.getText().toString().compareTo("")==0 || password.getText().toString().compareTo("")==0) {
             printDialog("please enter all fields");
@@ -283,7 +283,8 @@ public class loginPageActivity extends Activity implements
             switch(appData.get_loginType())
             {
                 case "facebook":
-                    bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().toString());
+                    bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(),
+                            AccessToken.getCurrentAccessToken().getToken());
                     break;
                 //TODO: send to own server google user id and google token
                 case "google":
