@@ -1,9 +1,12 @@
 package com.attender;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +30,7 @@ public class AppData extends Application
 
     public void resetData(String loginType,String token)
     {
+        FileOutputStream outputStream;
 
         if(token == null)
             loginType = "guest";
@@ -44,6 +48,14 @@ public class AppData extends Application
                 set_attenderBL(new AttenderBL());
                 set_userEventList(_attenderBL.getUserEvents(_userToken));
                 break;
+        }
+
+        try {
+            outputStream = openFileOutput("loginType", Context.MODE_PRIVATE);
+            outputStream.write(loginType.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

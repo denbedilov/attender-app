@@ -1,6 +1,7 @@
 package com.attender;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.content.pm.PackageInfo;
@@ -31,6 +32,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 
+import java.io.FileInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -62,9 +64,9 @@ public class loginPageActivity extends Activity implements
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
         bl = new AttenderBL();
-        appData = (AppData) getApplicationContext();
-        appData.resetData("guest", null);
 
+        /* ================== getting saved in file user data ================== */
+        getSavedData();
 
         //=============================================== Text Style =======================
         TextView Main_TV = (TextView) findViewById(R.id.attender_main_txt);
@@ -139,6 +141,33 @@ public class loginPageActivity extends Activity implements
         }
         //  ======== login check ========
         onResume();
+    }
+
+    private void getSavedData() {
+        String loginType = getData("loginType");
+        appData = (AppData) getApplicationContext();
+        if(loginType != null)
+            appData.resetData(loginType, "");
+        else
+            appData.resetData("guest", null);
+    }
+
+    private String getData(String fileName) {
+        FileInputStream inputStream;
+        String retData = null;
+        try {
+            inputStream = openFileInput(fileName);
+            while(inputStream.available() > 0){
+                retData += (char) inputStream.read();
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(retData != null)
+            return retData.substring(4, retData.length());
+        else
+            return null;
     }
 
     @Override
