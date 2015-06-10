@@ -246,16 +246,9 @@ public class loginPageActivity extends Activity implements
                         printDialog("user does not exist");
                         this.onStart();
                         break;
-
                 }
             }
-
-
-
-
-
         }
-
     }
     //======================================================================================================
     @Override
@@ -289,7 +282,6 @@ public class loginPageActivity extends Activity implements
         mGoogleApiClient.connect();
     }
 
-
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -304,8 +296,7 @@ public class loginPageActivity extends Activity implements
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 
         // Logs 'install' and 'app activate' App Events.
@@ -314,33 +305,31 @@ public class loginPageActivity extends Activity implements
         // check login
         if(appData.get_loginType().compareTo("guest") != 0 && appData.get_loginType().compareTo("") != 0)
         {
-            String userDetails = "";
+//            String token;
             // send id and token to own server
             switch(appData.get_loginType())
             {
                 case "facebook":
-                    bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(),
-                            AccessToken.getCurrentAccessToken().getToken());
+//                    TODO: open after facebook authentification will work
+//                    token = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(),
+//                            AccessToken.getCurrentAccessToken().getToken());
+//                    appData.resetData(appData.get_loginType(), token);
                     break;
                 //TODO: send to own server google user id and google token
                 case "google":
                     break;
                 case "server":
-                   userDetails=bl.getUserDetails(appData.get_userToken());
-
                     break;
                 default:
                     break;
             }
             Intent intent = new Intent(this, MainPageActivity.class);
             intent.putExtra("user_type", appData.get_loginType());
-            intent.putExtra("name", userDetails);
             startActivity(intent);
         }
     }
 
-    public void confirmPressed(View v)
-    {
+    public void confirmPressed(View v) {
         appData.resetData("guest", null);
         Intent intent=new Intent(this,MainPageActivity.class);
         startActivity(intent);
@@ -367,8 +356,8 @@ public class loginPageActivity extends Activity implements
 //
 //        return super.onOptionsItemSelected(item);
 //    }
-    private void printDialog(String message)
-    {
+
+    private void printDialog(String message) {
         Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
         toast.show();
     }

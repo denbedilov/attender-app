@@ -42,11 +42,11 @@ public class AppData extends Application
             default:
                 set_attenderBL(new AttenderBL());
                 set_userEventList(_attenderBL.getUserEvents(_userToken));
+                saveData("token", _userToken);
                 break;
         }
 
         /* saving token and loginType */
-        saveData("token", _userToken);
         saveData("loginType", _loginType);
     }
 
