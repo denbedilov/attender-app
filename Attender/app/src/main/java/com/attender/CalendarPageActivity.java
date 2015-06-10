@@ -96,25 +96,7 @@ public class CalendarPageActivity extends Activity
         });
 
 
-/*
-        final GridView calendarGrid = (GridView) findViewById(R.id.calendar_grid);
-        calendarGrid.setOnTouchListener(new View.OnTouchListener()
-        {
-            public boolean onTouch(View v, MotionEvent me)
-            {
-                int action = me.getActionMasked();
-                float currentXPosition = me.getX();
-                float currentYPosition = me.getY();
-                int position = calendarGrid.pointToPosition((int) currentXPosition, (int) currentYPosition);
-
-                // Change the color of the key pressed
-                ((TextView) calendarGrid.getItemAtPosition(position)).setBackgroundColor(Color.RED);
-                return true;
-            }
-        });
-*/
         //========================  On Calendar Click Listener  ====================================
-
         AdapterView.OnItemClickListener myOnItemClickListener = new AdapterView.OnItemClickListener()
         {
             @Override
@@ -150,15 +132,9 @@ public class CalendarPageActivity extends Activity
             }
         };
 
+
         GridView calendarGrid = (GridView) findViewById(R.id.calendar_grid);
         calendarGrid.setOnItemClickListener(myOnItemClickListener);
-
-
-
-
-
-
-
 
 
 
@@ -167,44 +143,6 @@ public class CalendarPageActivity extends Activity
         _calendar = Calendar.getInstance();                     //Set Current Date
         refreshCalendarGrid();
 
-
-
-
-
-
-
-
-
-  /*      myCal.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
-        {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth)
-            {
-
-                userEvents.clear();
-                //appData.resetData(AccessToken.getCurrentAccessToken().getToken());
-                if(appData.get_userEventList() != null)
-                    for(Event ev : appData.get_userEventList())
-                    {
-                        if(ev.isDateEquals(year, month+1,dayOfMonth))
-                            userEvents.add(ev);
-                    }
-                else
-                    printToastDialog("no events to show");
-
-
-                if(userEvents.size()==0)
-                {
-                    listView.setAdapter(null);
-                    printToastDialog("No events to show!");
-                }
-                else {
-                    EventAdapter adapter = new EventAdapter(getBaseContext(),userEvents);
-                    listView.setAdapter(adapter);
-                }
-            }
-        });
-*/
 
     }
 
@@ -230,7 +168,7 @@ public class CalendarPageActivity extends Activity
 
 
 
-        //markDates(calGrid);
+        markDates(calGrid);
     }
 
 
@@ -315,21 +253,24 @@ public class CalendarPageActivity extends Activity
         return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
-/*
+
     private void markDates(GridView calendarGrid)
     {
 //        ((TextView) gridView.getItemAtPosition(position)).setBackgroundColor(Color.RED);
 //        What I really needed was the method getChildAt and not getItemAtPosition (which returns a String)
-        int action = me.getActionMasked();
-        float currentXPosition = me.getX();
-        float currentYPosition = me.getY();
-        int position = gridView.pointToPosition((int) currentXPosition, (int) currentYPosition);
+
+        int position = 8;
 
         String s = (String) calendarGrid.getItemAtPosition(position);
-        TextView tv = (TextView) gridView.getChildAt(position);
-        tv.setBackgroundColor(Color.RED);
+        TextView tv = (TextView) calendarGrid.getChildAt(position);
+        if(tv != null)
+            tv.setBackgroundColor(Color.RED);
+
+        calendarGrid.setSelection(8);
+        TextView tv2 = (TextView)calendarGrid.getSelectedView();
+
     }
-*/
+
 
 
     //============= Calendar Setters and Getters  ======================
