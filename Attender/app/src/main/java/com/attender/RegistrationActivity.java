@@ -75,11 +75,10 @@ AttenderBL bl;
                 this.onStart();
             }
             else {
-                userToken=response.substring(4,response.length());
+                userToken = response.substring(3,response.length());
                 printToastDialog(userToken);
                 appData.resetData("server", userToken);
                 Intent intent = new Intent(this, MainPageActivity.class);
-                intent.putExtra("name", firstName.getText().toString() + " " + lastName.getText().toString());
                 startActivity(intent);
             }
         }
