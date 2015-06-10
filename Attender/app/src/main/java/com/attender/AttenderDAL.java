@@ -94,7 +94,7 @@ public class AttenderDAL {
         query+="id="+id+"&token="+token;
         String jsonData="";
         jsonData=serverConnection(query);
-        return jsonData;
+        return responseCode + jsonData;
     }
     //============================================Attend=============================================================================
     public String Attend(String token,String eventId, String isAttend) {
@@ -160,7 +160,7 @@ public class AttenderDAL {
     public String googleLogin() {
         String query="googlelogin";
         String serverResponse=serverConnection(query);
-        return serverResponse;
+        return responseCode + serverResponse;
     }
    //================================================get user details===========================================================
     public JSONArray getUserDetails(String token) {

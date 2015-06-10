@@ -269,11 +269,23 @@ public class loginPageActivity extends Activity implements
     public void onConnected(Bundle connectionHint) {
         //TODO: add google token to replace null
         if(mGoogleApiClient.isConnected()) {
-            appData.resetData("google", bl.googleLogin());
-            Intent intent = new Intent(this, MainPageActivity.class);
-            intent.putExtra("name", "your google nickname");
-            startActivity(intent);
+            String tok = bl.googleLogin();
+            int status = getStatus(tok);
+            if(status == 200) {
+                appData.resetData("google", tok.substring(3));
+                Intent intent = new Intent(this, MainPageActivity.class);
+                intent.putExtra("name", "your google nickname");
+                startActivity(intent);
+            }
+            else {
+                appData.resetData("guest", null);
+                printDialog("google login failed: " + status);
+            }
         }
+    }
+
+    private int getStatus(String tok) {
+        return Integer.parseInt(tok.substring(0, 3));
     }
 
     @Override
@@ -304,27 +316,54 @@ public class loginPageActivity extends Activity implements
         // check login
         if(appData.get_loginType().compareTo("guest") != 0 && appData.get_loginType().compareTo("") != 0)
         {
-//            String token;
+            String token;
+            int status;
             // send id and token to own server
             switch(appData.get_loginType())
             {
                 case "facebook":
 //                    TODO: open after facebook authentification will work
-//                    token = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(),
-//                            AccessToken.getCurrentAccessToken().getToken());
-//                    appData.resetData(appData.get_loginType(), token);
+                    token = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(),
+                            AccessToken.getCurrentAccessToken().getToken());
+                    status = getStatus(token);
+                    if(status == 200) {
+                        appData.resetData(appData.get_loginType(), token);
+                        Intent intent = new Intent(this, MainPageActivity.class);
+                        intent.putExtra("user_type", appData.get_loginType());
+                        startActivity(intent);
+                    }
+                    else{
+                        appData.resetData("guest", null);
+                        LoginManager.getInstance().logOut();
+                        printDialog("facebook login failed: " + status);
+                    }
                     break;
                 //TODO: send to own server google user id and google token
                 case "google":
+                    if(mGoogleApiClient.isConnected()) {
+                        token = bl.googleLogin();
+                        status = getStatus(token);
+                        if(status == 200) {
+                            appData.resetData("google", token.substring(3));
+                            Intent intent = new Intent(this, MainPageActivity.class);
+                            intent.putExtra("user_type", appData.get_loginType());
+                            intent.putExtra("name", "your google nickname");
+                            startActivity(intent);
+                        }
+                        else {
+                            appData.resetData("guest", null);
+                            printDialog("google login failed: " + status);
+                        }
+                    }
                     break;
                 case "server":
+                    Intent intent = new Intent(this, MainPageActivity.class);
+                    intent.putExtra("user_type", appData.get_loginType());
+                    startActivity(intent);
                     break;
                 default:
                     break;
             }
-            Intent intent = new Intent(this, MainPageActivity.class);
-            intent.putExtra("user_type", appData.get_loginType());
-            startActivity(intent);
         }
     }
 
