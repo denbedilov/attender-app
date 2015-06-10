@@ -23,12 +23,16 @@ import com.google.android.gms.plus.Plus;
 public class MainPageActivity  extends Activity
 {
     private AppData appData;
+    private AttenderBL bl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        bl = new AttenderBL();
 
         printDialog(getIntent().getStringExtra("user_type"));
 
@@ -62,6 +66,9 @@ public class MainPageActivity  extends Activity
                 break;
             case "guest":
                 userName.setText("guest");
+                break;
+            case "server":
+                userName.setText(bl.getUserDetails(appData.get_userToken()));
                 break;
             default:
                 userName.setText(getIntent().getStringExtra("name"));
