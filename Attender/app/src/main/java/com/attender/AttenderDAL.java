@@ -190,7 +190,6 @@ public class AttenderDAL {
         try {
             URL url = new URL(HTTP_URL + query);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.connect();
             responseCode = con.getResponseCode();
             jsonData += readJsonStream(con.getInputStream());
 
