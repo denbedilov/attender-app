@@ -218,9 +218,9 @@ public class loginPageActivity extends Activity implements
         else{
             response=bl.userLogin(email.getText().toString(), password.getText().toString().hashCode());
             status=response.substring(0,3);
-            userToken=response.substring(4,response.length());
             if(status.compareTo("200")==0)
             {
+                userToken=response.substring(4,response.length());
                 appData.resetData("server",userToken);
                 printDialog(userToken);
                 Intent intent=new Intent(this,MainPageActivity.class);

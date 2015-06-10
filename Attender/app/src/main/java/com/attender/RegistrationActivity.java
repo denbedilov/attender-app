@@ -41,6 +41,8 @@ AttenderBL bl;
     public void confirmPressed(View v)
     {
         String userToken="";
+        String response="";
+        String status="";
         EditText firstName=(EditText)findViewById(R.id.name_text);
         EditText lastName= (EditText)findViewById(R.id.LastName_text);
         EditText email=(EditText)findViewById(R.id.email_txt);
@@ -62,15 +64,24 @@ AttenderBL bl;
         else if(password.getText().toString().compareTo(confPass.getText().toString()) != 0)
             printToastDialog("passwords are not equal!");
         else {
-            userToken = bl.userRegistration(firstName.getText().toString(),
+            response = bl.userRegistration(firstName.getText().toString(),
                     lastName.getText().toString(),
                     email.getText().toString(),
                     password.getText().toString().hashCode());
-            printToastDialog(userToken);
-            appData.resetData("server",userToken);
-            Intent intent=new Intent(this,MainPageActivity.class);
-            intent.putExtra("name", firstName.getText().toString()+" "+lastName.getText().toString());
-            startActivity(intent);
+            status=response.substring(0, 3);
+            if(status.compareTo("403")==0)
+            {
+                printToastDialog("invalid mail");
+                this.onStart();
+            }
+            else {
+                userToken=response.substring(4,response.length());
+                printToastDialog(userToken);
+                appData.resetData("server", userToken);
+                Intent intent = new Intent(this, MainPageActivity.class);
+                intent.putExtra("name", firstName.getText().toString() + " " + lastName.getText().toString());
+                startActivity(intent);
+            }
         }
     }
     @Override
