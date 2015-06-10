@@ -18,17 +18,14 @@ package com.attender;
  */
 public class AttenderDAL {
     final String API_URL = "https://attender-mobile.appspot.com/";     //api url
+    final String HTTP_URL = "http://attender-mobile.appspot.com/";     //api url
     private int responseCode;
 
     /* =============================================== BUILDER ============================================================================== */
 
-    public AttenderDAL() {
-
-    }
-
+    public AttenderDAL() {    }
 
     /* =============================================== GET EVENTS ============================================================================== */
-
     public JSONArray getEvents(String eventType, String eventDate, String eventLocation) {
         JSONObject jsonObject;
         JSONArray jsonArray;
@@ -41,26 +38,18 @@ public class AttenderDAL {
         if (!eventLocation.contains("City")) query += "city=" + eventLocation;
         if (query.endsWith("&") || query.endsWith("?"))
             query = query.substring(0, query.length() - 1); //delete the last char if it '&'
-
-
         try {
             jsonData = "{ Events:\n";
             jsonData+=serverConnection(query);
             jsonData += "}";
-
             jsonObject = new JSONObject(jsonData);
             jsonArray = jsonObject.getJSONArray("Events");
-
         } catch (Exception e) {
             return null;
         }
-
         return jsonArray;
     }
-
-
-    //=========================================== READ STREAM ==================================================================================
-
+    //=========================================== READ STREAM ==========================================================================
     private String readJsonStream(InputStream in) {
         BufferedReader reader = null;
         String jsonStreamString = "";
@@ -83,11 +72,8 @@ public class AttenderDAL {
         }
         return jsonStreamString;
     }
-
     //===================================Server Connection==============================================================================
-
-    public String serverConnection(String query)
-    {
+    private String serverConnection(String query) {
         String jsonData = "";
         JSONObject jsonObject = null;
 
@@ -103,8 +89,7 @@ public class AttenderDAL {
         return jsonData;
     }
 //=================================================Facebook login======================================================================
-    public String loginToServer(String id, String token)
-    {
+    public String loginToServer(String id, String token) {
         String query="login?";
         query+="id="+id+"&token="+token;
         String jsonData="";
@@ -112,8 +97,7 @@ public class AttenderDAL {
         return jsonData;
     }
     //============================================Attend=============================================================================
-    public String Attend(String token,String eventId, String isAttend)
-    {
+    public String Attend(String token,String eventId, String isAttend) {
         String query="attend?";
         query+="token="+token+"&eventid="+eventId+"&isAttend="+isAttend;
         String jsonData="";
@@ -121,8 +105,7 @@ public class AttenderDAL {
         return jsonData;
     }
     //=========================================get Attendees===============================================================================
-    public JSONArray getAttendees(String eventId, String token)
-    {
+    public JSONArray getAttendees(String eventId, String token) {
         JSONObject jsonObject;
         JSONArray jsonArray;
         String query="attendees?";
@@ -132,27 +115,23 @@ public class AttenderDAL {
             jsonData = "{ Attendees:\n";
             jsonData += serverConnection(query);
             jsonData += "}";
-
             jsonObject = new JSONObject(jsonData);
             jsonArray = jsonObject.getJSONArray("Attendees");
-
         } catch (Exception e) {
             return null;
         }
-
-    return jsonArray;
+        return jsonArray;
     }
   //  ===============================================get User Events============================================================================
-    public JSONArray getUserEvents(String token)
-    {
-        JSONObject jsonObject = null;
-        JSONArray jsonArray = null;
-        String jsonData = "";
+    public JSONArray getUserEvents(String token) {
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+        String jsonData;
         String query="calendar?token="+token;
 
         try {
             jsonData = "{ Events:\n";
-            jsonData+=serverConnection(query);
+            jsonData+=httpConnection(query);
             jsonData += "}";
 
             jsonObject = new JSONObject(jsonData);
@@ -161,36 +140,30 @@ public class AttenderDAL {
         } catch (Exception e) {
             return null;
         }
-
         return jsonArray;
-
     }
     //====================================================Registration===================================================================
-public  String userRegistration(String firstName,String lastName,String email,int password)
-{
-    String query="userlogin?email="+email+"&password="+password+"&firstname="+firstName+"&lastname="+lastName;
-    String serverResponse=serverConnection(query);
-    return responseCode + serverResponse;
+    public String userRegistration(String firstName,String lastName,String email,int password) {
+        String query="userlogin?email="+email+"&password="+password+"&firstname="+firstName+"&lastname="+lastName;
+        String serverResponse=serverConnection(query);
+        return responseCode + serverResponse;
 
-}
+    }
 //======================================================userLogin=======================================================================
-public  String userLogin(String email,int password)
-{
-    String query="userlogin?email="+email+"&password="+password;
-    String serverResponse=serverConnection(query);
-    return responseCode + serverResponse;
+    public String userLogin(String email,int password) {
+        String query="userlogin?email="+email+"&password="+password;
+        String serverResponse=serverConnection(query);
+        return responseCode + serverResponse;
 
-}
+    }
 //=====================================================google login======================================================================
-    public String googleLogin()
-    {
+    public String googleLogin() {
         String query="googlelogin";
         String serverResponse=serverConnection(query);
         return serverResponse;
     }
    //================================================get user details===========================================================
-    public JSONArray getUserDetails(String token)
-    {
+    public JSONArray getUserDetails(String token) {
         JSONObject jsonObject = null;
         JSONArray jsonArray = null;
         String jsonData = "";
@@ -209,5 +182,20 @@ public  String userLogin(String email,int password)
         }
 
         return jsonArray;
+    }
+
+    private String httpConnection(String query)
+    {
+        String jsonData = "";
+        try {
+            URL url = new URL(HTTP_URL + query);
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+            responseCode = con.getResponseCode();
+            jsonData += readJsonStream(con.getInputStream());
+
+        } catch (Exception e) {
+            return null;
+        }
+        return jsonData;
     }
 }
