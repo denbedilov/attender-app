@@ -2,11 +2,9 @@ package com.attender;
 
 import android.app.Application;
 import android.content.Context;
-
-import com.google.android.gms.common.api.GoogleApiClient;
+import android.widget.Toast;
 
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 /**
@@ -30,8 +28,6 @@ public class AppData extends Application
 
     public void resetData(String loginType,String token)
     {
-        FileOutputStream outputStream;
-
         if(token == null)
             loginType = "guest";
 
@@ -50,14 +46,20 @@ public class AppData extends Application
                 break;
         }
 
+        saveData("loginType", loginType);
+    }
+
+    /* saving into the internal storage 'data' in 'fileName'  */
+    private void saveData(String fileName, String data) {
         try {
-            outputStream = openFileOutput("loginType", Context.MODE_PRIVATE);
-            outputStream.write(loginType.getBytes());
+            FileOutputStream outputStream;
+            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream.write(data.getBytes());
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(getBaseContext(), "cant save data", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     //If tok is not null, return true, else return false
