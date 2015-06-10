@@ -52,10 +52,9 @@ public class MainPageActivity  extends Activity
             layout.setVisibility(View.INVISIBLE);
             layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
             layout.setAlpha(.5f);
-            layout.setEnabled(false);
             layout = (LinearLayout) findViewById(R.id.Chat_Layout);
             layout.setAlpha(.5f);
-            layout.setEnabled(false);
+
         }
 
         //====================== Hello "name" ======================================
@@ -89,13 +88,21 @@ public class MainPageActivity  extends Activity
 
     public void chat_pressed(View v)
     {
-        Intent intent = new Intent(this,ChatPageActivity.class);
-        startActivity(intent);
+        if(appData.get_loginType().compareTo("guest")==0)
+            printDialog("log-in for use");
+        else {
+            Intent intent = new Intent(this, ChatPageActivity.class);
+            startActivity(intent);
+        }
     }
     public void event_calendar_pressed(View v)
     {
-        Intent intent = new Intent(this,CalendarPageActivity.class);
-        startActivity(intent);
+        if(appData.get_loginType().compareTo("guest")==0)
+            printDialog("log-in for use");
+        else {
+            Intent intent = new Intent(this, CalendarPageActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void search_event_pressed(View v)

@@ -24,12 +24,13 @@ import java.util.ArrayList;
 
 public class Event_Page_Activity extends Activity {
     Event currEvent;
-    AttenderBL bl;
-    ArrayList<Event> userEvents;
+    private AttenderBL bl;
+    private ArrayList<Event> userEvents;
+    private  AppData appData;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        final AppData appData = (AppData) getApplicationContext();
+        appData = (AppData) getApplicationContext();
         super.onCreate(savedInstanceState);
         TextView tv;
         boolean checkedFlag=false;
@@ -58,17 +59,15 @@ public class Event_Page_Activity extends Activity {
             chatBTN.setAlpha(.5f);
             chatBTN.setEnabled(false);
             attendeesBTN.setAlpha(.5f);
-            attendeesBTN.setEnabled(false);
-
-            attend.setClickable(false);
             attend.setAlpha(.5f);
+            attend.setEnabled(false);
 
         }
         attend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                    printToastDialog(bl.Attend(AccessToken.getCurrentAccessToken().getToken(), currEvent.getId(), isChecked));
+                    printToastDialog(bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked));
 
             }
         });
@@ -173,11 +172,14 @@ public class Event_Page_Activity extends Activity {
     }
     public void attendeesPressed(View v)
     {
-
-            Intent intent = new Intent(this, AttendeesPage.class);
-            String id = currEvent.getId();
-            intent.putExtra("eventId", currEvent.getId());
-            startActivity(intent);
+            if(appData.get_loginType().compareTo("guest")==0)
+                printToastDialog("log-in for use");
+        else {
+                Intent intent = new Intent(this, AttendeesPage.class);
+                String id = currEvent.getId();
+                intent.putExtra("eventId", currEvent.getId());
+                startActivity(intent);
+            }
 
     }
 
