@@ -3,12 +3,10 @@ package com.attender;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,18 +38,14 @@ AttenderBL bl;
 
     public void confirmPressed(View v)
     {
-        String userToken="";
-        String response="";
-        String status="";
+        String userToken;
+        String response;
+        String status;
         EditText firstName=(EditText)findViewById(R.id.name_text);
         EditText lastName= (EditText)findViewById(R.id.LastName_text);
         EditText email=(EditText)findViewById(R.id.email_txt);
         EditText password= (EditText)findViewById(R.id.password_txt);
         EditText confPass=(EditText)findViewById(R.id.confPass_txt);
-        Button confirm_btn=(Button)findViewById(R.id.confirm_cmd);
-
-
-
 
         if(firstName.getText().toString().compareTo("") == 0 ||
                 lastName.getText().toString().compareTo("") ==0 ||
