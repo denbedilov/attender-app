@@ -25,7 +25,6 @@ public class AppData extends Application
         set_loginType("");
     }
 
-
     public void resetData(String loginType,String token)
     {
         if(token == null)
@@ -40,17 +39,15 @@ public class AppData extends Application
                 set_attenderBL(null);
                 set_userEventList(null);
                 break;
-            case "server":
-                saveData("token", _userToken);
-                set_attenderBL(new AttenderBL());
-                set_userEventList(_attenderBL.getUserEvents(_userToken));
             default:
                 set_attenderBL(new AttenderBL());
                 set_userEventList(_attenderBL.getUserEvents(_userToken));
                 break;
         }
 
-        saveData("loginType", loginType);
+        /* saving token and loginType */
+        saveData("token", _userToken);
+        saveData("loginType", _loginType);
     }
 
     /* saving into the internal storage 'data' in 'fileName'  */
