@@ -151,6 +151,8 @@ public class Event_Page_Activity extends Activity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+
     public void onInfoClick(View v)
     {
         TextView tv =(TextView)findViewById(R.id.description_lbl);    ///TO ADD

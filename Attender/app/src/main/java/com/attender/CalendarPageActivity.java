@@ -28,8 +28,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-//import static com.example.rita.attender.R.id.listView;
-
 public class CalendarPageActivity extends Activity
 {
     private AttenderBL bl;
@@ -67,7 +65,7 @@ public class CalendarPageActivity extends Activity
         final ListView listView = (ListView) findViewById(R.id.listView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            // private int position;
+
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
