@@ -318,16 +318,15 @@ public class loginPageActivity extends Activity implements
         {
             String token;
             int status;
-            // send id and token to own server
+            /* get token from own server */
             switch(appData.get_loginType())
             {
                 case "facebook":
-//                    TODO: open after facebook authentification will work
                     token = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(),
                             AccessToken.getCurrentAccessToken().getToken());
                     status = getStatus(token);
                     if(status == 200) {
-                        appData.resetData(appData.get_loginType(), token);
+                        appData.resetData(appData.get_loginType(), token.substring(3));
                         Intent intent = new Intent(this, MainPageActivity.class);
                         intent.putExtra("user_type", appData.get_loginType());
                         startActivity(intent);
@@ -338,7 +337,6 @@ public class loginPageActivity extends Activity implements
                         printDialog("facebook login failed: " + status);
                     }
                     break;
-                //TODO: send to own server google user id and google token
                 case "google":
                     if(mGoogleApiClient.isConnected()) {
                         token = bl.googleLogin();
