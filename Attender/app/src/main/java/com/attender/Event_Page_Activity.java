@@ -52,7 +52,7 @@ public class Event_Page_Activity extends Activity {
            if(!checkedFlag)
                 attend.setChecked(false);
         }
-        if(AccessToken.getCurrentAccessToken() == null) {
+        if(appData.get_loginType().compareTo("guest")==0) {
             Button attendeesBTN=(Button)findViewById(R.id.attendees_cmd);
             Button chatBTN=(Button)findViewById(R.id.chat_cmd);
             chatBTN.setAlpha(.5f);

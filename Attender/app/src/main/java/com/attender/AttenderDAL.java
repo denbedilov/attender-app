@@ -16,7 +16,7 @@ package com.attender;
  * Created by Shai Pe'er on 03/05/2015.
  */
 public class AttenderDAL {
-    final String API_URL = "http://attender-mobile.appspot.com/";     //api url
+    final String API_URL = "https://attender-mobile.appspot.com/";     //api url
     private int responseCode;
 
     /* =============================================== BUILDER ============================================================================== */
@@ -186,5 +186,27 @@ public  String userLogin(String email,int password)
         String query="googlelogin";
         String serverResponse=serverConnection(query);
         return serverResponse;
+    }
+   //================================================get user details===========================================================
+    public JSONArray getUserDetails(String token)
+    {
+        JSONObject jsonObject = null;
+        JSONArray jsonArray = null;
+        String jsonData = "";
+        String query="userdetails?token="+token;
+
+        try {
+            jsonData = "{ Details:\n";
+            jsonData+=serverConnection(query);
+            jsonData += "}";
+
+            jsonObject = new JSONObject(jsonData);
+            jsonArray = jsonObject.getJSONArray("Details");
+
+        } catch (Exception e) {
+            return null;
+        }
+
+        return jsonArray;
     }
 }

@@ -147,7 +147,10 @@ public class loginPageActivity extends Activity implements
         String loginType = getData("loginType");
         appData = (AppData) getApplicationContext();
         if(loginType != null)
-            appData.resetData(loginType, "");
+            if(loginType.compareTo("server") == 0)
+                appData.resetData("server", getData("token"));
+            else
+                appData.resetData(loginType, "");
         else
             appData.resetData("guest", null);
     }
@@ -210,6 +213,7 @@ public class loginPageActivity extends Activity implements
         String userToken;
         String response;
         String status;
+        String userDetails;
 
         if(email.getText().toString().compareTo("")==0 || password.getText().toString().compareTo("")==0) {
             printDialog("please enter all fields");
@@ -220,11 +224,12 @@ public class loginPageActivity extends Activity implements
             status=response.substring(0,3);
             if(status.compareTo("200")==0)
             {
-                userToken=response.substring(4,response.length());
+                userToken=response.substring(3,response.length());
                 appData.resetData("server",userToken);
                 printDialog(userToken);
+                userDetails=bl.getUserDetails(userToken);
                 Intent intent=new Intent(this,MainPageActivity.class);
-                intent.putExtra("name","first"+" "+"last");
+                intent.putExtra("name",userDetails);
                 startActivity(intent);
             }
             else{
@@ -302,12 +307,14 @@ public class loginPageActivity extends Activity implements
     protected void onResume()
     {
         super.onResume();
+
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
 
         // check login
         if(appData.get_loginType().compareTo("guest") != 0 && appData.get_loginType().compareTo("") != 0)
         {
+            String userDetails = "";
             // send id and token to own server
             switch(appData.get_loginType())
             {
@@ -319,12 +326,15 @@ public class loginPageActivity extends Activity implements
                 case "google":
                     break;
                 case "server":
+                   userDetails=bl.getUserDetails(appData.get_userToken());
+
                     break;
                 default:
                     break;
             }
             Intent intent = new Intent(this, MainPageActivity.class);
             intent.putExtra("user_type", appData.get_loginType());
+            intent.putExtra("name", userDetails);
             startActivity(intent);
         }
     }

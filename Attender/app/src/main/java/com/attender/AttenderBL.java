@@ -229,4 +229,24 @@ public class AttenderBL
 
 
     }
+    public String getUserDetails(String token)
+    {
+        String userDetails="";
+        JSONArray userDetailsJson=dal.getUserDetails(token);
+        if(userDetailsJson == null)
+            return null;
+        try {
+            // JSONArray jEventArr = jo.getJSONArray("Events");
+            for (int i = 0; i < userDetailsJson.length(); i++) {
+                JSONObject childJSONObject = userDetailsJson.getJSONObject(i);
+                userDetails =  childJSONObject.getString("name")+" "+ childJSONObject.getString("lastname");
+            }
+        }
+            catch(JSONException e)
+            {
+                userDetails = "";
+            }
+        return userDetails;
+
+    }
 }
