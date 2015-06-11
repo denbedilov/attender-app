@@ -17,15 +17,17 @@ import java.util.ArrayList;
 public class AttendeesPage extends Activity {
 
     AttenderBL bl;
+    private AppData appData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendees_page);
+        appData = (AppData) getApplicationContext();
 
         ListView listView = (ListView) findViewById(R.id.listView);
         bl = new AttenderBL();
         ArrayList<Attendee> attendees;
-        attendees = bl.getAttendees(getIntent().getStringExtra("eventId"), AccessToken.getCurrentAccessToken().getToken());
+        attendees = bl.getAttendees(getIntent().getStringExtra("eventId"), appData.get_userToken());
         if(attendees != null)
         {
             AttendeesAdapter attendeesAdapter = new AttendeesAdapter(this, attendees);
