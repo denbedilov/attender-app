@@ -101,7 +101,7 @@ public class loginPageActivity extends Activity implements
 
         // =================================== facebook login ==================================
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("user_friends");
+        loginButton.setReadPermissions("user_friends", "email");
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>()
         {
             @Override
