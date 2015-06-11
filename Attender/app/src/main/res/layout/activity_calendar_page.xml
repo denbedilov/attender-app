@@ -168,6 +168,14 @@
                 android:gravity="fill_horizontal|center_vertical"
                 android:layout_weight="1"
                 tools:listitem="@android:layout/simple_list_item_1"
+
+                android:layout_margin="1dp"
+                android:verticalSpacing="1dp"
+                android:horizontalSpacing="1dp"
+
+                android:background="#005a5a5a"
+                android:columnWidth="90dp"
+
                 android:clickable="true" />
         </LinearLayout>
 

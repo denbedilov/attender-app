@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
@@ -136,6 +137,25 @@ public class CalendarPageActivity extends Activity
 
 
 
+
+
+
+//=================================================================================================
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
         //============================  Calendar Grid Create =============================================
 
         _calendar = Calendar.getInstance();                     //Set Current Date
@@ -153,20 +173,44 @@ public class CalendarPageActivity extends Activity
 
     private void refreshCalendarGrid()
     {
-        //====== Set Calendar Header =========
+        //================== Set Calendar Header ==========================
         TextView monthName = (TextView) findViewById(R.id.Date_Name_TXT);
         monthName.setText(getMounthNameByNum(getMonth() ));
         TextView yearName = (TextView) findViewById(R.id.Date_Year_TXT);
         yearName.setText(getYear() + "");
 
-        //=============== Update Clendar Values =======================
+        //================= Update Clendar Values =======================
         GridView calGrid = (GridView) findViewById(R.id.calendar_grid);
-        ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, calendarDateGenerator() );
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, calendarDateGenerator() )
+        {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                //for (int i = 0 ; i < 35 ; i++)
+                View view = super.getView(position, convertView, parent);
+
+                int backgroundColor = Color.WHITE; // Transparent
+                int fontColor = Color.BLACK;      //Black
+
+                if(position <= releventDaysGap || position > (releventDaysGap + getMonthLength()) )
+                {
+                    backgroundColor = 0x00FFFFFF; //
+                }
+                else if(isDateInUserEvents(position))
+                {
+                    backgroundColor = Color.MAGENTA; // Opaque Blue
+                }
+
+                view.setBackgroundColor(backgroundColor);
+
+
+                return view;
+            }
+        };
+
+
+
         calGrid.setAdapter(aa);
 
-
-
-        markDates(calGrid);
     }
 
 
@@ -252,21 +296,13 @@ public class CalendarPageActivity extends Activity
     }
 
 
-    private void markDates(GridView calendarGrid)
+    private boolean isDateInUserEvents(int day)
     {
-//        ((TextView) gridView.getItemAtPosition(position)).setBackgroundColor(Color.RED);
-//        What I really needed was the method getChildAt and not getItemAtPosition (which returns a String)
 
-        int position = 8;
-
-        String s = (String) calendarGrid.getItemAtPosition(position);
-        TextView tv = (TextView) calendarGrid.getChildAt(position);
-        if(tv != null)
-            tv.setBackgroundColor(Color.RED);
-
-        calendarGrid.setSelection(8);
-        TextView tv2 = (TextView)calendarGrid.getSelectedView();
-
+        if(day == 1 || day == 7 || day == 9 ||day == 18)
+            return true;
+        else
+            return false;
     }
 
 
