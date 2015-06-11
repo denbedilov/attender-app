@@ -298,11 +298,14 @@ public class CalendarPageActivity extends Activity
 
     private boolean isDateInUserEvents(int day)
     {
+        if(eventList != null)
+            for(Event ev : eventList)
+            {
+                if(ev.isDateEquals(getYear(), getMonth() + 1, day - releventDaysGap))
+                    return true;
+            }
 
-        if(day == 1 || day == 7 || day == 9 ||day == 18)
-            return true;
-        else
-            return false;
+        return false;
     }
 
 
