@@ -1,33 +1,23 @@
 package com.attender;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CalendarView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.AccessToken;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
+
 
 public class CalendarPageActivity extends Activity
 {
@@ -38,21 +28,27 @@ public class CalendarPageActivity extends Activity
     private int releventDaysGap;
     private ArrayList<Event> eventList;
 
+    
+    //==============================================================================================
+    //                               onCreate
+    //==============================================================================================
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        //==============================  Reset Data  ==========================================
-        userEvents = new ArrayList<Event>();
+        //==============================  Reset Data  ==============================================
+
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
+        userEvents = new ArrayList<Event>();
         setContentView(R.layout.activity_calendar_page);
 
-        //=========================  Global AppData Set  ======================================
+        //=========================  Global AppData Set  ===========================================
 
         // Calling Application class (see application tag in AndroidManifest.xml)
         final AppData appData = (AppData) getApplicationContext();
 
-        //===========================  Text Fonts =======================================
+        //==============================  Text Fonts ===============================================
         TextView Calendar_TV = (TextView) findViewById(R.id.Calendar_TXT);
         TextView Event_TV = (TextView) findViewById(R.id.Event_List_TXT);
         Typeface tf = Typeface.createFromAsset(getAssets(), "ostrich-regular.ttf");
@@ -60,7 +56,7 @@ public class CalendarPageActivity extends Activity
         Event_TV.setTypeface(tf);
 
 
-        //=============================  Event List  ======================================
+        //=============================  Event List  ===============================================
         eventList = appData.get_userEventList();    //get the updated user event list
 
         final ListView listView = (ListView) findViewById(R.id.listView);
@@ -78,7 +74,7 @@ public class CalendarPageActivity extends Activity
         });
 
 
-        //======================  Set Next Button  ==========================
+        //===========================  Set Next Button  ============================================
         ImageView next = (ImageView) findViewById(R.id.Calendar_Next_Image);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -86,13 +82,15 @@ public class CalendarPageActivity extends Activity
             }
         });
 
-        //======================  Set Prev Button  ==========================
+        //===========================  Set Prev Button  ============================================
         ImageView prev = (ImageView) findViewById(R.id.Calendar_Prev_Image);
         prev.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setPrevMonth();
             }
         });
+
+
 
 
         //========================  On Calendar Click Listener  ====================================
@@ -105,7 +103,7 @@ public class CalendarPageActivity extends Activity
                 Toast.makeText(getApplicationContext(), prompt, Toast.LENGTH_SHORT).show();
 
 
-                //==================  Event List  ================================
+                //=========================  Show Event List =======================================
 
                 if(position - releventDaysGap > 0 && position - releventDaysGap <= getMonthLength())
                 {
@@ -132,38 +130,13 @@ public class CalendarPageActivity extends Activity
         };
 
 
+        //============================  Calendar Grid Creation =====================================
         GridView calendarGrid = (GridView) findViewById(R.id.calendar_grid);
         calendarGrid.setOnItemClickListener(myOnItemClickListener);
 
-
-
-
-
-
-//=================================================================================================
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //============================  Calendar Grid Create =============================================
-
-        _calendar = Calendar.getInstance();                     //Set Current Date
+        _calendar = Calendar.getInstance();         //Set Current Date
         refreshCalendarGrid();
-
-
     }
-
 
 
 
@@ -179,25 +152,26 @@ public class CalendarPageActivity extends Activity
         TextView yearName = (TextView) findViewById(R.id.Date_Year_TXT);
         yearName.setText(getYear() + "");
 
-        //================= Update Clendar Values =======================
+        //================= Update Clendar Values =================================================
         GridView calGrid = (GridView) findViewById(R.id.calendar_grid);
         ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, calendarDateGenerator() )
         {
+            //============================  Color Cell Background  =================================
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                //for (int i = 0 ; i < 35 ; i++)
+            public View getView(int position, View convertView, ViewGroup parent)
+            {
                 View view = super.getView(position, convertView, parent);
 
-                int backgroundColor = Color.WHITE; // Transparent
-                int fontColor = Color.BLACK;      //Black
+                int backgroundColor = Color.WHITE;  //set default cell background color to White
+                //int fontColor = Color.BLACK;      //set font color to Black
 
                 if(position <= releventDaysGap || position > (releventDaysGap + getMonthLength()) )
                 {
-                    backgroundColor = 0x00FFFFFF; //
+                    backgroundColor = 0x00FFFFFF;   //set cell background color to transperent
                 }
                 else if(isDateInUserEvents(position))
                 {
-                    backgroundColor = Color.MAGENTA; // Opaque Blue
+                    backgroundColor = Color.MAGENTA; //set cell background color to Magenta
                 }
 
                 view.setBackgroundColor(backgroundColor);
@@ -213,14 +187,14 @@ public class CalendarPageActivity extends Activity
 
     }
 
-
+    //============================  Calendar Date Generator ========================================
     private ArrayList<String> calendarDateGenerator()
     {
         ArrayList<String> items = new ArrayList<String>();
 
         int numOfItems = 0;
 
-        //==============  Adding last month final dates  ======================
+        //==========  Adding last month final dates  ==========
         int lastMonthLength = getLastMonthLength();
         int dayOfWeek = _calendar.get(Calendar.DAY_OF_WEEK);
 
@@ -232,7 +206,7 @@ public class CalendarPageActivity extends Activity
 
         releventDaysGap = numOfItems - 1;
 
-        //==============  Adding this month dates  ======================
+        //=============  Adding this month dates  =============
 
         for(int i = 1 ; i <= getMonthLength() ; i++)
         {
@@ -240,7 +214,7 @@ public class CalendarPageActivity extends Activity
             numOfItems++;
         }
 
-        //==============  Adding next month first dates  =================
+        //==========  Adding next month first dates  ==========
         if(numOfItems > 35)
             for(int i = 1 ; numOfItems <= 41 ; i++)
             {
@@ -257,6 +231,7 @@ public class CalendarPageActivity extends Activity
         return items;
     }
 
+    //==============================  Get Month By Num  ============================================
     private String getMounthNameByNum(int mounthNum)
     {
         mounthNum += 1; // Jan = 0, Dec = 11
@@ -278,6 +253,8 @@ public class CalendarPageActivity extends Activity
         }
     }
 
+
+    //================================  Month Length Check  ========================================
     private int getMonthLength()
     {
         Calendar tempCal = new GregorianCalendar(getYear(), getMonth(), 1);
@@ -296,10 +273,11 @@ public class CalendarPageActivity extends Activity
     }
 
 
+    //==========================  Date In User Event Check  ========================================
     private boolean isDateInUserEvents(int day)
     {
-        if(eventList != null)
-            for(Event ev : eventList)
+        if(eventList != null)               //check if the event list is not null
+            for(Event ev : eventList)       //for each event in the list, check if it equals to 'day'
             {
                 if(ev.isDateEquals(getYear(), getMonth() + 1, day - releventDaysGap))
                     return true;
@@ -309,9 +287,9 @@ public class CalendarPageActivity extends Activity
     }
 
 
-
-    //============= Calendar Setters and Getters  ======================
-
+    //==============================================================================================
+    //                          Calendar Setters and Getters
+    //==============================================================================================
     private void setCalendar(int year, int mounth, int day) {   _calendar = new GregorianCalendar(year, mounth, day);   }
 
     private int getYear()   {   return _calendar.get(Calendar.YEAR);  }
@@ -319,8 +297,9 @@ public class CalendarPageActivity extends Activity
     private int getDay()    {   return _calendar.get(Calendar.DAY_OF_MONTH);  }
 
 
-    //=================  Button Functions ===============================
+    //=====================================  Button Functions ======================================
 
+    //==========  Next ==========
     private void setNextMonth()
     {
         if(getMonth() == 11)
@@ -330,6 +309,8 @@ public class CalendarPageActivity extends Activity
 
         refreshCalendarGrid();
     }
+
+    //==========  prev  ==========
     private void setPrevMonth()
     {
         if(getMonth() == 1)
@@ -340,26 +321,10 @@ public class CalendarPageActivity extends Activity
         refreshCalendarGrid();
     }
 
-    //==============  Alert Dialog ===============
-    private void printAlertDialog(String message)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("LOGIN DIALOG");
-        builder.setMessage(message);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //do things
-            }
-        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //do things
-            }
-        });
-        builder.show();
-    }
+
+
+    //==============================  Toast Dialog Print  ==========================================
+
     private void printToastDialog(String message)
     {
         Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
