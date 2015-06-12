@@ -245,6 +245,8 @@ public class loginPageActivity extends Activity implements
                         printDialog("user does not exist");
                         this.onStart();
                         break;
+                    default:
+                        printDialog("connection error");
                 }
             }
         }

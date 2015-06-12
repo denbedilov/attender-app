@@ -63,17 +63,26 @@ AttenderBL bl;
                     email.getText().toString(),
                     password.getText().toString().hashCode());
             status=response.substring(0, 3);
-            if(status.compareTo("403")==0)
+            if(status.compareTo("200")==0)
             {
-                printToastDialog("invalid mail");
-                this.onStart();
-            }
-            else {
                 userToken = response.substring(3,response.length());
                 printToastDialog(userToken);
                 appData.resetData("server", userToken);
                 Intent intent = new Intent(this, MainPageActivity.class);
                 startActivity(intent);
+            }
+            else {
+                switch (response){
+                    case "403":
+                        printToastDialog("invalid mail");
+                        break;
+                    case "502":
+                        printToastDialog("user already exists");
+                        break;
+                    default:
+                        printToastDialog("connection error");
+                }
+
             }
         }
     }
