@@ -58,7 +58,7 @@
                     android:text="First Name:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:textColor="#ff1f7b7c"
                     android:id="@+id/name_lbl">
                 </TextView>
@@ -96,7 +96,7 @@
                     android:text="Last Name:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:textColor="#ff1f7b7c"
                     android:id="@+id/lName_lbl">
                 </TextView>
@@ -134,7 +134,7 @@
                     android:text="Email:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:textColor="#ff1f7b7c"
                     android:id="@+id/email_lbl">
                 </TextView>
@@ -176,7 +176,7 @@
                     android:text="Password:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:textColor="#ff1f7b7c"
                     android:id="@+id/password_lbl">
                 </TextView>
@@ -217,7 +217,7 @@
                     android:text="Confirm Password:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:textColor="#ff1f7b7c"
                     android:id="@+id/confPass_lbl">
                 </TextView>

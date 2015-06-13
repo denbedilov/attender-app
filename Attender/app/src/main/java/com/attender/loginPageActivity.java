@@ -77,7 +77,6 @@ public class loginPageActivity extends Activity implements
         Sub_TV.setTypeface(tf);
         Login_TV.setTypeface(tf);
         Or_TV.setTypeface(tf);
-
         //================================== Gmail Login ===================================
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -197,12 +196,22 @@ public class loginPageActivity extends Activity implements
     //=======================================user login=================================================
     public void userLoginPressed(View v)
     {
+        Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
         LinearLayout emailLayout= (LinearLayout)findViewById(R.id.email_layout);
         emailLayout.setVisibility(LinearLayout.VISIBLE);
         LinearLayout passwordLayout= (LinearLayout)findViewById(R.id.password_layout);
         passwordLayout.setVisibility(LinearLayout.VISIBLE);
         LinearLayout loginLayout= (LinearLayout)findViewById(R.id.login_layout);
         loginLayout.setVisibility(LinearLayout.VISIBLE);
+        EditText email_txt=(EditText)findViewById((R.id.email_txt));
+        EditText password_txt=(EditText)findViewById((R.id.password_txt));
+        TextView email_lbl=(TextView)findViewById((R.id.email_lbl));
+        TextView password_lbl=(TextView)findViewById((R.id.password_lbl));
+        email_txt.setTypeface(tf);
+        password_txt.setTypeface(tf);
+        email_lbl.setTypeface(tf);
+        password_lbl.setTypeface(tf);
+
 
     }
     public void loginPressed(View v)
