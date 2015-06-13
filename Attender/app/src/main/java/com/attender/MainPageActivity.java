@@ -85,7 +85,14 @@ public class MainPageActivity  extends Activity
         AccessToken.setCurrentAccessToken(null);
     }
 
-
+    public void userLogoutPressed(View v)
+    {
+        Intent intent = new Intent(this,loginPageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish(); // call this to finish the current activity
+        appData.resetData("guest", null);
+    }
     public void chat_pressed(View v)
     {
         if(appData.get_loginType().compareTo("guest")==0)
