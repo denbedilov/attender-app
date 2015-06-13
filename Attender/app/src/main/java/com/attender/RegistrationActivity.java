@@ -72,7 +72,7 @@ AttenderBL bl;
                 startActivity(intent);
             }
             else {
-                switch (response){
+                switch (status){
                     case "403":
                         printToastDialog("invalid mail");
                         break;
