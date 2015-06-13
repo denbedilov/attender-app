@@ -42,7 +42,6 @@ public class MainPageActivity  extends Activity
 
         // Calling Application class (see application tag in AndroidManifest.xml)
         appData = (AppData) getApplicationContext();
-        appData.resetData(appData.get_loginType(),appData.get_userToken());
 
 
 

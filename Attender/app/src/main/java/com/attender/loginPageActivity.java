@@ -366,6 +366,7 @@ public class loginPageActivity extends Activity implements
                     }
                     break;
                 case "server":
+                    appData.resetData(appData.get_loginType(),appData.get_userToken());
                     Intent intent = new Intent(this, MainPageActivity.class);
                     intent.putExtra("user_type", appData.get_loginType());
                     startActivity(intent);
