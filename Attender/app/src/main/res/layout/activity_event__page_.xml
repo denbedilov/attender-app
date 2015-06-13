@@ -49,9 +49,9 @@
                 android:layout_width="fill_parent"
                 android:text="Details"
                 android:textStyle="bold|italic"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:id="@+id/details_TEX"
-                android:textSize="35dp">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -69,14 +69,10 @@
                     android:checked="false"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:textSize="25dp">
+                    android:textSize="15dp">
                 </CheckBox>
             </LinearLayout>
         </LinearLayout>
-
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -92,7 +88,7 @@
                 android:text="Date"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -109,7 +105,7 @@
                     android:id="@+id/date_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -128,7 +124,7 @@
                 android:text="City"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -145,7 +141,7 @@
                     android:id="@+id/cityName_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -164,7 +160,7 @@
                 android:text="Address"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -181,7 +177,7 @@
                     android:id="@+id/address_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
 
@@ -201,7 +197,7 @@
                 android:text="Time"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -218,7 +214,7 @@
                     android:id="@+id/time_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -237,7 +233,7 @@
                 android:text="Price"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -254,7 +250,7 @@
                     android:id="@+id/price_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -273,8 +269,7 @@
                 android:text="Attending"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp"
-                android:id="@+id/">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -291,7 +286,7 @@
                     android:id="@+id/attending_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -310,7 +305,7 @@
                 android:text="Host"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -327,7 +322,7 @@
                     android:id="@+id/host_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -346,7 +341,7 @@
                 android:text="Event URL"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp">
+                android:textSize="15dp">
             </TextView>
 
             <LinearLayout
@@ -363,7 +358,7 @@
                     android:id="@+id/url_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -383,7 +378,7 @@
                 android:text="Description"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:id="@+id/desc_txt"
                 android:onClick="descCloseClick">
             </TextView>
@@ -404,7 +399,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
                     android:onClick="onInfoClick"
-                    android:textSize="20dp">
+                    android:textSize="15dp">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
