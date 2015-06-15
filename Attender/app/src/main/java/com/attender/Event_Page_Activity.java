@@ -6,9 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -63,12 +67,10 @@ public class Event_Page_Activity extends Activity {
             attend.setEnabled(false);
 
         }
-        attend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                    printToastDialog(bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked));
-                    appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
+        attend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                printToastDialog(bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked));
+                appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
 
             }
         });
@@ -99,6 +101,8 @@ public class Event_Page_Activity extends Activity {
        // tv.setText(currEvent.getDescription());
         tv.setText(R.string.description);
         tv.setClickable(true);
+
+        tv.setMovementMethod(new ScrollingMovementMethod());
 
 
 
