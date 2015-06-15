@@ -32,7 +32,7 @@ public class searchEventActivity extends Activity
     private ArrayList<Event> events;
     private static ProgressDialog progress;
     private static Context context;
-
+    int lisFlag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,12 +41,12 @@ public class searchEventActivity extends Activity
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_event);
+
         typeSpinner = (Spinner) findViewById(R.id.type_spinner);
         dateSpinner = (Spinner) findViewById(R.id.date_spinner);
         citySpinner = (Spinner) findViewById(R.id.city_spinner);
 
         listView = (ListView) findViewById(R.id.listView);
-        Button search_button=(Button)findViewById(R.id.search_cmd);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             // private int position;
 
@@ -54,7 +54,6 @@ public class searchEventActivity extends Activity
             {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
                 int eventNum = position;
-                Event testE = events.get(eventNum);
                 myIntent.putExtra("CurrentEvent",events.get(eventNum));
                 startActivity(myIntent);
             }
@@ -76,7 +75,27 @@ public class searchEventActivity extends Activity
         typeSpinner.setAdapter(type_adapter);
         citySpinner.setAdapter(city_adapter);
 
-        searchPressed(getCurrentFocus());
+        AdapterView.OnItemSelectedListener lis;
+        lis = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        /* listener plaster */
+                if(lisFlag >= 2)
+                    searchPressed(getCurrentFocus());
+                else
+                    lisFlag++;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+//                searchPressed(getCurrentFocus());
+            }
+        };
+
+        typeSpinner.setOnItemSelectedListener(lis);
+        citySpinner.setOnItemSelectedListener(lis);
+        dateSpinner.setOnItemSelectedListener(lis);
+
     }
 
     public void searchPressed(View v)

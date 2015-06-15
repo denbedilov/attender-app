@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,19 +46,8 @@ public class MainPageActivity  extends Activity
 
 
 
-        //========================  Guest Check  ==================================================
-        if(appData.get_loginType().compareTo("guest") == 0)
-        {
-            LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
-            layout.setVisibility(View.INVISIBLE);
-            layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
-            layout.setAlpha(.5f);
-            layout = (LinearLayout) findViewById(R.id.Chat_Layout);
-            layout.setAlpha(.5f);
 
-        }
-
-        //====================== Hello "name" ======================================
+        //====================== Main Page login handle ======================================
         switch(appData.get_loginType())
         {
             case "facebook":
@@ -65,10 +55,23 @@ public class MainPageActivity  extends Activity
                 break;
             case "guest":
                 userName.setText("guest");
+                LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
+                layout.setVisibility(View.INVISIBLE);
+                layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
+                layout.setAlpha(.5f);
+                layout = (LinearLayout) findViewById(R.id.Chat_Layout);
+                layout.setAlpha(.5f);
+                Button userLogout = (Button) findViewById(R.id.user_logout_cmd);
+                userLogout.setVisibility(View.INVISIBLE);
                 break;
             case "server":
                 userName.setText(bl.getUserDetails(appData.get_userToken()));
+                layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
+                layout.setVisibility(View.INVISIBLE);
                 break;
+            case "google":
+                break;
+
             default:
                 userName.setText(getIntent().getStringExtra("name"));
                 break;

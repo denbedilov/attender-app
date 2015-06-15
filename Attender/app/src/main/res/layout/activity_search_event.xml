@@ -66,34 +66,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_weight="1">
-
-            <Space
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="2" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="Search"
-                android:textColor="#ffffffff"
-                android:onClick="searchPressed"
-                android:id="@+id/search_cmd"
-                android:background="@drawable/button_pressed"
-                android:layout_weight="1" />
-
-            <Space
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="2" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
