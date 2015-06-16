@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:context=".loginPageActivity"
-    android:background="#ff292929"
+    android:background="#ff494949"
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -180,6 +180,22 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="User Login"
+                        android:onClick="userLoginPressed"
+                        android:id="@+id/userLogin_cmd"
+                        android:nestedScrollingEnabled="false"
+                        android:background="#ff7ed400" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical"
@@ -200,21 +216,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1">
-
-                    <Button
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:text="User Login"
-                        android:onClick="userLoginPressed"
-                        android:id="@+id/userLogin_cmd"
-                        android:nestedScrollingEnabled="false"
-                        android:background="#ff9af00c" />
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
