@@ -296,7 +296,8 @@ public class loginPageActivity extends Activity implements
                 if (status == 200) {
                     appData.resetData("google", tok.substring(3));
                     Intent intent = new Intent(this, MainPageActivity.class);
-                    intent.putExtra("name", "your google nickname");
+                    intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
+                            Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
                     startActivity(intent);
                 } else {
                     appData.resetData("guest", null);
@@ -371,7 +372,8 @@ public class loginPageActivity extends Activity implements
                             appData.resetData("google", token.substring(3));
                             Intent intent = new Intent(this, MainPageActivity.class);
                             intent.putExtra("user_type", appData.get_loginType());
-                            intent.putExtra("name", "your google nickname");
+                            intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
+                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
                             startActivity(intent);
                         }
                         else {

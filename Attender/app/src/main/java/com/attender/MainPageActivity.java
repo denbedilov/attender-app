@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.Profile;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
 
 /**
  * Created by Shai on 17/05/2015.
@@ -17,6 +19,7 @@ import com.facebook.Profile;
 public class MainPageActivity  extends Activity
 {
     private AppData appData;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,8 +67,8 @@ public class MainPageActivity  extends Activity
                 layout.setVisibility(View.INVISIBLE);
                 break;
             case "google":
+                userName.setText(getIntent().getStringExtra("name"));
                 break;
-
             default:
                 userName.setText(getIntent().getStringExtra("name"));
                 break;
