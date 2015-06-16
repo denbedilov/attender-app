@@ -44,6 +44,8 @@ public class MainPageActivity  extends Activity
         {
             case "facebook":
                 userName.setText(Profile.getCurrentProfile().getName());
+                Button logoutUser= (Button)findViewById(R.id.user_logout_cmd);
+                logoutUser.setVisibility(logoutUser.INVISIBLE);
                 break;
             case "guest":
                 userName.setText("guest");
