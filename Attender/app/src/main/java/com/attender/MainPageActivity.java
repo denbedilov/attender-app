@@ -1,7 +1,5 @@
 package com.attender;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
-import com.facebook.HttpMethod;
 import com.facebook.Profile;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.plus.Plus;
 
 /**
  * Created by Shai on 17/05/2015.
@@ -24,7 +17,6 @@ import com.google.android.gms.plus.Plus;
 public class MainPageActivity  extends Activity
 {
     private AppData appData;
-    private AttenderBL bl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,7 +25,7 @@ public class MainPageActivity  extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        bl = new AttenderBL();
+        AttenderBL bl = new AttenderBL();
 
         printDialog(getIntent().getStringExtra("user_type"));
 
@@ -119,6 +111,16 @@ public class MainPageActivity  extends Activity
     {
         Intent intent=new Intent(this,searchEventActivity.class);
         startActivity(intent);
+    }
+
+    /* back button canceling */
+    @Override
+    public void onBackPressed()
+    {
+        if(appData.get_loginType().compareTo("guest")==0)
+            finish();
+        else
+            printDialog("press logout button to exit");
     }
 
     private void printDialog(String message)
