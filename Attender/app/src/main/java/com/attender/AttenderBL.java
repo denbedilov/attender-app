@@ -179,9 +179,9 @@ public class AttenderBL
         return dal.userLogin(email,password);
     }
     //============================================googlelogin=======================================================
-    public String googleLogin()
+    public String googleLogin(String firstName, String lastName, String email)
     {
-        return dal.googleLogin();
+        return dal.googleLogin(firstName, lastName, email);
     }
     //=============================================Attend============================================================
     public String Attend(String token,String eventId, boolean isAttend)

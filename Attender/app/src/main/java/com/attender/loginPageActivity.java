@@ -27,9 +27,13 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.PersonBuffer;
 
 import java.io.FileInputStream;
 import java.security.MessageDigest;
@@ -40,7 +44,8 @@ import static android.content.pm.PackageManager.GET_SIGNATURES;
 public class loginPageActivity extends Activity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+        View.OnClickListener,
+        ResultCallback<People.LoadPeopleResult> {
 
     /* Request code used to invoke sign in user interactions. */
     private static final int RC_SIGN_IN = 0;
@@ -214,6 +219,7 @@ public class loginPageActivity extends Activity implements
 
 
     }
+
     public void loginPressed(View v)
     {
         EditText email=(EditText)findViewById(R.id.email_txt);
@@ -279,20 +285,24 @@ public class loginPageActivity extends Activity implements
     @Override
     public void onConnected(Bundle connectionHint) {
         //TODO: add google token to replace null
-        if(mGoogleApiClient.isConnected()) {
-            String tok = bl.googleLogin();
-            int status = getStatus(tok);
-            if(status == 200) {
-                appData.resetData("google", tok.substring(3));
-                Intent intent = new Intent(this, MainPageActivity.class);
-                intent.putExtra("name", "your google nickname");
-                startActivity(intent);
+        if (mGoogleApiClient.isConnected())
+            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+                String tok = bl.googleLogin(
+                        Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
+                        Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
+                        Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getNickname() + "@gmail.com"
+                );
+                int status = getStatus(tok);
+                if (status == 200) {
+                    appData.resetData("google", tok.substring(3));
+                    Intent intent = new Intent(this, MainPageActivity.class);
+                    intent.putExtra("name", "your google nickname");
+                    startActivity(intent);
+                } else {
+                    appData.resetData("guest", null);
+                    printDialog("google login failed: " + status);
+                }
             }
-            else {
-                appData.resetData("guest", null);
-                printDialog("google login failed: " + status);
-            }
-        }
     }
 
     private int getStatus(String tok) {
@@ -349,8 +359,13 @@ public class loginPageActivity extends Activity implements
                     }
                     break;
                 case "google":
-                    if(mGoogleApiClient.isConnected()) {
-                        token = bl.googleLogin();
+                    if(mGoogleApiClient.isConnected())
+                    if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null){
+                        token = bl.googleLogin(
+                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
+                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
+                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getNickname() + "@gmail.com"
+                        );
                         status = getStatus(token);
                         if(status == 200) {
                             appData.resetData("google", token.substring(3));
@@ -374,6 +389,23 @@ public class loginPageActivity extends Activity implements
                 default:
                     break;
             }
+        }
+    }
+
+    @Override
+    public void onResult(People.LoadPeopleResult peopleData) {
+        if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
+            PersonBuffer personBuffer = peopleData.getPersonBuffer();
+            try {
+                int count = personBuffer.getCount();
+                for (int i = 0; i < count; i++) {
+//                    Log.d("GoogleNameTAG", "Display name: " + personBuffer.get(i).getDisplayName());
+                }
+            } finally {
+                personBuffer.close();
+            }
+        } else {
+//            Log.e("GoogleNameTAG", "Error requesting visible circles: " + peopleData.getStatus());
         }
     }
 

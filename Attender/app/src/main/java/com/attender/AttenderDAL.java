@@ -157,9 +157,9 @@ public class AttenderDAL {
 
     }
 //=====================================================google login======================================================================
-    public String googleLogin() {
-        String query="googlelogin";
-        String serverResponse=serverConnection(query);
+    public String googleLogin(String firstName, String lastName, String email) {
+        String query="googlelogin?firstname=" + firstName + "&lastname=" + lastName + "&email=" + email;
+        String serverResponse=httpConnection(query);
         return responseCode + serverResponse;
     }
    //================================================get user details===========================================================
