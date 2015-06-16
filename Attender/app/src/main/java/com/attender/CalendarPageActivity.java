@@ -191,7 +191,7 @@ public class CalendarPageActivity extends Activity
     private ArrayList<String> calendarDateGenerator()
     {
         ArrayList<String> items = new ArrayList<String>();
-
+        int maxCalendatItems = 0;
         int numOfItems = 0;
 
         //==========  Adding last month final dates  ==========
@@ -215,18 +215,14 @@ public class CalendarPageActivity extends Activity
         }
 
         //==========  Adding next month first dates  ==========
-        if(numOfItems > 35)
-            for(int i = 1 ; numOfItems <= 41 ; i++)
-            {
-                items.add("" + i);
-                numOfItems++;
-            }
-        else if(numOfItems <= 35)
-            for(int i = 1 ; numOfItems <= 35-numOfItems ; i++)
-            {
-                items.add("" + i);
-                numOfItems++;
-            }
+        if(numOfItems > 35)         maxCalendatItems = 42;  //6 rows - 7*6
+        else if(numOfItems <= 35)   maxCalendatItems = 35;  //5 rows - 7*5
+
+        for(int i = 1 ; i <= maxCalendatItems - numOfItems ; i++)
+        {
+            items.add("" + i);
+            //numOfItems++;
+        }
 
         return items;
     }
