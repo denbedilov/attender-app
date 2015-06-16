@@ -13,12 +13,12 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:paddingLeft="20dp">
 
         <Space
             android:layout_width="fill_parent"
-            android:layout_height="30dp" />
+            android:layout_height="30sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,14 +26,14 @@
             android:text="ATTENDER"
             android:id="@+id/attender_main_txt"
             android:textColor="#ffffffff"
-            android:textSize="65dp"
+            android:textSize="65sp"
             android:focusableInTouchMode="false"
             android:focusable="false"
             android:enabled="false" />
 
         <Space
             android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+            android:layout_height="10sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,91 +41,7 @@
             android:text="search . attend . meet"
             android:id="@+id/attender_sub_txt"
             android:textColor="#ffffffff"
-            android:textSize="30dp" />
-
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="30dp" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/email_layout"
-                android:visibility="invisible">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email:"
-                    android:id="@+id/email_lbl"
-                    android:layout_weight="1"
-                    android:textColor="#ffffffff"
-                    android:visibility="visible"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:ems="10"
-                    android:id="@+id/email_txt"
-                    android:layout_weight="2"
-                    android:textColor="#ffffffff" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/password_layout"
-                android:visibility="invisible">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Password:"
-                    android:id="@+id/password_lbl"
-                    android:layout_weight="1"
-                    android:textColor="#ffffffff"
-                    android:visibility="visible"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:id="@+id/password_txt"
-                    android:layout_weight="2"
-                    android:textColor="#ffffffff" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:id="@+id/login_layout"
-                android:visibility="invisible">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Login"
-                    android:id="@+id/login_cmd"
-                    android:gravity="center"
-                    android:onClick="loginPressed" />
-            </LinearLayout>
-        </LinearLayout>
+            android:textSize="30sp" />
 
     </LinearLayout>
 
@@ -133,154 +49,249 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="4"
-        android:paddingRight="40dp"
-        android:paddingLeft="40dp">
+        android:layout_weight="2">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/email_layout"
+            android:visibility="invisible">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LOGIN:"
-                android:id="@+id/login_txt"
+                android:text="Email:"
+                android:id="@+id/email_lbl"
+                android:layout_weight="1"
                 android:textColor="#ffffffff"
-                android:textSize="30dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp" />
+                android:visibility="visible"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/email_txt"
+                android:layout_weight="2"
+                android:textColor="#ffffffff" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="5">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/password_layout"
+            android:visibility="invisible">
 
-            <LinearLayout
-                android:layout_height="fill_parent"
-                android:layout_width="fill_parent"
-                android:gravity="center_horizontal"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password:"
+                android:id="@+id/password_lbl"
                 android:layout_weight="1"
-                android:id="@+id/google_plus">
-                <com.google.android.gms.common.SignInButton
-                    android:id="@+id/sign_in_button"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Google"
-                    android:layout_weight="1" />
+                android:textColor="#ffffffff"
+                android:visibility="visible"
+                android:textSize="20dp" />
 
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/password_txt"
+                android:layout_weight="2"
+                android:textColor="#ffffffff" />
+        </LinearLayout>
 
-            </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:id="@+id/login_layout"
+            android:visibility="invisible">
 
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="fill_parent" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical"
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:id="@+id/login_cmd"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:id="@+id/facebook">
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/login_button"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="center"
-                    android:background="@drawable/facebook_button_pressed"
-                    android:layout_weight="1"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
-                    android:gravity="center_vertical|center_horizontal" />
+                android:onClick="loginPressed" />
+        </LinearLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:paddingRight="30dp">
 
-            </LinearLayout>
-
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="fill_parent" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
 
-                <Button
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="User Login"
-                    android:onClick="userLoginPressed"
-                    android:id="@+id/userLogin_cmd"
-                    android:nestedScrollingEnabled="false" />
+                    android:text="LOGIN:"
+                    android:id="@+id/login_txt"
+                    android:textColor="#ffffffff"
+                    android:textSize="30dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:id="@+id/google_plus">
+                    <com.google.android.gms.common.SignInButton
+                        android:id="@+id/sign_in_button"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Google"
+                        android:layout_weight="1"
+                        android:background="#ffdd4c3a" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/facebook">
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_button"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:background="#ff021cbf"
+                        android:layout_weight="1"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:gravity="center_vertical|center_horizontal" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="User Login"
+                        android:onClick="userLoginPressed"
+                        android:id="@+id/userLogin_cmd"
+                        android:nestedScrollingEnabled="false"
+                        android:background="#ff9af00c" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
         <Space
-            android:layout_width="fill_parent"
-            android:layout_height="20dp" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="OR:"
-                android:id="@+id/or_txt"
-                android:textColor="#ffffffff"
-                android:textSize="30dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp" />
-        </LinearLayout>
+            android:layout_width="20sp"
+            android:layout_height="20sp" />
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="5">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center_horizontal"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
 
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Connect as Guest"
-                    android:onClick="confirmPressed"
-                    android:id="@+id/button"
-                    android:background="@drawable/guest_button_pressed"
-                    android:layout_weight="1"
-                    android:textColor="#ffffffff" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OR:"
+                    android:id="@+id/or_txt"
+                    android:textColor="#ffffffff"
+                    android:textSize="30dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp" />
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:gravity="center_horizontal"
                 android:layout_weight="1">
 
-                <Button
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="Register"
-                    android:onClick="registerPressed"
-                    android:id="@+id/register_cmd"
-                    android:background="@drawable/guest_button_pressed"
-                    android:layout_weight="1"
-                    android:textColor="#ffffffff" />
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Connect as Guest"
+                        android:onClick="confirmPressed"
+                        android:id="@+id/button"
+                        android:layout_weight="1"
+                        android:textColor="#ffffffff"
+                        android:background="#ffc0359d" />
                 </LinearLayout>
+
+                <Space
+                    android:layout_width="5sp"
+                    android:layout_height="5sp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Register"
+                        android:onClick="registerPressed"
+                        android:id="@+id/register_cmd"
+                        android:layout_weight="1"
+                        android:textColor="#ffffffff"
+                        android:background="#ffffb900" />
+                    </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
