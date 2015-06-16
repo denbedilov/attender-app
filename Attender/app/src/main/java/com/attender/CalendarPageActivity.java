@@ -171,11 +171,10 @@ public class CalendarPageActivity extends Activity
                 }
                 else if(isDateInUserEvents(position))
                 {
-                    backgroundColor = Color.MAGENTA; //set cell background color to Magenta
+                    backgroundColor = 0xFF9D57A0;   //set cell background color to Magenta
                 }
 
                 view.setBackgroundColor(backgroundColor);
-
 
                 return view;
             }
