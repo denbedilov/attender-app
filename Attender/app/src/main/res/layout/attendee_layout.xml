@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:paddingTop="5sp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/event_bg">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="80sp"
+                android:id="@+id/user_image"
+                android:src="@drawable/chat_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/event_bg"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+
+                <TextView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/attendee_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="name"
+
+                    android:textColor="@color/com_facebook_blue"
+                    android:textSize="23sp"
+
+                    android:layout_weight="1"
+                    android:fontFamily="Arial">
+                </TextView>
+
+            </LinearLayout>
+
+            <!--<Space-->
+            <!--android:layout_width="20sp"-->
+            <!--android:layout_height="20sp" />-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_gravity="right">
+
+                <Space
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/attendee_ff"
+                    android:layout_gravity="right"
+                    android:src="@drawable/facebook_icon_not_ff"
+                    android:layout_weight="3" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
