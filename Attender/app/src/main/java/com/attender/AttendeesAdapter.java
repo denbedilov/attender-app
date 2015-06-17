@@ -22,11 +22,10 @@ public class AttendeesAdapter extends ArrayAdapter<String>
 
     public AttendeesAdapter(Context context, ArrayList<Attendee> attendees)
     {
-        super(context, R.layout.event);
+        super(context, R.layout.attendee_layout);
         this.context = context;
         this.attendees = attendees;
-        lInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        lInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -34,19 +33,22 @@ public class AttendeesAdapter extends ArrayAdapter<String>
     {
         View view = convertView;
         if (view == null) {
-            view = lInflater.inflate(R.layout.event, parent, false);
+            view = lInflater.inflate(R.layout.attendee_layout, parent, false);
         }
 
         Attendee at = getAttendee(position);
-        ((TextView) view.findViewById(R.id.tvName)).setText(at.get_firstName() + " " + at.get_lastName());
+        ((TextView) view.findViewById(R.id.attendee_name)).setText(at.get_firstName() + " " + at.get_lastName());
         if(at.is_ff())
         {
             ImageView iv = new ImageView(getApplicationContext());
             iv.setImageResource(R.drawable.facebook_friend);
-            ((TextView) view.findViewById(R.id.tvDate)).setText("friend");
+            //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("friend");
+            //at.
+            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_icon_ff);
         }
         else
-            ((TextView) view.findViewById(R.id.tvDate)).setText("not friend");
+            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_icon_not_ff);
+            //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("not friend");
 
         return view;
     }
