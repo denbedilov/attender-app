@@ -29,8 +29,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="#ffffffff">
+        android:layout_weight="1">
 
         <include  layout="@layout/activity_event__page_" android:id="@+id/id" />
 
@@ -42,35 +41,36 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/linearLayout2"
-        android:paddingTop="5dp"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:paddingRight="15sp"
+        android:paddingLeft="15sp"
+        android:paddingBottom="15sp"
+        android:paddingTop="15sp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <Button
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:text="Open Chat"
                 android:id="@+id/chat_cmd"
-                android:layout_weight="1"
                 android:background="@drawable/button_pressed_main_page"
                 android:textColor="#fff6f4ff" />
         </LinearLayout>
 
         <Space
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
+            android:layout_width="15sp"
+            android:layout_height="fill_parent" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <Button
                 android:layout_height="wrap_content"
@@ -79,7 +79,6 @@
                 android:text="Attendees"
                 android:id="@+id/attendees_cmd"
                 android:onClick="attendeesPressed"
-                android:layout_weight="2"
                 android:background="@drawable/button_pressed_main_page" />
         </LinearLayout>
     </LinearLayout>
