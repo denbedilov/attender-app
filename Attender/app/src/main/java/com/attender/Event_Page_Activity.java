@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.Toast;
@@ -44,7 +45,55 @@ public class Event_Page_Activity extends Activity {
         Intent myIntent=getIntent();
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
         //appData.resetData(AccessToken.getCurrentAccessToken().getToken());
+
+
+
           //==========  ATTEND   =====================
+
+        Switch attendSwitch = (Switch) findViewById(R.id.attend_switch);
+        userEvents = appData.get_userEventList();
+
+        if(userEvents!=null)
+        {
+            for(Event ev: userEvents)
+                if(ev.equals(currEvent)) {
+                    attendSwitch.setChecked(true);
+                    checkedFlag = true;
+                }
+            if(!checkedFlag)
+                attendSwitch.setChecked(false);
+        }
+        if(appData.get_loginType().compareTo("guest")==0)
+        {
+            Button attendeesBTN=(Button)findViewById(R.id.attendees_cmd);
+            Button chatBTN=(Button)findViewById(R.id.chat_cmd);
+            chatBTN.setAlpha(.5f);
+            chatBTN.setEnabled(false);
+            attendeesBTN.setAlpha(.5f);
+            attendSwitch.setAlpha(.5f);
+            attendSwitch.setEnabled(false);
+
+        }
+        attendSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                printToastDialog(bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked));
+                appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
+
+                if (isChecked)
+                {
+                } else
+                {
+                }
+
+
+            }
+        });
+
+
+
+
+   /*
         CheckBox attend = (CheckBox) findViewById(R.id.attend_check);
         userEvents=appData.get_userEventList();
         if(userEvents!=null)
@@ -68,13 +117,14 @@ public class Event_Page_Activity extends Activity {
 
         }
         attend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
                 printToastDialog(bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked));
                 appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
 
             }
         });
-
+*/
 
         //==========  DATE   ==================
         tv =(TextView)findViewById(R.id.date_lbl);  //TODO - ADD DATE

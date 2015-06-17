@@ -27,7 +27,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Details"
+                android:text="Attend"
                 android:textStyle="bold|italic"
                 android:layout_weight="1"
                 android:id="@+id/details_TEX"
@@ -41,16 +41,13 @@
                 android:gravity="center_vertical|right"
                 android:layout_weight="2">
 
-                <CheckBox
-                    android:layout_height="fill_parent"
-                    android:layout_width="fill_parent"
-                    android:text="Attend"
-                    android:id="@+id/attend_check"
-                    android:checked="false"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:textSize="15dp">
-                </CheckBox>
+                <Switch
+                    android:id="@+id/attend_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"/>
+
             </LinearLayout>
         </LinearLayout>
 
