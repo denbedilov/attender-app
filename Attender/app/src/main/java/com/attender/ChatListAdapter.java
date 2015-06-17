@@ -2,7 +2,10 @@ package com.attender;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.client.Query;
@@ -34,16 +37,27 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
      */
     @Override
     protected void populateView(View view, Chat chat) {
+
         // Map a Chat object to an entry in our listview
         String author = chat.getAuthor();
         TextView authorText = (TextView) view.findViewById(R.id.author);
         authorText.setText(author + ": ");
+
         // If the message was sent by this user, color it differently
-        if (author != null && author.equals(mUsername)) {
+        if (author != null && author.equals(mUsername))
+        {
             authorText.setTextColor(Color.RED);
-        } else {
-            authorText.setTextColor(Color.BLUE);
+            ((RelativeLayout) view).setGravity(Gravity.RIGHT);
+            //((RelativeLayout) view).setBackground();
+
         }
+        else
+        {
+            authorText.setTextColor(Color.BLUE);
+            ((RelativeLayout) view).setGravity(Gravity.LEFT);
+        }
+
         ((TextView) view.findViewById(R.id.message)).setText(chat.getMessage());
+
     }
 }
