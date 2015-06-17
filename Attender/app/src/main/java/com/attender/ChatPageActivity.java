@@ -28,7 +28,7 @@ public class ChatPageActivity extends Activity
         ListView listView = (ListView) findViewById(R.id.listView);
         appData = (AppData) getApplicationContext();
 
-        bl.getUserEvents(appData.get_userToken());
+        events = bl.getUserEvents(appData.get_userToken());
         if(events == null)
         {
             listView.setAdapter(null);
@@ -44,10 +44,10 @@ public class ChatPageActivity extends Activity
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
+                Intent myIntent = new Intent(getApplicationContext(), ChatActivity.class);
                 int eventNum = position;
                 Event testE = events.get(eventNum);
-                myIntent.putExtra("CurrentEvent",events.get(eventNum));
+                myIntent.putExtra("EventID",events.get(eventNum).getId());
                 startActivity(myIntent);
             }
         });
