@@ -14,7 +14,7 @@
     <string name="description_close"><u><b><i>Close Description</i></b></u></string>
 
     <string-array name="type_array">
-        <item>Type&#160;&#160;&#160;&#160;&#160;▼</item>
+        <item>Type&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;▼</item>
         <item>Career&amp;Business</item>
         <item>Community&amp;Environment</item>
         <item>Entertainment</item>
@@ -27,14 +27,14 @@
         <item>Transport</item>
     </string-array>
     <string-array name="dates_array">
-        <item>Date&#160;&#160;&#160;&#160;&#160;▼</item>
+        <item>Date&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;▼</item>
         <item>1 day ahead</item>
         <item>1 week ahead</item>
         <item>1 month ahead</item>
 
     </string-array>
     <string-array name="cities_array">
-        <item>City&#160;&#160;&#160;&#160;&#160;▼</item>
+        <item>City&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;▼</item>
         <item>Jerusalem</item>
         <item>Tel Aviv-Yafo</item>
         <item>Haifa</item>
