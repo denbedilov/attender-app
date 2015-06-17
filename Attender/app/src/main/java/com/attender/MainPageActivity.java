@@ -48,24 +48,17 @@ public class MainPageActivity  extends Activity
         {
             case "facebook":
                 userName.setText(Profile.getCurrentProfile().getName());
-//                Button logoutUser= (Button)findViewById(R.id.user_logout_cmd);
-//                logoutUser.setVisibility(logoutUser.INVISIBLE);
                 break;
             case "guest":
                 userName.setText("guest");
-//                LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
-//                layout.setVisibility(View.INVISIBLE);
-//                layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
-//                layout.setAlpha(.5f);
-//                layout = (LinearLayout) findViewById(R.id.Chat_Layout);
-//                layout.setAlpha(.5f);
-//                Button userLogout = (Button) findViewById(R.id.user_logout_cmd);
+                LinearLayout layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
+                layout.setAlpha(.5f);
+                layout = (LinearLayout) findViewById(R.id.Chat_Layout);
+                layout.setAlpha(.5f);
                 logoutUser.setVisibility(View.INVISIBLE);
                 break;
             case "server":
                 userName.setText(bl.getUserDetails(appData.get_userToken()));
-//                layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
-//                layout.setVisibility(View.INVISIBLE);
                 break;
             case "google":
                 userName.setText(getIntent().getStringExtra("name"));
