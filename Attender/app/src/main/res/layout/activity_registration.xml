@@ -74,9 +74,10 @@
                         android:layout_height="fill_parent"
                         android:layout_width="fill_parent"
                         android:id="@+id/name_text"
-                        android:gravity="center_vertical"
+                        android:gravity="center_vertical|left"
                         android:layout_weight="5"
                         android:textSize="15dp"
+                        android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
                 </LinearLayout>
@@ -113,8 +114,9 @@
                         android:layout_width="fill_parent"
                         android:id="@+id/LastName_text"
                         android:layout_weight="5"
-                        android:gravity="center_vertical|right"
+                        android:gravity="center_vertical|left"
                         android:textSize="15dp"
+                        android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
                 </LinearLayout>
@@ -154,8 +156,9 @@
                         android:ems="10"
                         android:id="@+id/email_txt"
                         android:layout_weight="3"
-                        android:gravity="center_vertical|right"
+                        android:gravity="center_vertical|left"
                         android:textSize="15dp"
+                        android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
 
@@ -195,8 +198,9 @@
                         android:ems="10"
                         android:id="@+id/password_txt"
                         android:layout_weight="3"
-                        android:gravity="center_vertical|right"
+                        android:gravity="center_vertical|left"
                         android:textSize="15dp"
+                        android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
                 </LinearLayout>
@@ -236,8 +240,9 @@
                         android:ems="10"
                         android:id="@+id/confPass_txt"
                         android:layout_weight="2"
-                        android:gravity="center_vertical|right"
+                        android:gravity="center_vertical|left"
                         android:textSize="15dp"
+                        android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
                 </LinearLayout>
@@ -272,7 +277,7 @@
                 android:text="Confirm"
                 android:id="@+id/confirm_cmd"
                 android:layout_weight="1"
-                android:background="@drawable/button_pressed"
+                android:background="@drawable/button_pressed_main_page"
                 android:textColor="#fff6f4ff"
                 android:onClick="confirmPressed" />
 

@@ -79,7 +79,7 @@
                 <com.facebook.login.widget.LoginButton
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
-                    android:background="#ff1215ff"
+                    android:background="@drawable/button_pressed"
                     android:textColor="#ffffffff"
                     android:text="Log-Out"
                     android:id="@+id/logOut_cmd"
@@ -101,9 +101,11 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="user logout"
+            android:background="@drawable/button_pressed"
             android:id="@+id/user_logout_cmd"
             android:layout_weight="2"
-            android:onClick="userLogoutPressed" />
+            android:onClick="userLogoutPressed"
+            android:backgroundTint="#9decefff" />
 
     </LinearLayout>
 
@@ -112,7 +114,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="2"
-        android:background="@drawable/button_pressed"
+        android:background="@drawable/button_pressed_main_page"
         android:paddingRight="25dp"
         android:id="@+id/Search_Event_Layout"
         android:onClick="search_event_pressed">
@@ -153,7 +155,7 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/button_pressed"
+            android:background="@drawable/button_pressed_main_page"
             android:layout_weight="1"
             android:paddingBottom="25dp"
             android:id="@+id/Event_Calendar_Layout"
@@ -187,12 +189,12 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/button_pressed"
+            android:background="@drawable/button_pressed_main_page"
             android:layout_weight="1"
             android:layout_gravity="right"
             android:paddingBottom="25dp"
             android:id="@+id/Chat_Layout"
-            android:nestedScrollingEnabled="true"
+            android:nestedScrollingEnabled="false"
             android:onClick="chat_pressed">
 
             <TextView

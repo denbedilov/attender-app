@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:context=".loginPageActivity"
-    android:background="#ff494949"
+    android:background="#ffe9e9e9"
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -11,36 +11,38 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
-        android:paddingLeft="20dp">
+        android:layout_weight="2">
 
         <Space
             android:layout_width="fill_parent"
             android:layout_height="30sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="ATTENDER"
             android:id="@+id/attender_main_txt"
-            android:textColor="#ffffffff"
-            android:textSize="65sp"
+            android:textColor="#ff0d00a1"
+            android:textSize="45sp"
             android:focusableInTouchMode="false"
             android:focusable="false"
             android:enabled="false" />
 
         <Space
             android:layout_width="fill_parent"
-            android:layout_height="10sp" />
+            android:layout_height="5sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="search . attend . meet"
+            android:text="search. attend. meet."
             android:id="@+id/attender_sub_txt"
-            android:textColor="#ffffffff"
+            android:textColor="#ff8c8c8c"
             android:textSize="30sp" />
 
     </LinearLayout>
@@ -65,9 +67,9 @@
                 android:text="Email:"
                 android:id="@+id/email_lbl"
                 android:layout_weight="1"
-                android:textColor="#ffffffff"
+                android:textColor="#ff757575"
                 android:visibility="visible"
-                android:textSize="20dp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -76,7 +78,7 @@
                 android:ems="10"
                 android:id="@+id/email_txt"
                 android:layout_weight="2"
-                android:textColor="#ffffffff" />
+                android:textColor="#ff757575" />
         </LinearLayout>
 
         <LinearLayout
@@ -93,9 +95,9 @@
                 android:text="Password:"
                 android:id="@+id/password_lbl"
                 android:layout_weight="1"
-                android:textColor="#ffffffff"
+                android:textColor="#ff757575"
                 android:visibility="visible"
-                android:textSize="20dp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -104,7 +106,7 @@
                 android:ems="10"
                 android:id="@+id/password_txt"
                 android:layout_weight="2"
-                android:textColor="#ffffffff" />
+                android:textColor="#ff757575" />
         </LinearLayout>
 
         <LinearLayout
@@ -122,7 +124,10 @@
                 android:text="Login"
                 android:id="@+id/login_cmd"
                 android:gravity="center"
-                android:onClick="loginPressed" />
+                android:onClick="loginPressed"
+                android:textColor="#ff757575"
+                android:background="@drawable/button_pressed"
+                />
         </LinearLayout>
     </LinearLayout>
 
@@ -148,10 +153,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LOGIN:"
+                    android:text="Login:"
                     android:id="@+id/login_txt"
-                    android:textColor="#ffffffff"
-                    android:textSize="30dp"
+                    android:textColor="#ff757575"
+                    android:textSize="20dp"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp" />
             </LinearLayout>
@@ -160,13 +165,15 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                >
 
                 <LinearLayout
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
                     android:gravity="center_horizontal"
                     android:layout_weight="1"
+                    android:background="#fffafbff"
                     android:id="@+id/google_plus">
                     <com.google.android.gms.common.SignInButton
                         android:id="@+id/sign_in_button"
@@ -174,16 +181,50 @@
                         android:layout_height="fill_parent"
                         android:text="Google"
                         android:layout_weight="1"
-                        android:background="#ffdd4c3a" />
+                        android:background="@drawable/button_pressed"
+                        />
+
+
+                </LinearLayout>
+                <Space
+                    android:layout_width="5sp"
+                    android:layout_height="5sp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="#ff021cbf"
+                    android:id="@+id/facebook">
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_button"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_pressed"
+                        android:layout_weight="1"
+                        android:paddingTop="25dp"
+                        android:paddingBottom="25dp"
+                        android:gravity="center_vertical|center_horizontal" />
 
 
                 </LinearLayout>
 
+
+                <Space
+                    android:layout_width="5sp"
+                    android:layout_height="5sp" />
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="1">
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:background="#ff2baaff"
+                    >
 
                     <Button
                         android:layout_width="fill_parent"
@@ -192,28 +233,13 @@
                         android:onClick="userLoginPressed"
                         android:id="@+id/userLogin_cmd"
                         android:nestedScrollingEnabled="false"
-                        android:background="#ff7ed400" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/facebook">
-                    <com.facebook.login.widget.LoginButton
-                        android:id="@+id/login_button"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center"
-                        android:background="#ff021cbf"
                         android:layout_weight="1"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="20dp"
-                        android:gravity="center_vertical|center_horizontal" />
+                        android:textColor="#ffffffff"
+                        android:clickable="true"
+                        android:background="@drawable/button_pressed"
 
 
+                        />
                 </LinearLayout>
 
             </LinearLayout>
@@ -240,8 +266,8 @@
                     android:layout_height="wrap_content"
                     android:text="OR:"
                     android:id="@+id/or_txt"
-                    android:textColor="#ffffffff"
-                    android:textSize="30dp"
+                    android:textColor="#ff757575"
+                    android:textSize="20dp"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp" />
             </LinearLayout>
@@ -257,7 +283,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center_horizontal"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="#ff00c2bc">
 
                     <Button
                         android:layout_width="fill_parent"
@@ -267,7 +294,8 @@
                         android:id="@+id/button"
                         android:layout_weight="1"
                         android:textColor="#ffffffff"
-                        android:background="#ffc0359d" />
+                        android:background="@drawable/button_pressed"
+                        />
                 </LinearLayout>
 
                 <Space
@@ -279,7 +307,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center_horizontal"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="#ff6bd0ac"
+                    >
 
                     <Button
                         android:layout_width="fill_parent"
@@ -289,7 +319,10 @@
                         android:id="@+id/register_cmd"
                         android:layout_weight="1"
                         android:textColor="#ffffffff"
-                        android:background="#ffffb900" />
+                        android:background="@drawable/button_pressed"
+                        android:clickable="true"
+
+                        />
                     </LinearLayout>
             </LinearLayout>
 

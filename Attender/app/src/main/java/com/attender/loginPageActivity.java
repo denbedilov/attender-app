@@ -27,6 +27,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -77,11 +78,14 @@ public class loginPageActivity extends Activity implements
         TextView Sub_TV = (TextView) findViewById(R.id.attender_sub_txt);
         TextView Login_TV = (TextView) findViewById(R.id.login_txt);
         TextView Or_TV = (TextView) findViewById(R.id.or_txt);
-        Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
-        Main_TV.setTypeface(tf);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(),"chlorinar.ttf");
+        Typeface tf1 = Typeface.createFromAsset(getAssets(),"cooprblk.ttf");
+
+        Main_TV.setTypeface(tf1);
         Sub_TV.setTypeface(tf);
-        Login_TV.setTypeface(tf);
-        Or_TV.setTypeface(tf);
+//        Login_TV.setTypeface(tf);
+//        Or_TV.setTypeface(tf);
         //================================== Gmail Login ===================================
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -90,6 +94,8 @@ public class loginPageActivity extends Activity implements
                 .addScope(new Scope("profile"))
                 .build();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+        SignInButton bu = (SignInButton)findViewById(R.id.sign_in_button);
+        bu.setColorScheme(SignInButton.COLOR_LIGHT);
 //        manager = AccountManager.get(this);
 //        accounts = manager.getAccountsByType("com.google");
         //================================== internet connection ===============================
@@ -201,7 +207,7 @@ public class loginPageActivity extends Activity implements
     //=======================================user login=================================================
     public void userLoginPressed(View v)
     {
-        Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
+        //Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
         LinearLayout emailLayout= (LinearLayout)findViewById(R.id.email_layout);
         emailLayout.setVisibility(LinearLayout.VISIBLE);
         LinearLayout passwordLayout= (LinearLayout)findViewById(R.id.password_layout);
@@ -212,10 +218,10 @@ public class loginPageActivity extends Activity implements
         EditText password_txt=(EditText)findViewById((R.id.password_txt));
         TextView email_lbl=(TextView)findViewById((R.id.email_lbl));
         TextView password_lbl=(TextView)findViewById((R.id.password_lbl));
-        email_txt.setTypeface(tf);
-        password_txt.setTypeface(tf);
-        email_lbl.setTypeface(tf);
-        password_lbl.setTypeface(tf);
+//        email_txt.setTypeface(tf);
+//        password_txt.setTypeface(tf);
+//        email_lbl.setTypeface(tf);
+//        password_lbl.setTypeface(tf);
 
 
     }
