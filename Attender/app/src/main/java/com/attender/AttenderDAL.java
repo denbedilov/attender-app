@@ -8,10 +8,16 @@ package com.attender;
         import java.io.InputStream;
         import java.io.InputStreamReader;
         import java.net.HttpURLConnection;
+        import java.net.MalformedURLException;
         import java.net.URL;
         import java.net.URLConnection;
 
+        import javax.net.ssl.HostnameVerifier;
         import javax.net.ssl.HttpsURLConnection;
+        import javax.net.ssl.SSLContext;
+        import javax.net.ssl.SSLSession;
+        import javax.net.ssl.TrustManager;
+        import javax.net.ssl.X509TrustManager;
 
 /**
  * Created by Shai Pe'er on 03/05/2015.
@@ -75,11 +81,34 @@ public class AttenderDAL {
     //===================================Server Connection==============================================================================
     private String serverConnection(String query) {
         String jsonData = "";
-        JSONObject jsonObject = null;
+        // Create a trust manager that does not validate certificate chains
+        TrustManager[] trustAllCerts = new TrustManager[]{
+                new X509TrustManager() {
+                    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                        return null;
+                    }
+                    public void checkClientTrusted(
+                            java.security.cert.X509Certificate[] certs, String authType) {
+                    }
+                    public void checkServerTrusted(
+                            java.security.cert.X509Certificate[] certs, String authType) {
+                    }
+                }
+        };
 
+        // Install the all-trusting trust manager
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (Exception e) {
+        }
+
+        // Now you can access an https URL without having the certificate in the truststore
         try {
             URL url = new URL(API_URL + query);
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+
             responseCode = con.getResponseCode();
             jsonData += readJsonStream(con.getInputStream());
 
@@ -159,7 +188,7 @@ public class AttenderDAL {
 //=====================================================google login======================================================================
     public String googleLogin(String firstName, String lastName, String email) {
         String query="googlelogin?firstname=" + firstName + "&lastname=" + lastName + "&email=" + email;
-        String serverResponse=httpConnection(query);
+        String serverResponse = serverConnection(query);
         return responseCode + serverResponse;
     }
    //================================================get user details===========================================================
