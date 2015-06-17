@@ -1,4 +1,5 @@
 package com.attender;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.plus.Plus;
 
 /**
  * Created by Shai on 17/05/2015.

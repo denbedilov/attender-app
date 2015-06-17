@@ -1,27 +1,17 @@
 package com.attender;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
-import android.text.method.MovementMethod;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.text.method.ScrollingMovementMethod;
 import android.widget.Toast;
-
-import com.facebook.AccessToken;
 
 import java.util.ArrayList;
 

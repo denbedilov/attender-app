@@ -296,7 +296,7 @@ public class loginPageActivity extends Activity implements
                 String tok = bl.googleLogin(
                         Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
                         Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
-                        Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getNickname() + "@gmail.com"
+                        Plus.AccountApi.getAccountName(mGoogleApiClient)
                 );
                 int status = getStatus(tok);
                 if (status == 200) {
