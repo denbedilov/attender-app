@@ -1,40 +1,59 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 
-    tools:context=".MainActivity">
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/listFooter"
-        android:layout_alignParentTop="true"
-        android:transcriptMode="alwaysScroll" />
+    tools:context=".MainActivity"
+    android:background="#ff1f1f1f">
 
     <LinearLayout
-        android:id="@+id/listFooter"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_weight="1">
 
-        <EditText
-            android:id="@+id/messageInput"
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="textShortMessage"
-            android:lines="1"
-            android:singleLine="true" />
+            android:layout_above="@+id/listFooter"
+            android:layout_alignParentTop="true"
+            android:transcriptMode="alwaysScroll" />
+    </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="10"
+        android:gravity="bottom">
+
+        <LinearLayout
+            android:id="@+id/listFooter"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_send" />
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:background="#ffffffff"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/messageInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textShortMessage"
+                android:lines="1"
+                android:singleLine="true" />
+
+            <ImageButton
+                android:id="@+id/sendButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_send" />
+        </LinearLayout>
     </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>
