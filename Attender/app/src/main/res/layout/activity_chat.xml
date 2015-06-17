@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
 
     tools:context=".MainActivity"
-    android:background="#ff1f1f1f">
+    android:background="@drawable/unnamed">
 
     <LinearLayout
         android:orientation="vertical"
@@ -20,14 +20,19 @@
             android:layout_above="@+id/listFooter"
             android:layout_alignParentTop="true"
             android:transcriptMode="alwaysScroll"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:paddingBottom="5sp"
+            android:divider="#00000000"
+            android:clickable="false"
+            android:listSelector="@android:color/transparent"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="10"
+        android:layout_height="wrap_content"
+
         android:gravity="bottom">
 
         <LinearLayout
@@ -42,11 +47,10 @@
             <EditText
                 android:id="@+id/messageInput"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:inputType="textShortMessage"
-                android:lines="1"
-                android:singleLine="true" />
+                android:maxLines="5"
+                android:inputType="textAutoCorrect|textMultiLine"/>
 
             <ImageButton
                 android:id="@+id/sendButton"
