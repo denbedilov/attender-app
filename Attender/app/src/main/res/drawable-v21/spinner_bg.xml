@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+android:color="?android:colorControlHighlight">
 
-<item>
+
+    <!-- Note: <ripple> acts like a layer-list -->
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <!-- This color is not displayed in any way -->
+            <solid android:color="@android:color/black" />
+        </shape>
+    </item>
+
+    <!-- This is the border -->
+    <item>
+        <shape android:shape="oval">
+            <corners android:radius="6dp"/>
+       </shape>
+    </item>
+    <item>
     <layer-list>
     <item><shape>
         <gradient android:angle="90"
@@ -22,5 +39,4 @@
     </shape></item>
 
 </layer-list></item>
-
-</selector>
+</ripple>

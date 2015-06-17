@@ -176,6 +176,7 @@
                 android:background="#005a5a5a"
                 android:columnWidth="90dp"
 
+                android:listSelector="@drawable/button_pressed"
                 android:clickable="true" />
         </LinearLayout>
 

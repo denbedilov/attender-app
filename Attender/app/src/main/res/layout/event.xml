@@ -39,6 +39,10 @@
 
         </LinearLayout>
 
+        <!--<Space-->
+            <!--android:layout_width="20sp"-->
+            <!--android:layout_height="20sp" />-->
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -72,5 +76,4 @@
             </TextView>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

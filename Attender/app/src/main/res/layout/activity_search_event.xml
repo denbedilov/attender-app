@@ -63,7 +63,9 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    <Space
+        android:layout_width="10sp"
+        android:layout_height="10sp" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"

@@ -40,6 +40,7 @@ public class MainPageActivity  extends Activity
         appData = (AppData) getApplicationContext();
 
 
+                Button logoutUser= (Button)findViewById(R.id.user_logout_cmd);
 
 
         //====================== Main Page login handle ======================================
@@ -47,24 +48,24 @@ public class MainPageActivity  extends Activity
         {
             case "facebook":
                 userName.setText(Profile.getCurrentProfile().getName());
-                Button logoutUser= (Button)findViewById(R.id.user_logout_cmd);
-                logoutUser.setVisibility(logoutUser.INVISIBLE);
+//                Button logoutUser= (Button)findViewById(R.id.user_logout_cmd);
+//                logoutUser.setVisibility(logoutUser.INVISIBLE);
                 break;
             case "guest":
                 userName.setText("guest");
-                LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
-                layout.setVisibility(View.INVISIBLE);
-                layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
-                layout.setAlpha(.5f);
-                layout = (LinearLayout) findViewById(R.id.Chat_Layout);
-                layout.setAlpha(.5f);
-                Button userLogout = (Button) findViewById(R.id.user_logout_cmd);
-                userLogout.setVisibility(View.INVISIBLE);
+//                LinearLayout layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
+//                layout.setVisibility(View.INVISIBLE);
+//                layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
+//                layout.setAlpha(.5f);
+//                layout = (LinearLayout) findViewById(R.id.Chat_Layout);
+//                layout.setAlpha(.5f);
+//                Button userLogout = (Button) findViewById(R.id.user_logout_cmd);
+                logoutUser.setVisibility(View.INVISIBLE);
                 break;
             case "server":
                 userName.setText(bl.getUserDetails(appData.get_userToken()));
-                layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
-                layout.setVisibility(View.INVISIBLE);
+//                layout = (LinearLayout) findViewById(R.id.facebooklogutLayout);
+//                layout.setVisibility(View.INVISIBLE);
                 break;
             case "google":
                 userName.setText(getIntent().getStringExtra("name"));
@@ -74,7 +75,6 @@ public class MainPageActivity  extends Activity
                 break;
         }
     }
-
     public void log_out_to_home(View v)
     {
         Intent intent = new Intent(this,loginPageActivity.class);
@@ -84,7 +84,21 @@ public class MainPageActivity  extends Activity
         appData.resetData("guest", null);
         AccessToken.setCurrentAccessToken(null);
     }
-
+    public void logOutMethod(View v)
+    {
+        switch (appData.get_loginType())
+        {
+            case "google":
+                finish();
+                break;
+            case "facebook":
+                log_out_to_home(v);
+                break;
+            case "server":
+                userLogoutPressed(v);
+                break;
+        }
+    }
     public void userLogoutPressed(View v)
     {
         Intent intent = new Intent(this,loginPageActivity.class);
