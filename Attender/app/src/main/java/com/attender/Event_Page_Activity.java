@@ -40,7 +40,7 @@ public class Event_Page_Activity extends Activity {
         boolean checkedFlag=false;
         bl = new AttenderBL();
         userEvents=new ArrayList<Event>();
-        setContentView(R.layout.activity_event__page_);
+        setContentView(R.layout.event_page);
         Intent myIntent=getIntent();
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
         //appData.resetData(AccessToken.getCurrentAccessToken().getToken());
