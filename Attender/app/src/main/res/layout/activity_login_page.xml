@@ -126,7 +126,6 @@
                 android:gravity="center"
                 android:onClick="loginPressed"
                 android:textColor="#ff757575"
-                android:background="@drawable/button_pressed"
                 />
         </LinearLayout>
     </LinearLayout>

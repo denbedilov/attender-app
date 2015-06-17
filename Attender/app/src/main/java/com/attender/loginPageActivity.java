@@ -64,6 +64,7 @@ public class loginPageActivity extends Activity implements
 
     /* saved data */
     AppData appData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -82,13 +83,11 @@ public class loginPageActivity extends Activity implements
         TextView Login_TV = (TextView) findViewById(R.id.login_txt);
         TextView Or_TV = (TextView) findViewById(R.id.or_txt);
 
-        Typeface tf = Typeface.createFromAsset(getAssets(),"chlorinar.ttf");
-        Typeface tf1 = Typeface.createFromAsset(getAssets(),"cooprblk.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "chlorinar.ttf");
+        Typeface tf1 = Typeface.createFromAsset(getAssets(), "cooprblk.ttf");
 
         Main_TV.setTypeface(tf1);
         Sub_TV.setTypeface(tf);
-//        Login_TV.setTypeface(tf);
-//        Or_TV.setTypeface(tf);
         //================================== Gmail Login ===================================
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -97,10 +96,9 @@ public class loginPageActivity extends Activity implements
                 .addScope(new Scope("profile"))
                 .build();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        SignInButton bu = (SignInButton)findViewById(R.id.sign_in_button);
+        SignInButton bu = (SignInButton) findViewById(R.id.sign_in_button);
         bu.setColorScheme(SignInButton.COLOR_LIGHT);
-//        manager = AccountManager.get(this);
-//        accounts = manager.getAccountsByType("com.google");
+
         //================================== internet connection ===============================
 
         StrictMode.ThreadPolicy policy = new StrictMode.
@@ -115,25 +113,21 @@ public class loginPageActivity extends Activity implements
         // =================================== facebook login ==================================
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("user_friends", "email");
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>()
-        {
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult)
-            {
+            public void onSuccess(LoginResult loginResult) {
                 // App code
                 AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
                 appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken());
             }
 
             @Override
-            public void onCancel()
-            {
+            public void onCancel() {
                 // App code
             }
 
             @Override
-            public void onError(FacebookException exception)
-            {
+            public void onError(FacebookException exception) {
                 // App code
             }
         });
@@ -158,8 +152,8 @@ public class loginPageActivity extends Activity implements
     private void getSavedData() {
         String loginType = getData("loginType");
         appData = (AppData) getApplicationContext();
-        if(loginType != null)
-            if(loginType.compareTo("server") == 0)
+        if (loginType != null)
+            if (loginType.compareTo("server") == 0)
                 appData.resetData("server", getData("token"));
             else
                 appData.resetData(loginType, "");
@@ -172,14 +166,14 @@ public class loginPageActivity extends Activity implements
         String retData = null;
         try {
             inputStream = openFileInput(fileName);
-            while(inputStream.available() > 0){
+            while (inputStream.available() > 0) {
                 retData += (char) inputStream.read();
             }
             inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(retData != null)
+        if (retData != null)
             return retData.substring(4, retData.length());
         else
             return null;
@@ -200,72 +194,69 @@ public class loginPageActivity extends Activity implements
     @Override
     public void onClick(View v) {
         Context context;
-        progress = ProgressDialog.show(this, "Login in",
-                "Please wait..", true);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mGoogleApiClient.connect();
-
-            }
-        }).start();
+        mGoogleApiClient.connect();
     }
+
     //===========================================user register==========================================
-    public void registerPressed(View v)
-    {
-        Intent intent=new Intent(this,RegistrationActivity.class);
+    public void registerPressed(View v) {
+        Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
     }
+    boolean pressed = false;
     //=======================================user login=================================================
-    public void userLoginPressed(View v)
-    {
-        //Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
-        LinearLayout emailLayout= (LinearLayout)findViewById(R.id.email_layout);
-        emailLayout.setVisibility(LinearLayout.VISIBLE);
-        LinearLayout passwordLayout= (LinearLayout)findViewById(R.id.password_layout);
-        passwordLayout.setVisibility(LinearLayout.VISIBLE);
-        LinearLayout loginLayout= (LinearLayout)findViewById(R.id.login_layout);
-        loginLayout.setVisibility(LinearLayout.VISIBLE);
-        EditText email_txt=(EditText)findViewById((R.id.email_txt));
-        EditText password_txt=(EditText)findViewById((R.id.password_txt));
-        TextView email_lbl=(TextView)findViewById((R.id.email_lbl));
-        TextView password_lbl=(TextView)findViewById((R.id.password_lbl));
-//        email_txt.setTypeface(tf);
-//        password_txt.setTypeface(tf);
-//        email_lbl.setTypeface(tf);
-//        password_lbl.setTypeface(tf);
+    public void userLoginPressed(View v) {
+        LinearLayout emailLayout = (LinearLayout) findViewById(R.id.email_layout);
+        LinearLayout passwordLayout = (LinearLayout) findViewById(R.id.password_layout);
+        LinearLayout loginLayout = (LinearLayout) findViewById(R.id.login_layout);
+        EditText password_txt = (EditText) findViewById((R.id.password_txt));
+        TextView email_lbl = (TextView) findViewById((R.id.email_lbl));
+        TextView password_lbl = (TextView) findViewById((R.id.password_lbl));
+        EditText email_txt = (EditText) findViewById((R.id.email_txt));
+        if (!pressed)
+        {
+            emailLayout.setVisibility(LinearLayout.VISIBLE);
+
+            passwordLayout.setVisibility(LinearLayout.VISIBLE);
+
+            loginLayout.setVisibility(LinearLayout.VISIBLE);
+
+            pressed = true;
+        }
+        else{
+            emailLayout.setVisibility(LinearLayout.INVISIBLE);
+
+            passwordLayout.setVisibility(LinearLayout.INVISIBLE);
+
+            loginLayout.setVisibility(LinearLayout.INVISIBLE);
+            pressed = false;
+        }
 
 
     }
 
-    public void loginPressed(View v)
-    {
-        EditText email=(EditText)findViewById(R.id.email_txt);
-        EditText password=(EditText)findViewById(R.id.password_txt);
+    public void loginPressed(View v) {
+        EditText email = (EditText) findViewById(R.id.email_txt);
+        EditText password = (EditText) findViewById(R.id.password_txt);
         String userToken;
         String response;
         String status;
         String userDetails;
 
-        if(email.getText().toString().compareTo("")==0 || password.getText().toString().compareTo("")==0) {
+        if (email.getText().toString().compareTo("") == 0 || password.getText().toString().compareTo("") == 0) {
             printDialog("please enter all fields");
             this.onStart();
-        }
-        else{
-            response=bl.userLogin(email.getText().toString(), password.getText().toString().hashCode());
-            status=response.substring(0,3);
-            if(status.compareTo("200")==0)
-            {
-                userToken=response.substring(3,response.length());
-                appData.resetData("server",userToken);
-                printDialog(userToken);
-                userDetails=bl.getUserDetails(userToken);
-                Intent intent=new Intent(this,MainPageActivity.class);
-                intent.putExtra("name",userDetails);
+        } else {
+            response = bl.userLogin(email.getText().toString(), password.getText().toString().hashCode());
+            status = response.substring(0, 3);
+            if (status.compareTo("200") == 0) {
+                userToken = response.substring(3, response.length());
+                appData.resetData("server", userToken);
+                userDetails = bl.getUserDetails(userToken);
+                Intent intent = new Intent(this, MainPageActivity.class);
+                intent.putExtra("name", userDetails);
                 startActivity(intent);
-            }
-            else{
-                switch(status){
+            } else {
+                switch (status) {
                     case "403":
                         printDialog("invalid mail");
                         this.onStart();
@@ -284,6 +275,7 @@ public class loginPageActivity extends Activity implements
             }
         }
     }
+
     //======================================================================================================
     @Override
     public void onConnectionFailed(ConnectionResult result) {
@@ -303,25 +295,42 @@ public class loginPageActivity extends Activity implements
     @Override
     public void onConnected(Bundle connectionHint) {
         //TODO: add google token to replace null
-        if (mGoogleApiClient.isConnected())
-            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-                String tok = bl.googleLogin(
-                        Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
-                        Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
-                        Plus.AccountApi.getAccountName(mGoogleApiClient)
-                );
-                int status = getStatus(tok);
-                if (status == 200) {
-                    appData.resetData("google", tok.substring(3));
-                    Intent intent = new Intent(this, MainPageActivity.class);
-                    intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
-                            Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
-                    startActivity(intent);
-                } else {
-                    appData.resetData("guest", null);
-                    printDialog("google login failed: " + status);
+        final Intent intent = new Intent(this, MainPageActivity.class);
+
+        if (mGoogleApiClient.isConnected()) {
+            progress = ProgressDialog.show(this, "Login in Progress",
+                    "Please wait..", true);
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+                        String tok = bl.googleLogin(
+                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
+                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
+                                Plus.AccountApi.getAccountName(mGoogleApiClient)
+                        );
+                        int status = getStatus(tok);
+                        if (status == 200) {
+                            appData.resetData("google", tok.substring(3));
+                            intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
+                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+
+                        } else {
+                            appData.resetData("guest", null);
+                            printDialog("google login failed");
+                        }
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(intent);
+                            progress.dismiss();
+                        }
+                    });
                 }
-            }
+            }).start();
+        }
     }
 
     private int getStatus(String tok) {
@@ -354,54 +363,50 @@ public class loginPageActivity extends Activity implements
         AppEventsLogger.activateApp(this);
 
         // check login
-        if(appData.get_loginType().compareTo("guest") != 0 && appData.get_loginType().compareTo("") != 0)
-        {
+        if (appData.get_loginType().compareTo("guest") != 0 && appData.get_loginType().compareTo("") != 0) {
             String token;
             int status;
             /* get token from own server */
-            switch(appData.get_loginType())
-            {
+            switch (appData.get_loginType()) {
                 case "facebook":
                     token = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(),
                             AccessToken.getCurrentAccessToken().getToken());
                     status = getStatus(token);
-                    if(status == 200) {
+                    if (status == 200) {
                         appData.resetData(appData.get_loginType(), token.substring(3));
                         Intent intent = new Intent(this, MainPageActivity.class);
                         intent.putExtra("user_type", appData.get_loginType());
                         startActivity(intent);
-                    }
-                    else{
+                    } else {
                         appData.resetData("guest", null);
                         LoginManager.getInstance().logOut();
                         printDialog("facebook login failed: " + status);
                     }
                     break;
                 case "google":
-                    if(mGoogleApiClient.isConnected())
-                    if(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null){
-                        token = bl.googleLogin(
-                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
-                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
-                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getNickname() + "@gmail.com"
-                        );
-                        status = getStatus(token);
-                        if(status == 200) {
-                            appData.resetData("google", token.substring(3));
-                            Intent intent = new Intent(this, MainPageActivity.class);
-                            intent.putExtra("user_type", appData.get_loginType());
-                            intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
-                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
-                            startActivity(intent);
+                    if (mGoogleApiClient.isConnected())
+                        if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+                            token = bl.googleLogin(
+                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
+                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
+                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getNickname() + "@gmail.com"
+                            );
+                            status = getStatus(token);
+                            if (status == 200) {
+                                appData.resetData("google", token.substring(3));
+                                Intent intent = new Intent(this, MainPageActivity.class);
+                                intent.putExtra("user_type", appData.get_loginType());
+                                intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
+                                        Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+                                startActivity(intent);
+                            } else {
+                                appData.resetData("guest", null);
+                                printDialog("google login failed: " + status);
+                            }
                         }
-                        else {
-                            appData.resetData("guest", null);
-                            printDialog("google login failed: " + status);
-                        }
-                    }
                     break;
                 case "server":
-                    appData.resetData(appData.get_loginType(),appData.get_userToken());
+                    appData.resetData(appData.get_loginType(), appData.get_userToken());
                     Intent intent = new Intent(this, MainPageActivity.class);
                     intent.putExtra("user_type", appData.get_loginType());
                     startActivity(intent);
@@ -431,7 +436,7 @@ public class loginPageActivity extends Activity implements
 
     public void confirmPressed(View v) {
         appData.resetData("guest", null);
-        Intent intent=new Intent(this,MainPageActivity.class);
+        Intent intent = new Intent(this, MainPageActivity.class);
         startActivity(intent);
     }
 

@@ -50,7 +50,8 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:maxLines="5"
-                android:inputType="textAutoCorrect|textMultiLine"/>
+                android:singleLine="false"
+                android:inputType="textImeMultiLine"/>
 
             <ImageButton
                 android:id="@+id/sendButton"

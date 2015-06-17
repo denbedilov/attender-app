@@ -6,14 +6,14 @@
     android:layout_marginTop="10dp"
     android:orientation="vertical"
     android:gravity="fill_horizontal"
-    android:paddingTop="5sp"
-    >
+    android:paddingTop="5sp">
 
     <LinearLayout
         android:background="@drawable/event_bg"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <LinearLayout
             android:orientation="vertical"

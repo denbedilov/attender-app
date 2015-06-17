@@ -42,6 +42,7 @@ public class AttendeesAdapter extends ArrayAdapter<String>
         {
             ImageView iv = new ImageView(getApplicationContext());
             iv.setImageResource(R.drawable.facebook_friend);
+            
             //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("friend");
             //at.
             ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_icon_ff);

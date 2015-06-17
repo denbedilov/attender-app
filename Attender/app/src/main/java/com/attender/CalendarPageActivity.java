@@ -100,7 +100,7 @@ public class CalendarPageActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String prompt = (String)parent.getItemAtPosition(position) + getYear() + " - " + (getMonth() + 1) + " - " + (position - releventDaysGap);
-                Toast.makeText(getApplicationContext(), prompt, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), prompt, Toast.LENGTH_SHORT).show();
 
 
                 //=========================  Show Event List =======================================
@@ -118,7 +118,7 @@ public class CalendarPageActivity extends Activity
 
                     if (userEvents.size() == 0) {
                         listView.setAdapter(null);
-                        printToastDialog("No events to show!");
+                        printToastDialog("No events");
                     } else {
                         EventAdapter adapter = new EventAdapter(getBaseContext(), userEvents);
                         listView.setAdapter(adapter);

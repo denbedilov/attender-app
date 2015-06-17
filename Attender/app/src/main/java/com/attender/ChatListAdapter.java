@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.firebase.client.Query;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 /**
  * @author greg
  * @since 6/21/13
@@ -18,7 +22,7 @@ import com.firebase.client.Query;
  * data for each individual chat message
  */
 public class ChatListAdapter extends FirebaseListAdapter<Chat> {
-
+    Map<String, Integer> map = new HashMap<String, Integer>();
     // The mUsername for this client. We use this to indicate which messages originated from this user
     private String mUsername;
 
@@ -53,7 +57,20 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         }
         else
         {
-            authorText.setTextColor(Color.BLUE);
+            int color;
+            if (map.containsKey(author))
+                color = map.get(author);
+            else
+            {
+                Random rnd = new Random();
+                color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                while(map.containsValue(color))
+                {
+                    color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                }
+                map.put(author, color);
+            }
+            authorText.setTextColor(color);
             ((RelativeLayout) view).setGravity(Gravity.LEFT);
         }
 

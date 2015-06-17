@@ -77,7 +77,7 @@ public class Event_Page_Activity extends Activity {
         attendSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                printToastDialog(bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked));
+//                printToastDialog(bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked));
                 appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
 
                 if (isChecked)
@@ -208,7 +208,7 @@ public class Event_Page_Activity extends Activity {
     public void chatPressed(View v)
     {
         if(appData.get_loginType().compareTo("guest")==0)
-            printToastDialog("please log in");
+            printToastDialog("Please log in");
         else{
         Switch attendSwitch = (Switch) findViewById(R.id.attend_switch);
         if (attendSwitch.isChecked() == true) {
@@ -217,7 +217,7 @@ public class Event_Page_Activity extends Activity {
             myIntent.putExtra("EventID", currEvent.getId());
             startActivity(myIntent);
         } else
-            printToastDialog("press attend to open chat");
+            printToastDialog("You need to attend to open chat");
     }
     }
 
@@ -244,7 +244,7 @@ public class Event_Page_Activity extends Activity {
     public void attendeesPressed(View v)
     {
             if(appData.get_loginType().compareTo("guest")==0)
-                printToastDialog("log-in for use");
+                printToastDialog("For Logged In User Only");
         else {
                 Intent intent = new Intent(this, AttendeesPage.class);
                 String id = currEvent.getId();
@@ -256,7 +256,7 @@ public class Event_Page_Activity extends Activity {
 
     private void printToastDialog(String message)
     {
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
         toast.show();
     }
 }

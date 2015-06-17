@@ -52,11 +52,11 @@ AttenderBL bl;
                 password.getText().toString().compareTo("") ==0 ||
                 email.getText().toString().compareTo("") == 0 ||
                 confPass.getText().toString().compareTo("") == 0 ) {
-            printToastDialog("Please fill all Fields");
+            printToastDialog("All Fields Must Be Filled");
             this.onStart();
         }
         else if(password.getText().toString().compareTo(confPass.getText().toString()) != 0)
-            printToastDialog("passwords are not equal!");
+            printToastDialog("passwords not match");
         else {
             response = bl.userRegistration(firstName.getText().toString(),
                     lastName.getText().toString(),
@@ -66,7 +66,6 @@ AttenderBL bl;
             if(status.compareTo("200")==0)
             {
                 userToken = response.substring(3,response.length());
-                printToastDialog(userToken);
                 appData.resetData("server", userToken);
                 Intent intent = new Intent(this, MainPageActivity.class);
                 startActivity(intent);

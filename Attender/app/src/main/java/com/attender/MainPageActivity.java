@@ -30,7 +30,7 @@ public class MainPageActivity  extends Activity
 
         AttenderBL bl = new AttenderBL();
 
-        printDialog(getIntent().getStringExtra("user_type"));
+//        printDialog(getIntent().getStringExtra("user_type"));
 
         TextView userName = (TextView)findViewById(R.id.User_Name_textView);
 
@@ -103,7 +103,7 @@ public class MainPageActivity  extends Activity
     public void chat_pressed(View v)
     {
         if(appData.get_loginType().compareTo("guest")==0)
-            printDialog("log-in for use");
+            printDialog("Login to use");
         else {
             Intent intent = new Intent(this, ChatPageActivity.class);
             startActivity(intent);
@@ -112,7 +112,7 @@ public class MainPageActivity  extends Activity
     public void event_calendar_pressed(View v)
     {
         if(appData.get_loginType().compareTo("guest")==0)
-            printDialog("log-in for use");
+            printDialog("Login to use");
         else {
             Intent intent = new Intent(this, CalendarPageActivity.class);
             startActivity(intent);
