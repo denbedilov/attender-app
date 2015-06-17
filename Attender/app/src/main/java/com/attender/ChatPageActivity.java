@@ -1,6 +1,8 @@
 package com.attender;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ public class ChatPageActivity extends Activity
 {
     AttenderBL bl;
     ArrayList<Event> events;
+    AppData appData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,19 @@ public class ChatPageActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_page);
         ListView listView = (ListView) findViewById(R.id.listView);
+        appData = (AppData) getApplicationContext();
 
-       
+        bl.getUserEvents(appData.get_userToken());
+        if(events == null)
+        {
+            listView.setAdapter(null);
+            printAlertDialog("No events to show!");
+        }
+        else {
+            EventAdapter adapter = new EventAdapter(this, events);
+            listView.setAdapter(adapter);
+        }
+
 
         EventAdapter adapter = new EventAdapter(this, events);
         listView.setAdapter(adapter);
@@ -51,6 +65,25 @@ public class ChatPageActivity extends Activity
     {
         Intent intent=new Intent(this,CalendarPageActivity.class);
         startActivity(intent);
+    }
+    private void printAlertDialog(String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("LOGIN DIALOG");
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //do things
+            }
+        });
+        builder.show();
     }
 
 //    @Override
