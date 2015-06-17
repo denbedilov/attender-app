@@ -39,9 +39,9 @@ public class AttenderDAL {
 
         // Query format: ?[category=***]&[time=***]&[city=***]";
         String query = "api?";
-        if (!eventType.contains("Type")) query += "category=" + eventType + "&";
-        if (!eventDate.contains("Date")) query += "time=" + eventDate + "&";
-        if (!eventLocation.contains("City")) query += "city=" + eventLocation;
+        if (!eventType.contains("TYPE")) query += "category=" + eventType + "&";
+        if (!eventDate.contains("DATE")) query += "time=" + eventDate + "&";
+        if (!eventLocation.contains("CITY")) query += "city=" + eventLocation;
         if (query.endsWith("&") || query.endsWith("?"))
             query = query.substring(0, query.length() - 1); //delete the last char if it '&'
         try {

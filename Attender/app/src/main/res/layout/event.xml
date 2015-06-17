@@ -31,7 +31,7 @@
                     android:text="name"
 
                     android:textColor="@color/com_facebook_blue"
-                    android:textSize="25sp"
+                    android:textSize="23sp"
 
                     android:layout_weight="1"
                     android:fontFamily="Arial">
@@ -65,7 +65,7 @@
                 android:padding="1dp"
                 android:text="date"
                 android:textColor="#ff010000"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:gravity="end"
                 android:layout_gravity="top"
                 android:layout_weight="1">
