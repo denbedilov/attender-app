@@ -192,11 +192,15 @@ public class AttenderBL
             return dal.Attend(token,eventId, "false");
     }
     //=============================================getAttendees===================================================
-    public ArrayList<Attendee> getAttendees(String eventId, String token)
+    public ArrayList<Attendee> getAttendees(String eventId, String token,String fbToken )
     {
         Attendee at;
         ArrayList<Attendee> attendees=new ArrayList<Attendee>();
-        JSONArray attendeesJson=dal.getAttendees(eventId,token);
+        JSONArray attendeesJson;
+        if(fbToken==null)
+              attendeesJson=dal.getAttendees(eventId,token,null);
+        else
+            attendeesJson=dal.getAttendees(eventId,token,fbToken);
         if(attendeesJson == null)
             return null;
         try

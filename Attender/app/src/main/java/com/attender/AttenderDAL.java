@@ -134,11 +134,16 @@ public class AttenderDAL {
         return jsonData;
     }
     //=========================================get Attendees===============================================================================
-    public JSONArray getAttendees(String eventId, String token) {
+    public JSONArray getAttendees(String eventId, String token,String fbToken) {
         JSONObject jsonObject;
         JSONArray jsonArray;
         String query="attendees?";
-        query+="eventid="+eventId+"&token="+token;
+        if(fbToken!=null) {
+            query += "eventid=" + eventId + "&token=" + token + "&fbtoken=" + fbToken;
+        }
+        else
+            query += "eventid=" + eventId + "&token=" + token;
+
         String jsonData = "";
         try{
             jsonData = "{ Attendees:\n";

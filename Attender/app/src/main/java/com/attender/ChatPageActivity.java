@@ -39,6 +39,10 @@ public class ChatPageActivity extends Activity
             listView.setAdapter(adapter);
         }
 
+
+        EventAdapter adapter = new EventAdapter(this, events);
+        listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             // private int position;
 

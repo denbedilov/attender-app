@@ -27,7 +27,12 @@ public class AttendeesPage extends Activity {
         ListView listView = (ListView) findViewById(R.id.listView);
         bl = new AttenderBL();
         ArrayList<Attendee> attendees;
-        attendees = bl.getAttendees(getIntent().getStringExtra("eventId"), appData.get_userToken());
+        if(appData.get_loginType().compareTo("facebook")==0)
+        {
+            attendees=bl.getAttendees(getIntent().getStringExtra("eventId"),appData.get_userToken(), AccessToken.getCurrentAccessToken().getToken());
+        }
+        else
+            attendees = bl.getAttendees(getIntent().getStringExtra("eventId"), appData.get_userToken(),null);
         if(attendees != null)
         {
             AttendeesAdapter attendeesAdapter = new AttendeesAdapter(this, attendees);
