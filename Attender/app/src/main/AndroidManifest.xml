@@ -76,11 +76,6 @@
             android:name=".UserLoginActivity"
             android:label="@string/title_activity_user_login" >
         </activity>
-        <activity
-            android:name=".ChatActivity"
-            android:label="@string/title_activity_chat"
-            android:screenOrientation="portrait" >
-        </activity>
     </application>
 
 </manifest>
