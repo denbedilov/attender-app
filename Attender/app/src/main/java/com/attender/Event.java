@@ -171,9 +171,9 @@ public class Event implements Serializable
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
     }
-    public boolean equals(Event ev)
+    public boolean equalCheck(Event ev)
     {
-        if(this.getId().equals(ev.getId()))
+        if(this.getId().compareTo((ev.getId()))==0)
             return true;
         else
             return false;
