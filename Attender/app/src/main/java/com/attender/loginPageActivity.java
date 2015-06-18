@@ -1,6 +1,8 @@
 package com.attender;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.content.pm.PackageInfo;
@@ -54,6 +56,7 @@ public class loginPageActivity extends Activity implements
     /* Client used to interact with Google APIs. */
     private GoogleApiClient mGoogleApiClient;
     private boolean mIntentInProgress;
+    private static ProgressDialog progress;
 
     /* facebook login callback */
     CallbackManager callbackManager;
@@ -196,7 +199,16 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onClick(View v) {
-       mGoogleApiClient.connect();
+        Context context;
+        progress = ProgressDialog.show(this, "Login in",
+                "Please wait..", true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mGoogleApiClient.connect();
+
+            }
+        }).start();
     }
     //===========================================user register==========================================
     public void registerPressed(View v)
