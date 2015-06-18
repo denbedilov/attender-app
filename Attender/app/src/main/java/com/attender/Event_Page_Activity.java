@@ -56,7 +56,7 @@ public class Event_Page_Activity extends Activity {
         if(userEvents!=null)
         {
             for(Event ev: userEvents)
-                if(ev.equalCheck(currEvent)) {
+                if(ev.equals(currEvent)) {
                     attendSwitch.setChecked(true);
                     checkedFlag = true;
                 }
