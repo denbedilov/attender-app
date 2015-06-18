@@ -173,7 +173,7 @@ public class Event implements Serializable
     }
     public boolean equalscheck(Event ev)
     {
-        if(this.getId().compareTo(ev.getId())==0)
+        if(this.getId().equals(ev.getId()))
             return true;
         else
             return false;
