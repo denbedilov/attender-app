@@ -59,7 +59,8 @@
                 android:text="Open Chat"
                 android:id="@+id/chat_cmd"
                 android:background="@drawable/button_pressed_main_page"
-                android:textColor="#fff6f4ff" />
+                android:textColor="#fff6f4ff"
+                android:onClick="chatPressed" />
         </LinearLayout>
 
         <Space

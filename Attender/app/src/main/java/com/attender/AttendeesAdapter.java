@@ -39,10 +39,6 @@ public class AttendeesAdapter extends ArrayAdapter<String>
 
         Attendee at = getAttendee(position);
         ((TextView) view.findViewById(R.id.tvName)).setText(at.get_firstName() + " " + at.get_lastName());
-        if(at.get_firstName().compareTo("Rita") == 0)
-            ((TextView) view.findViewById(R.id.tvCity)).setText("blonda");
-        else
-            ((TextView) view.findViewById(R.id.tvCity)).setText("good man");
         if(at.is_ff())
         {
             ImageView iv = new ImageView(getApplicationContext());

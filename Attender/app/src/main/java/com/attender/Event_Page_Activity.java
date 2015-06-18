@@ -205,7 +205,19 @@ public class Event_Page_Activity extends Activity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+    public void chatPressed(View v)
+    {
+        Switch attendSwitch = (Switch) findViewById(R.id.attend_switch);
+        if(attendSwitch.isChecked()==true)
+        {
+            Intent myIntent = new Intent(getApplicationContext(), ChatActivity.class);
 
+            myIntent.putExtra("EventID",currEvent.getId());
+            startActivity(myIntent);
+        }
+        else
+            printToastDialog("press attend to open chat");
+    }
 
     public void onInfoClick(View v)
     {
