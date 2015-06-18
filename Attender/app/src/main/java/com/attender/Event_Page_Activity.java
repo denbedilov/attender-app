@@ -207,16 +207,18 @@ public class Event_Page_Activity extends Activity {
 //    }
     public void chatPressed(View v)
     {
+        if(appData.get_loginType().compareTo("guest")==0)
+            printToastDialog("please log in");
+        else{
         Switch attendSwitch = (Switch) findViewById(R.id.attend_switch);
-        if(attendSwitch.isChecked()==true)
-        {
+        if (attendSwitch.isChecked() == true) {
             Intent myIntent = new Intent(getApplicationContext(), ChatActivity.class);
 
-            myIntent.putExtra("EventID",currEvent.getId());
+            myIntent.putExtra("EventID", currEvent.getId());
             startActivity(myIntent);
-        }
-        else
+        } else
             printToastDialog("press attend to open chat");
+    }
     }
 
     public void onInfoClick(View v)
