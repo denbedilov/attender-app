@@ -31,6 +31,7 @@ public class Event_Page_Activity extends Activity {
     Event currEvent;
     private AttenderBL bl;
     private ArrayList<Event> userEvents;
+    private ArrayList<Attendee> attendees;
     private  AppData appData;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +45,11 @@ public class Event_Page_Activity extends Activity {
         setContentView(R.layout.event_page);
         Intent myIntent=getIntent();
         currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
+        if(appData.get_loginType().compareTo("facebook")==0)
+            attendees=bl.getAttendees(currEvent.getId(),appData.get_userToken(),AccessToken.getCurrentAccessToken().getToken());
+        else
+            attendees=bl.getAttendees(currEvent.getId(),appData.get_userToken(),null);
+
         //appData.resetData(AccessToken.getCurrentAccessToken().getToken());
 
 
@@ -56,7 +62,7 @@ public class Event_Page_Activity extends Activity {
         if(userEvents!=null)
         {
             for(Event ev: userEvents)
-                if(ev.equals(currEvent)) {
+                if(ev.equalscheck(currEvent)) {
                     attendSwitch.setChecked(true);
                     checkedFlag = true;
                 }
@@ -173,7 +179,10 @@ public class Event_Page_Activity extends Activity {
         }
         //==========  ATTENDEES   ==================
         tv =(TextView)findViewById(R.id.attending_lbl);
-        tv.setText(currEvent.getAttendees());
+        if(attendees!=null)
+            tv.setText(String.valueOf(attendees.size()));
+        else
+            tv.setText("no attendees");
 
     }
 
