@@ -142,10 +142,14 @@ public class MainPageActivity  extends Activity
     @Override
     protected void onResume() {
         super.onResume();
+//add saving to appData
     }
 
     @Override
     protected void onPause() {
+
         super.onPause();
+        //add reading from app Data
+
     }
 }

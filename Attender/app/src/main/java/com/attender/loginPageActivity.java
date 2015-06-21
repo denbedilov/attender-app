@@ -314,19 +314,20 @@ public class loginPageActivity extends Activity implements
                                 Plus.AccountApi.getAccountName(mGoogleApiClient)
                         );
                         status = getStatus(tok);
+                        if (status == 200) {
+                            appData.resetData("google", tok.substring(3));
+                            intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
+                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+
+                        } else {
+                            appData.resetData("guest", null);
+                            printDialog("google login failed");
+                        }
+                        startActivity(intent);
+                        
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (status == 200) {
-                                    appData.resetData("google", tok.substring(3));
-                                    intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
-                                            Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
-
-                                } else {
-                                    appData.resetData("guest", null);
-                                    printDialog("google login failed");
-                                }
-                                startActivity(intent);
                                 progress.dismiss();
                             }
                         });
