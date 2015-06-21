@@ -202,7 +202,9 @@ public class loginPageActivity extends Activity implements
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
     }
+
     boolean pressed = false;
+
     //=======================================user login=================================================
     public void userLoginPressed(View v) {
         LinearLayout emailLayout = (LinearLayout) findViewById(R.id.email_layout);
@@ -212,8 +214,7 @@ public class loginPageActivity extends Activity implements
         TextView email_lbl = (TextView) findViewById((R.id.email_lbl));
         TextView password_lbl = (TextView) findViewById((R.id.password_lbl));
         EditText email_txt = (EditText) findViewById((R.id.email_txt));
-        if (!pressed)
-        {
+        if (!pressed) {
             emailLayout.setVisibility(LinearLayout.VISIBLE);
 
             passwordLayout.setVisibility(LinearLayout.VISIBLE);
@@ -221,8 +222,7 @@ public class loginPageActivity extends Activity implements
             loginLayout.setVisibility(LinearLayout.VISIBLE);
 
             pressed = true;
-        }
-        else{
+        } else {
             emailLayout.setVisibility(LinearLayout.INVISIBLE);
 
             passwordLayout.setVisibility(LinearLayout.INVISIBLE);
@@ -301,35 +301,38 @@ public class loginPageActivity extends Activity implements
             progress = ProgressDialog.show(this, "Login in Progress",
                     "Please wait..", true);
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-                        String tok = bl.googleLogin(
+            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+                new Thread(new Runnable() {
+
+                    int status;
+                    String tok;
+                    @Override
+                    public void run() {
+                        tok = bl.googleLogin(
                                 Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
                                 Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
                                 Plus.AccountApi.getAccountName(mGoogleApiClient)
                         );
-                        int status = getStatus(tok);
-                        if (status == 200) {
-                            appData.resetData("google", tok.substring(3));
-                            intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
-                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+                        status = getStatus(tok);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (status == 200) {
+                                    appData.resetData("google", tok.substring(3));
+                                    intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
+                                            Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
 
-                        } else {
-                            appData.resetData("guest", null);
-                            printDialog("google login failed");
-                        }
+                                } else {
+                                    appData.resetData("guest", null);
+                                    printDialog("google login failed");
+                                }
+                                startActivity(intent);
+                                progress.dismiss();
+                            }
+                        });
                     }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            startActivity(intent);
-                            progress.dismiss();
-                        }
-                    });
-                }
-            }).start();
+                }).start();
+            }
         }
     }
 
