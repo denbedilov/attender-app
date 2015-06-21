@@ -243,7 +243,7 @@
                         android:ems="10"
                         android:id="@+id/confPass_txt"
                         android:layout_weight="3"
-                        android:gravity="left|center_vertical|bottom"
+                        android:gravity="center_vertical|left"
                         android:textSize="15dp"
                         android:singleLine="true"
                         android:textColor="#fc000000">
