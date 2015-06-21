@@ -22,18 +22,19 @@ AttenderBL bl;
         bl=new AttenderBL();
         appData = (AppData) getApplicationContext();
         TextView register_lbl=(TextView)findViewById(R.id.register_lbl);
-        Typeface tf = Typeface.createFromAsset(getAssets(),"ostrich-regular.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(),"LeagueGothic-CondensedRegular.otf");
+        Typeface tf2 = Typeface.createFromAsset(getAssets(),"Oswald-Regular.ttf");
         register_lbl.setTypeface(tf);
         TextView name_lbl=(TextView)findViewById(R.id.name_lbl);
         TextView lastName_lbl=(TextView)findViewById(R.id.lName_lbl);
         TextView email_lbl=(TextView)findViewById(R.id.email_lbl);
         TextView password_lbl=(TextView)findViewById(R.id.password_lbl);
         TextView confPass_lbl=(TextView)findViewById(R.id.confPass_lbl);
-        name_lbl.setTypeface(tf);
-        lastName_lbl.setTypeface(tf);
-        email_lbl.setTypeface(tf);
-        password_lbl.setTypeface(tf);
-        confPass_lbl.setTypeface(tf);
+        name_lbl.setTypeface(tf2);
+        lastName_lbl.setTypeface(tf2);
+        email_lbl.setTypeface(tf2);
+        password_lbl.setTypeface(tf2);
+        confPass_lbl.setTypeface(tf2);
     }
 
     public void confirmPressed(View v)
