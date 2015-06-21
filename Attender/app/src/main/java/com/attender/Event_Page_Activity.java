@@ -83,8 +83,12 @@ public class Event_Page_Activity extends Activity {
         attendSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                 printToastDialog(bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked));
+                 bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked);
                 appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
+                if(isChecked)
+                    printToastDialog("Attending");
+                else
+                    printToastDialog("Unattending");
 
 
             }
