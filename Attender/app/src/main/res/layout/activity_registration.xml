@@ -15,7 +15,7 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/headLine"
-        android:padding="10dp"
+        android:padding="0dp"
         android:layout_weight="5">
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_width="fill_parent"
             android:text="Registration"
             android:textStyle="bold|italic"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textColor="#ffffffff"
             android:gravity="center_vertical|center_horizontal"
             android:layout_weight="1"
@@ -42,7 +42,7 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:paddingTop="100dp"
+            android:paddingTop="50dp"
             android:background="#ffffffff">
 
             <LinearLayout
@@ -59,7 +59,7 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25dp"
-                    android:textColor="#ff1f7b7c"
+                    android:textColor="#ff0d00a1"
                     android:id="@+id/name_lbl">
                 </TextView>
 
@@ -98,7 +98,7 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25dp"
-                    android:textColor="#ff1f7b7c"
+                    android:textColor="#ff0d00a1"
                     android:id="@+id/lName_lbl">
                 </TextView>
 
@@ -137,7 +137,7 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25dp"
-                    android:textColor="#ff1f7b7c"
+                    android:textColor="#ff0d00a1"
                     android:id="@+id/email_lbl">
                 </TextView>
 
@@ -171,7 +171,9 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/passwordLine"
-                android:padding="15dp">
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -180,7 +182,7 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25dp"
-                    android:textColor="#ff1f7b7c"
+                    android:textColor="#ff0d00a1"
                     android:id="@+id/password_lbl">
                 </TextView>
 
@@ -213,7 +215,8 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/confirmPasswordLine"
-                android:padding="15dp">
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -222,7 +225,7 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25dp"
-                    android:textColor="#ff1f7b7c"
+                    android:textColor="#ff0d00a1"
                     android:id="@+id/confPass_lbl">
                 </TextView>
 
@@ -239,7 +242,7 @@
                         android:inputType="textPassword"
                         android:ems="10"
                         android:id="@+id/confPass_txt"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:gravity="center_vertical|left"
                         android:textSize="15dp"
                         android:singleLine="true"
