@@ -66,24 +66,16 @@ public class MainPageActivity  extends Activity
                 break;
         }
     }
-    public void log_out_to_home(View v)
-    {
-        Intent intent = new Intent(this,loginPageActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish(); // call this to finish the current activity
-        appData.resetData("guest", null);
-        AccessToken.setCurrentAccessToken(null);
-    }
     public void logOutMethod(View v)
     {
         switch (appData.get_loginType())
         {
             case "google":
-                finish();
+                userLogoutPressed(v);
                 break;
             case "facebook":
-                log_out_to_home(v);
+                userLogoutPressed(v);
+                AccessToken.setCurrentAccessToken(null);
                 break;
             case "server":
                 userLogoutPressed(v);
