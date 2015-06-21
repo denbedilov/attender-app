@@ -100,8 +100,18 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
-        progress = ProgressDialog.show(this, "Loading Events",
-                "Please wait..", true);
+        progress = new ProgressDialog(this);
+        progress.setMessage("Loading events, please wait...");
+        progress.setCancelable(false);
+        progress.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                // may we close this page, or dialog only?????
+//                finish();
+            }
+        });
+        progress.show();
 
         context = this;
 
