@@ -24,7 +24,7 @@ AttenderBL bl;
         TextView register_lbl=(TextView)findViewById(R.id.register_lbl);
         Typeface tf = Typeface.createFromAsset(getAssets(),"LeagueGothic-CondensedRegular.otf");
         Typeface tf2 = Typeface.createFromAsset(getAssets(),"Oswald-Regular.ttf");
-        register_lbl.setTypeface(tf);
+//        register_lbl.setTypeface(tf);
         TextView name_lbl=(TextView)findViewById(R.id.name_lbl);
         TextView lastName_lbl=(TextView)findViewById(R.id.lName_lbl);
         TextView email_lbl=(TextView)findViewById(R.id.email_lbl);

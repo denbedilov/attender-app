@@ -20,10 +20,10 @@
 
         <TextView
             android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:text="Registration"
-            android:textStyle="bold|italic"
-            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textSize="40sp"
             android:textColor="#ffffffff"
             android:gravity="center_vertical|center_horizontal"
             android:layout_weight="1"
@@ -42,15 +42,20 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:paddingTop="50dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:background="#ffffffff">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="top"
                 android:orientation="horizontal"
                 android:id="@+id/nameLine"
-                android:padding="15dp">
+                android:paddingTop="30dp"
+                android:paddingBottom="25dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -58,7 +63,7 @@
                     android:text="First Name:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textColor="#ff0d00a1"
                     android:id="@+id/name_lbl">
                 </TextView>
@@ -71,12 +76,12 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:layout_height="fill_parent"
+                        android:layout_height="0dp"
                         android:layout_width="fill_parent"
                         android:id="@+id/name_text"
                         android:gravity="center_vertical|left"
                         android:layout_weight="5"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
@@ -89,7 +94,10 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/LastNameLine"
-                android:padding="15dp">
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -97,7 +105,7 @@
                     android:text="Last Name:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textColor="#ff0d00a1"
                     android:id="@+id/lName_lbl">
                 </TextView>
@@ -110,12 +118,12 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:layout_height="fill_parent"
+                        android:layout_height="0dp"
                         android:layout_width="fill_parent"
                         android:id="@+id/LastName_text"
                         android:layout_weight="5"
                         android:gravity="center_vertical|left"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
@@ -128,7 +136,10 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/EmailLine"
-                android:padding="15dp">
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -136,7 +147,7 @@
                     android:text="Email:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textColor="#ff0d00a1"
                     android:id="@+id/email_lbl">
                 </TextView>
@@ -150,14 +161,14 @@
 
 
                     <EditText
-                        android:layout_height="fill_parent"
+                        android:layout_height="0dp"
                         android:layout_width="fill_parent"
                         android:inputType="textEmailAddress"
                         android:ems="10"
                         android:id="@+id/email_txt"
                         android:layout_weight="3"
                         android:gravity="center_vertical|left"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
@@ -171,9 +182,10 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:id="@+id/passwordLine"
-                android:paddingLeft="15dp"
-                android:paddingTop="15dp"
-                android:paddingRight="15dp">
+                android:paddingTop="25dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingBottom="25dp">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -181,7 +193,7 @@
                     android:text="Password:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textColor="#ff0d00a1"
                     android:id="@+id/password_lbl">
                 </TextView>
@@ -194,14 +206,14 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:layout_height="fill_parent"
+                        android:layout_height="0dp"
                         android:layout_width="fill_parent"
                         android:inputType="textPassword"
                         android:ems="10"
                         android:id="@+id/password_txt"
                         android:layout_weight="3"
                         android:gravity="center_vertical|left"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
@@ -212,19 +224,20 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_horizontal|bottom"
                 android:orientation="horizontal"
                 android:id="@+id/confirmPasswordLine"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
+                android:paddingTop="30dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
 
                 <TextView
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
-                    android:text="Confirm Password:"
+                    android:text="Confirm:"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textColor="#ff0d00a1"
                     android:id="@+id/confPass_lbl">
                 </TextView>
@@ -237,14 +250,14 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:layout_height="fill_parent"
+                        android:layout_height="0dp"
                         android:layout_width="fill_parent"
                         android:inputType="textPassword"
                         android:ems="10"
                         android:id="@+id/confPass_txt"
                         android:layout_weight="3"
                         android:gravity="left|center_vertical|bottom"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:singleLine="true"
                         android:textColor="#fc000000">
                     </EditText>
@@ -261,11 +274,12 @@
         android:gravity="center"
         android:id="@+id/footerLine"
         android:layout_weight="5"
-        android:paddingTop="5dp">
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
