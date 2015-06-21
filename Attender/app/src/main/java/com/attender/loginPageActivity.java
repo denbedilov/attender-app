@@ -83,7 +83,7 @@ public class loginPageActivity extends Activity implements
         TextView Login_TV = (TextView) findViewById(R.id.login_txt);
         TextView Or_TV = (TextView) findViewById(R.id.or_txt);
 
-        Typeface tf = Typeface.createFromAsset(getAssets(), "chlorinar.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "Caviar_Dreams_Bold.ttf");
         Typeface tf1 = Typeface.createFromAsset(getAssets(), "cooprblk.ttf");
 
         Main_TV.setTypeface(tf1);
