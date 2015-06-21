@@ -10,16 +10,14 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.Profile;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.plus.Plus;
 
 /**
  * Created by Shai on 17/05/2015.
  */
+
 public class MainPageActivity  extends Activity
 {
     private AppData appData;
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,7 +48,7 @@ public class MainPageActivity  extends Activity
                 userName.setText(Profile.getCurrentProfile().getName());
                 break;
             case "guest":
-                userName.setText("guest");
+                userName.setText("Guest");
                 LinearLayout layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
                 layout.setAlpha(.5f);
                 layout = (LinearLayout) findViewById(R.id.Chat_Layout);
