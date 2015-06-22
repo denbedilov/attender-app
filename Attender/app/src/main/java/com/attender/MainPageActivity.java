@@ -28,8 +28,6 @@ public class MainPageActivity  extends Activity
 
         AttenderBL bl = new AttenderBL();
 
-//        printDialog(getIntent().getStringExtra("user_type"));
-
         TextView userName = (TextView)findViewById(R.id.User_Name_textView);
 
         //=============================  Global AppData Set  ======================================
@@ -141,6 +139,7 @@ public class MainPageActivity  extends Activity
     protected void onPause() {
 
         super.onPause();
+        finish();
         //add reading from app Data
 
     }
