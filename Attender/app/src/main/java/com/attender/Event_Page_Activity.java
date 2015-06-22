@@ -74,21 +74,23 @@ public class Event_Page_Activity extends Activity {
             Button attendeesBTN=(Button)findViewById(R.id.attendees_cmd);
             Button chatBTN=(Button)findViewById(R.id.chat_cmd);
             chatBTN.setAlpha(.5f);
-            chatBTN.setEnabled(false);
             attendeesBTN.setAlpha(.5f);
             attendSwitch.setAlpha(.5f);
-            attendSwitch.setEnabled(false);
 
         }
         attendSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                 bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked);
-                appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
-                if(isChecked)
-                    printToastDialog("Attending");
-                else
-                    printToastDialog("Unattending");
+                if(appData.get_loginType().compareTo("guest")==0)
+                    printToastDialog("For Logged In User Only");
+                else {
+                    bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked);
+                    appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
+                    if (isChecked)
+                        printToastDialog("Attending");
+                    else
+                        printToastDialog("Unattending");
+                }
 
 
             }
@@ -215,7 +217,7 @@ public class Event_Page_Activity extends Activity {
     public void chatPressed(View v)
     {
         if(appData.get_loginType().compareTo("guest")==0)
-            printToastDialog("Please log in");
+            printToastDialog("For logged-in User Only");
         else{
         Switch attendSwitch = (Switch) findViewById(R.id.attend_switch);
         if (attendSwitch.isChecked() == true) {
