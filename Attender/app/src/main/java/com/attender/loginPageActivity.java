@@ -67,6 +67,10 @@ public class loginPageActivity extends Activity implements
     /* saved data */
     AppData appData;
 
+    //Class Vars
+    TextView Main_TV, Sub_TV, Login_TV, Or_TV;
+    Typeface tf, tf1;
+    LoginButton loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -79,13 +83,13 @@ public class loginPageActivity extends Activity implements
         getSavedData();
 
         //=============================================== Text Style =======================
-        TextView Main_TV = (TextView) findViewById(R.id.attender_main_txt);
-        TextView Sub_TV = (TextView) findViewById(R.id.attender_sub_txt);
-        TextView Login_TV = (TextView) findViewById(R.id.login_txt);
-        TextView Or_TV = (TextView) findViewById(R.id.or_txt);
+        Main_TV = (TextView) findViewById(R.id.attender_main_txt);
+        Sub_TV = (TextView) findViewById(R.id.attender_sub_txt);
+        Login_TV = (TextView) findViewById(R.id.login_txt);
+        Or_TV = (TextView) findViewById(R.id.or_txt);
 
-        Typeface tf = Typeface.createFromAsset(getAssets(), "Caviar_Dreams_Bold.ttf");
-        Typeface tf1 = Typeface.createFromAsset(getAssets(), "cooprblk.ttf");
+        tf = Typeface.createFromAsset(getAssets(), "Caviar_Dreams_Bold.ttf");
+        tf1 = Typeface.createFromAsset(getAssets(), "cooprblk.ttf");
 
         Main_TV.setTypeface(tf1);
         Sub_TV.setTypeface(tf);
@@ -112,7 +116,7 @@ public class loginPageActivity extends Activity implements
         callbackManager = CallbackManager.Factory.create();
 
         // =================================== facebook login ==================================
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("user_friends", "email");
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -415,7 +419,7 @@ public class loginPageActivity extends Activity implements
                     }
                     break;
                 case "google":
-                    intent.putExtra("name",appData.get_firstName() + " " + appData.get_lastName());
+                    intent.putExtra("name", appData.get_firstName() + " " + appData.get_lastName());
                     startActivity(intent);
                     break;
                 case "server":
