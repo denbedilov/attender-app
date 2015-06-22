@@ -45,11 +45,11 @@ public class AttendeesAdapter extends ArrayAdapter<String>
             
             //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("friend");
             //at.
-            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_icon_ff);
+            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_friend);
         }
-        else
-            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_icon_not_ff);
-            //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("not friend");
+//        else
+//            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_icon_not_ff);
+//            //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("not friend");
 
         return view;
     }

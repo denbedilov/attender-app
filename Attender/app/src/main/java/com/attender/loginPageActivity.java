@@ -11,6 +11,7 @@ import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.UserDictionary;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -308,16 +309,18 @@ public class loginPageActivity extends Activity implements
                     String tok;
                     @Override
                     public void run() {
+                        String firstname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName());
+                        String lastname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
                         tok = bl.googleLogin(
-                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
-                                Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
+                                firstname,
+                                lastname,
                                 Plus.AccountApi.getAccountName(mGoogleApiClient)
-                        );
+                                        );
                         status = getStatus(tok);
                         if (status == 200) {
                             appData.resetData("google", tok.substring(3));
-                            intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
-                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+                            intent.putExtra("name", capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName()) + " " +
+                                    capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName()));
 
                         } else {
                             appData.resetData("guest", null);
@@ -335,6 +338,9 @@ public class loginPageActivity extends Activity implements
                 }).start();
             }
         }
+    }
+    private String capitalize(final String line) {
+        return Character.toUpperCase(line.charAt(0)) + line.substring(1);
     }
 
     private int getStatus(String tok) {
@@ -400,8 +406,8 @@ public class loginPageActivity extends Activity implements
                                 appData.resetData("google", token.substring(3));
                                 Intent intent = new Intent(this, MainPageActivity.class);
                                 intent.putExtra("user_type", appData.get_loginType());
-                                intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName() + " " +
-                                        Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+                                intent.putExtra("name", capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName()) + " " +
+                                        capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName()));
                                 startActivity(intent);
                             } else {
                                 appData.resetData("guest", null);

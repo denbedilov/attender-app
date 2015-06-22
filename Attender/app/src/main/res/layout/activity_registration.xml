@@ -80,6 +80,7 @@
                         android:layout_width="fill_parent"
                         android:id="@+id/name_text"
                         android:gravity="center_vertical|left"
+                        android:inputType="textCapWords"
                         android:layout_weight="5"
                         android:textSize="15sp"
                         android:singleLine="true"
@@ -106,6 +107,7 @@
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25sp"
+                    android:onClick="checkUpper"
                     android:textColor="#ff0d00a1"
                     android:id="@+id/lName_lbl">
                 </TextView>
@@ -123,6 +125,7 @@
                         android:id="@+id/LastName_text"
                         android:layout_weight="5"
                         android:gravity="center_vertical|left"
+                        android:inputType="text|textCapSentences"
                         android:textSize="15sp"
                         android:singleLine="true"
                         android:textColor="#fc000000">
