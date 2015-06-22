@@ -1,4 +1,5 @@
 package com.attender;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,20 +16,26 @@ import com.facebook.Profile;
  * Created by Shai on 17/05/2015.
  */
 
-public class MainPageActivity  extends Activity
-{
+public class MainPageActivity extends Activity {
     private AppData appData;
+    private TextView userName;
+    private Button logoutUser;
+    private AttenderBL bl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
     {
         super.onCreate(savedInstanceState);
+        loadPage();
+    }
+
+    private void loadPage() {
         setContentView(R.layout.activity_main_page);
 
-        AttenderBL bl = new AttenderBL();
+        bl = new AttenderBL();
 
-        TextView userName = (TextView)findViewById(R.id.User_Name_textView);
+        userName = (TextView) findViewById(R.id.User_Name_textView);
 
         //=============================  Global AppData Set  ======================================
 
@@ -36,12 +43,15 @@ public class MainPageActivity  extends Activity
         appData = (AppData) getApplicationContext();
 
 
-                Button logoutUser= (Button)findViewById(R.id.user_logout_cmd);
+        logoutUser = (Button) findViewById(R.id.user_logout_cmd);
 
 
         //====================== Main Page login handle ======================================
-        switch(appData.get_loginType())
-        {
+        loadUserName(userName);
+    }
+
+    private void loadUserName(TextView userName) {
+        switch (appData.get_loginType()) {
             case "facebook":
                 userName.setText(Profile.getCurrentProfile().getName());
                 break;
@@ -64,10 +74,9 @@ public class MainPageActivity  extends Activity
                 break;
         }
     }
-    public void logOutMethod(View v)
-    {
-        switch (appData.get_loginType())
-        {
+
+    public void logOutMethod(View v) {
+        switch (appData.get_loginType()) {
             case "google":
                 userLogoutPressed(v);
                 break;
@@ -80,26 +89,26 @@ public class MainPageActivity  extends Activity
                 break;
         }
     }
-    public void userLogoutPressed(View v)
-    {
-        Intent intent = new Intent(this,loginPageActivity.class);
+
+    public void userLogoutPressed(View v) {
+        Intent intent = new Intent(this, loginPageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish(); // call this to finish the current activity
         appData.resetData("guest", null);
     }
-    public void chat_pressed(View v)
-    {
-        if(appData.get_loginType().compareTo("guest")==0)
+
+    public void chat_pressed(View v) {
+        if (appData.get_loginType().compareTo("guest") == 0)
             printDialog("Login to use");
         else {
             Intent intent = new Intent(this, ChatPageActivity.class);
             startActivity(intent);
         }
     }
-    public void event_calendar_pressed(View v)
-    {
-        if(appData.get_loginType().compareTo("guest")==0)
+
+    public void event_calendar_pressed(View v) {
+        if (appData.get_loginType().compareTo("guest") == 0)
             printDialog("Login to use");
         else {
             Intent intent = new Intent(this, CalendarPageActivity.class);
@@ -107,24 +116,21 @@ public class MainPageActivity  extends Activity
         }
     }
 
-    public void search_event_pressed(View v)
-    {
-        Intent intent=new Intent(this,searchEventActivity.class);
+    public void search_event_pressed(View v) {
+        Intent intent = new Intent(this, searchEventActivity.class);
         startActivity(intent);
     }
 
     /* back button canceling */
     @Override
-    public void onBackPressed()
-    {
-        if(appData.get_loginType().compareTo("guest")==0)
+    public void onBackPressed() {
+        if (appData.get_loginType().compareTo("guest") == 0)
             finish();
         else
             printDialog("press logout button to exit");
     }
 
-    private void printDialog(String message)
-    {
+    private void printDialog(String message) {
         Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
         toast.show();
     }
@@ -132,15 +138,13 @@ public class MainPageActivity  extends Activity
     @Override
     protected void onResume() {
         super.onResume();
-//add saving to appData
+        loadPage();
     }
 
     @Override
     protected void onPause() {
 
         super.onPause();
-        finish();
         //add reading from app Data
-
     }
 }

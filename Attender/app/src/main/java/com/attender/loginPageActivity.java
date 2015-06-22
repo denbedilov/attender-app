@@ -71,7 +71,7 @@ public class loginPageActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        reActivateData();
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
         bl = new AttenderBL();
@@ -148,7 +148,7 @@ public class loginPageActivity extends Activity implements
 
         }
         //  ======== login check ========
-        onResume();
+        reActivateData();
     }
 
     private void getSavedData() {
@@ -355,7 +355,7 @@ public class loginPageActivity extends Activity implements
             }
         }
     }
-    private String capitalize(final String line) {
+    protected static String capitalize(final String line) {
         return Character.toUpperCase(line.charAt(0)) + line.substring(1);
     }
 
@@ -384,7 +384,11 @@ public class loginPageActivity extends Activity implements
     @Override
     protected void onResume() {
         super.onResume();
+        reActivateData();
+    }
 
+    public  void reActivateData()
+    {
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
 
@@ -442,21 +446,16 @@ public class loginPageActivity extends Activity implements
             }
         }
     }
-
     @Override
     public void onResult(People.LoadPeopleResult peopleData) {
         if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
             PersonBuffer personBuffer = peopleData.getPersonBuffer();
             try {
                 int count = personBuffer.getCount();
-                for (int i = 0; i < count; i++) {
-//                    Log.d("GoogleNameTAG", "Display name: " + personBuffer.get(i).getDisplayName());
-                }
+
             } finally {
                 personBuffer.close();
             }
-        } else {
-//            Log.e("GoogleNameTAG", "Error requesting visible circles: " + peopleData.getStatus());
         }
     }
 
@@ -466,27 +465,6 @@ public class loginPageActivity extends Activity implements
         startActivity(intent);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_login_page, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     private void printDialog(String message) {
         Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
