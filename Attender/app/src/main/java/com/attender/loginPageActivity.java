@@ -59,7 +59,7 @@ public class loginPageActivity extends Activity implements
     private GoogleApiClient mGoogleApiClient;
     private boolean mIntentInProgress;
     private static ProgressDialog progress;
-    private boolean cancelGoogle=true;
+    private boolean cancelGoogle = true;
     /* facebook login callback */
     CallbackManager callbackManager;
     AttenderBL bl;
@@ -71,7 +71,6 @@ public class loginPageActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        reActivateData();
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
         bl = new AttenderBL();
@@ -308,8 +307,8 @@ public class loginPageActivity extends Activity implements
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                 if(mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting())
-                     cancelGoogle=false;
+                    if (mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting())
+                        cancelGoogle = false;
                 }
             });
             progress.show();
@@ -320,26 +319,28 @@ public class loginPageActivity extends Activity implements
 
                     int status;
                     String tok;
+
                     @Override
                     public void run() {
                         String firstname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName());
                         String lastname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+                        appData.set_firstName(firstname);
+                        appData.set_lastName(lastname);
                         tok = bl.googleLogin(
                                 firstname,
                                 lastname,
                                 Plus.AccountApi.getAccountName(mGoogleApiClient)
-                                        );
+                        );
                         status = getStatus(tok);
                         if (status == 200) {
                             appData.resetData("google", tok.substring(3));
                             intent.putExtra("name", capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName()) + " " +
                                     capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName()));
-
                         } else {
                             appData.resetData("guest", null);
                             printDialog("google login failed");
                         }
-                        if(cancelGoogle)
+                        if (cancelGoogle)
                             startActivity(intent);
                         else
                             mGoogleApiClient.disconnect();
@@ -355,6 +356,7 @@ public class loginPageActivity extends Activity implements
             }
         }
     }
+
     protected static String capitalize(final String line) {
         return Character.toUpperCase(line.charAt(0)) + line.substring(1);
     }
@@ -387,8 +389,7 @@ public class loginPageActivity extends Activity implements
         reActivateData();
     }
 
-    public  void reActivateData()
-    {
+    public void reActivateData() {
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
 
@@ -396,6 +397,7 @@ public class loginPageActivity extends Activity implements
         if (appData.get_loginType().compareTo("guest") != 0 && appData.get_loginType().compareTo("") != 0) {
             String token;
             int status;
+            Intent intent = new Intent(this, MainPageActivity.class);
             /* get token from own server */
             switch (appData.get_loginType()) {
                 case "facebook":
@@ -404,7 +406,6 @@ public class loginPageActivity extends Activity implements
                     status = getStatus(token);
                     if (status == 200) {
                         appData.resetData(appData.get_loginType(), token.substring(3));
-                        Intent intent = new Intent(this, MainPageActivity.class);
                         intent.putExtra("user_type", appData.get_loginType());
                         startActivity(intent);
                     } else {
@@ -414,30 +415,11 @@ public class loginPageActivity extends Activity implements
                     }
                     break;
                 case "google":
-                    if (mGoogleApiClient.isConnected())
-                        if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-                            token = bl.googleLogin(
-                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName(),
-                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName(),
-                                    Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getNickname() + "@gmail.com"
-                            );
-                            status = getStatus(token);
-                            if (status == 200) {
-                                appData.resetData("google", token.substring(3));
-                                Intent intent = new Intent(this, MainPageActivity.class);
-                                intent.putExtra("user_type", appData.get_loginType());
-                                intent.putExtra("name", capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName()) + " " +
-                                        capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName()));
-                                startActivity(intent);
-                            } else {
-                                appData.resetData("guest", null);
-                                printDialog("google login failed: " + status);
-                            }
-                        }
+                    intent.putExtra("name",appData.get_firstName() + " " + appData.get_lastName());
+                    startActivity(intent);
                     break;
                 case "server":
                     appData.resetData(appData.get_loginType(), appData.get_userToken());
-                    Intent intent = new Intent(this, MainPageActivity.class);
                     intent.putExtra("user_type", appData.get_loginType());
                     startActivity(intent);
                     break;
@@ -446,6 +428,7 @@ public class loginPageActivity extends Activity implements
             }
         }
     }
+
     @Override
     public void onResult(People.LoadPeopleResult peopleData) {
         if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {

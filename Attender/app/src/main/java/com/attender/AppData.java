@@ -16,6 +16,8 @@ public class AppData extends Application
     private AttenderBL       _attenderBL;
     private String           _userToken;
     private String           _loginType;
+    private String          _firstName;
+    private String          _lastName;
 
     public AppData()
     {
@@ -49,6 +51,7 @@ public class AppData extends Application
         /* saving token and loginType */
         saveData("loginType", _loginType);
     }
+
 
     /* saving into the internal storage 'data' in 'fileName'  */
     private void saveData(String fileName, String data) {
@@ -98,4 +101,12 @@ public class AppData extends Application
     {
         this._loginType = _loginType;
     }
+    public void set_firstName(String firstName) {
+        this._firstName = firstName;
+    }
+    public String get_firstName(){return this._firstName;}
+    public void set_lastName(String lastName) {
+        this._lastName = lastName;
+    }
+    public String get_lastName(){return this._lastName;}
 }
