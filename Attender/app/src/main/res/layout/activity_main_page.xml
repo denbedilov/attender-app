@@ -115,7 +115,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="2"
-        android:baselineAligned="false"
         >
 
         <LinearLayout
@@ -158,10 +157,8 @@
             android:layout_height="fill_parent"
             android:background="@drawable/button_pressed_main_page"
             android:layout_weight="1"
-            android:layout_gravity="right"
             android:paddingBottom="25dp"
             android:id="@+id/Chat_Layout"
-            android:nestedScrollingEnabled="false"
             android:onClick="chat_pressed">
 
             <TextView
