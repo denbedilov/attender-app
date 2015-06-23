@@ -3,6 +3,7 @@ package com.attender;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.content.pm.PackageInfo;
@@ -58,7 +59,7 @@ public class loginPageActivity extends Activity implements
     private GoogleApiClient mGoogleApiClient;
     private boolean mIntentInProgress;
     private static ProgressDialog progress;
-
+    private boolean cancelGoogle=true;
     /* facebook login callback */
     CallbackManager callbackManager;
     AttenderBL bl;
@@ -299,8 +300,20 @@ public class loginPageActivity extends Activity implements
         final Intent intent = new Intent(this, MainPageActivity.class);
 
         if (mGoogleApiClient.isConnected()) {
-            progress = ProgressDialog.show(this, "Login in Progress",
-                    "Please wait..", true);
+
+            progress = new ProgressDialog(this);
+            progress.setMessage("Logging in, please wait...");
+            progress.setCancelable(false);
+            progress.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                 if(mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting())
+                     cancelGoogle=false;
+                }
+            });
+            progress.show();
+
 
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 new Thread(new Runnable() {
@@ -326,8 +339,11 @@ public class loginPageActivity extends Activity implements
                             appData.resetData("guest", null);
                             printDialog("google login failed");
                         }
-                        startActivity(intent);
-                        
+                        if(cancelGoogle)
+                            startActivity(intent);
+                        else
+                            mGoogleApiClient.disconnect();
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
