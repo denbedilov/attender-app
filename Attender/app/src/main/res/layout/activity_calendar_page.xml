@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:text="Calendar"
+        android:text="@string/calendar"
         android:layout_gravity="center"
         android:background="#005a5a5a"
         android:textColor="#ffffffff"
@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#ff000000"
-                android:text="mounth"
+                android:text="@string/month"
                 android:textSize="25sp"
                 android:textIsSelectable="false" />
 
@@ -73,7 +73,7 @@
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#ff000000"
-                android:text="2015"
+                android:text="@string/year2015"
                 android:textSize="25sp"
                 android:textIsSelectable="false" />
 
@@ -97,7 +97,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Sun"
+                android:text="@string/sunday"
                 android:id="@+id/textView15"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Mon"
+                android:text="@string/monday"
                 android:id="@+id/textView16"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
@@ -113,7 +113,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Tue"
+                android:text="@string/tuesday"
                 android:id="@+id/textView10"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
@@ -121,7 +121,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Wed"
+                android:text="@string/wednesday"
                 android:id="@+id/textView11"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
@@ -129,7 +129,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Thu"
+                android:text="@string/thursday"
                 android:id="@+id/textView12"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
@@ -137,7 +137,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Fri"
+                android:text="@string/friday"
                 android:id="@+id/textView13"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
@@ -145,7 +145,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Sat"
+                android:text="@string/saturday"
                 android:id="@+id/textView14"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal" />
@@ -189,7 +189,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="35dp"
-        android:text="Events list"
+        android:text="@string/eventlist"
         android:layout_gravity="center"
         android:background="#005a5a5a"
         android:textColor="#ffffffff"
@@ -202,7 +202,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/calendarView"
         android:orientation="vertical"
         android:layout_weight="1"
         android:paddingTop="10dp">
@@ -210,7 +209,7 @@
         <ListView
             android:id="@+id/listView"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="1">
         </ListView>
     </LinearLayout>
