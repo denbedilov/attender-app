@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -85,8 +84,6 @@ AttenderBL bl;
         setContentView(R.layout.registration_scroll);
         bl=new AttenderBL();
         appData = (AppData) getApplicationContext();
-        TextView register_lbl=(TextView)findViewById(R.id.register_lbl);
-        Typeface tf = Typeface.createFromAsset(getAssets(),"LeagueGothic-CondensedRegular.otf");
         Typeface tf2 = Typeface.createFromAsset(getAssets(),"Oswald-Regular.ttf");
         TextView name_lbl=(TextView)findViewById(R.id.name_lbl);
         TextView lastName_lbl=(TextView)findViewById(R.id.lName_lbl);
@@ -132,7 +129,7 @@ AttenderBL bl;
                 status = response.substring(0, 3);
                 if (status.compareTo("200") == 0) {
                     userToken = response.substring(3, response.length());
-                    appData.resetData("server", userToken);
+                    appData.resetData("server", userToken, bl.getUserDetails(userToken));
                     Intent intent = new Intent(this, MainPageActivity.class);
                     startActivity(intent);
                 } else {

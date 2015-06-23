@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
@@ -12,12 +13,11 @@ import java.util.ArrayList;
  */
 public class AppData extends Application
 {
-    private ArrayList<Event> _userEventList;
-    private AttenderBL       _attenderBL;
-    private String           _userToken;
-    private String           _loginType;
-    private String          _firstName;
-    private String          _lastName;
+    private ArrayList<Event>    _userEventList;
+    private AttenderBL          _attenderBL;
+    private String              _userToken;
+    private String              _loginType;
+    private String              _userName;
 
     public AppData()
     {
@@ -27,7 +27,7 @@ public class AppData extends Application
         set_loginType("");
     }
 
-    public void resetData(String loginType,String token)
+    public void resetData(String loginType,String token, String userName)
     {
         if(token == null)
             loginType = "guest";
@@ -40,11 +40,14 @@ public class AppData extends Application
             case "guest":
                 set_attenderBL(null);
                 set_userEventList(null);
+                set_userName(null);
                 break;
             default:
                 set_attenderBL(new AttenderBL());
+                set_userName(userName);
                 set_userEventList(_attenderBL.getUserEvents(_userToken));
                 saveData("token", _userToken);
+                saveData("userName", _userName);
                 break;
         }
 
@@ -66,21 +69,44 @@ public class AppData extends Application
         }
     }
 
-    //If tok is not null, return true, else return false
+    public void getSavedData() {
+        String loginType = getData("loginType");
+        if (loginType != null)
+            resetData(loginType, getData("token"),getData("userName"));
+        else
+            resetData("guest", null, null);
+    }
+
+    private String getData(String fileName) {
+        FileInputStream inputStream;
+        String retData = null;
+        try {
+            inputStream = openFileInput(fileName);
+            while (inputStream.available() > 0) {
+                retData += (char) inputStream.read();
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (retData != null)
+            return retData.substring(4, retData.length());
+        else
+            return null;
+    }
+
 
     public ArrayList<Event> get_userEventList() {
         return _userEventList;
     }
 
-    public void set_userEventList(ArrayList<Event> _userEventList) {
-        this._userEventList = _userEventList;
-    }
+    public void set_userEventList(ArrayList<Event> _userEventList) { this._userEventList = _userEventList; }
 
     public AttenderBL get_attenderBL() {
         return _attenderBL;
     }
 
-    public void set_attenderBL(AttenderBL _attenderBL) {
+    private void set_attenderBL(AttenderBL _attenderBL) {
         this._attenderBL = _attenderBL;
     }
 
@@ -88,7 +114,7 @@ public class AppData extends Application
         return _userToken;
     }
 
-    public void set_userToken(String _userToken) {
+    private void set_userToken(String _userToken) {
         this._userToken = _userToken;
     }
 
@@ -97,16 +123,14 @@ public class AppData extends Application
         return _loginType;
     }
 
-    public void set_loginType(String _loginType)
+    private void set_loginType(String _loginType)
     {
         this._loginType = _loginType;
     }
-    public void set_firstName(String firstName) {
-        this._firstName = firstName;
+
+    private void set_userName(String userName) {
+        this._userName = userName;
     }
-    public String get_firstName(){return this._firstName;}
-    public void set_lastName(String lastName) {
-        this._lastName = lastName;
-    }
-    public String get_lastName(){return this._lastName;}
+
+    public String get_userName(){return this._userName;}
 }

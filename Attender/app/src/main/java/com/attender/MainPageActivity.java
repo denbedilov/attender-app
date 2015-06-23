@@ -19,7 +19,6 @@ import com.facebook.Profile;
 public class MainPageActivity extends Activity {
     private AppData appData;
     private TextView userName;
-    private Button logoutUser;
     private AttenderBL bl;
 
     @Override
@@ -43,7 +42,7 @@ public class MainPageActivity extends Activity {
         appData = (AppData) getApplicationContext();
 
 
-        logoutUser = (Button) findViewById(R.id.user_logout_cmd);
+        Button logoutUser = (Button) findViewById(R.id.user_logout_cmd);
 
 
         //====================== Main Page login handle ======================================
@@ -51,29 +50,11 @@ public class MainPageActivity extends Activity {
     }
 
     private void loadUserName(TextView userName) {
-        switch (appData.get_loginType()) {
-            case "facebook":
-                userName.setText(Profile.getCurrentProfile().getName());
-                break;
-            case "guest":
-                userName.setText("Guest");
-                LinearLayout layout = (LinearLayout) findViewById(R.id.Event_Calendar_Layout);
-                layout.setAlpha(.5f);
-                layout = (LinearLayout) findViewById(R.id.Chat_Layout);
-                layout.setAlpha(.5f);
-                logoutUser.setVisibility(View.INVISIBLE);
-                break;
-            case "server":
-                userName.setText(bl.getUserDetails(appData.get_userToken()));
-                break;
-            case "google":
-                userName.setText(getIntent().getStringExtra("name"));
-                break;
-            default:
-                userName.setText(getIntent().getStringExtra("name"));
-                break;
-        }
-    }
+       if(appData.get_loginType().equals("guest"))
+           userName.setText("Guest");
+        else
+           userName.setText(appData.get_userName());
+       }
 
     public void logOutMethod(View v) {
         switch (appData.get_loginType()) {
@@ -95,7 +76,7 @@ public class MainPageActivity extends Activity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish(); // call this to finish the current activity
-        appData.resetData("guest", null);
+        appData.resetData("guest", null, null);
     }
 
     public void chat_pressed(View v) {
