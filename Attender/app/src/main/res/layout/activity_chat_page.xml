@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Events Chat Room"
+        android:text="@string/eventsChatRoom"
         android:layout_gravity="center_horizontal"
         android:textSize="35dp"
         android:textColor="#ffffffff"
@@ -22,14 +22,13 @@
     </TextView>
 
     <Space
-        android:layout_width="20px"
-        android:layout_height="20px" />
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/events_cmd"
         android:orientation="vertical">
 
         <ListView
