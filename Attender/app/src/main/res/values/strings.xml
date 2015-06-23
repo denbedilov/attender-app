@@ -40,6 +40,11 @@
     <string name="logout">Logout</string>
     <string name="eventCalendar">Event Calendar</string>
     <string name="chat_MainPage">Chat</string>
+    <string name="firstName_registration">First Name:</string>
+    <string name="lastName_registration">Last Name:</string>
+    <string name="confirm_registration">Confirm:</string>
+
+
 
 
 
