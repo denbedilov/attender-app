@@ -1,11 +1,16 @@
 package com.attender;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -26,10 +31,10 @@ public class AttendeesPage extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
         bl = new AttenderBL();
-        ArrayList<Attendee> attendees;
+        final ArrayList<Attendee> attendees;
         if(appData.get_loginType().compareTo("facebook")==0)
         {
-            attendees=bl.getAttendees(getIntent().getStringExtra("eventId"),appData.get_userToken(), AccessToken.getCurrentAccessToken().getToken());
+            attendees = bl.getAttendees(getIntent().getStringExtra("eventId"),appData.get_userToken(), AccessToken.getCurrentAccessToken().getToken());
         }
         else
             attendees = bl.getAttendees(getIntent().getStringExtra("eventId"), appData.get_userToken(),null);
@@ -37,9 +42,29 @@ public class AttendeesPage extends Activity {
         {
             AttendeesAdapter attendeesAdapter = new AttendeesAdapter(this, attendees);
             listView.setAdapter(attendeesAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Attendee at = attendees.get(position);
+                    Intent facebookIntent = getOpenFacebookIntent(getApplicationContext(), at.get_id());
+                    startActivity(facebookIntent);
+                }
+        });
         }
     }
 
+    public static Intent getOpenFacebookIntent(Context context, String userId) {
+
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.facebook.katana", 0); //Checks if FB is even installed.
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("fb://profile/" + userId)); //Trys to make intent with FB's URI
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.facebook.com/sentiapps")); //catches and opens a url to the desired page
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

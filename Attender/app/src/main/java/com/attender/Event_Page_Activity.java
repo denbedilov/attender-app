@@ -52,10 +52,6 @@ public class Event_Page_Activity extends Activity {
         else
             attendees=bl.getAttendees(currEvent.getId(),appData.get_userToken(),null);
 
-        //appData.resetData(AccessToken.getCurrentAccessToken().getToken());
-
-
-
           //==========  ATTEND   =====================
 
         Switch attendSwitch = (Switch) findViewById(R.id.attend_switch);

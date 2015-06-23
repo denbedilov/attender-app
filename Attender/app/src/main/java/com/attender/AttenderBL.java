@@ -197,10 +197,7 @@ public class AttenderBL
         Attendee at;
         ArrayList<Attendee> attendees=new ArrayList<Attendee>();
         JSONArray attendeesJson;
-        if(fbToken==null)
-              attendeesJson=dal.getAttendees(eventId,token,null);
-        else
-            attendeesJson=dal.getAttendees(eventId,token,fbToken);
+        attendeesJson = dal.getAttendees(eventId,token,fbToken);
         if(attendeesJson == null)
             return null;
         try
@@ -209,29 +206,25 @@ public class AttenderBL
             for (int i = 0; i < attendeesJson.length(); i++)
             {
                 JSONObject childJSONObject = attendeesJson.getJSONObject(i);
-
-                // change city name NULL and Unknown
                 boolean ff = false;
-                if(childJSONObject.getString("fbf").compareTo("true") == 0)
+                if(childJSONObject.getString("fbf").equals("true"))
                     ff = true;
                 at= new Attendee(
-                            childJSONObject.getString("name"),
-                            childJSONObject.getString("lastname"),
-                            ff
+                        childJSONObject.getString("name"),
+                        childJSONObject.getString("lastname"),
+                        ff//,
+                        /* TODO: revert after server support it*/
+                        //childJSONObject.getString("id")
+                        ,""
                     );
-
                     attendees.add(at);
                 }
-
         }
         catch(JSONException e)
         {
             attendees = null;
         }
-
         return attendees;
-
-
     }
     public String getUserDetails(String token)
     {

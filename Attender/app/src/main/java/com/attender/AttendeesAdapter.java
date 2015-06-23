@@ -47,13 +47,12 @@ public class AttendeesAdapter extends ArrayAdapter<String>
 
         Attendee at = getAttendee(position);
         ((TextView) view.findViewById(R.id.attendee_name)).setText(at.get_firstName() + " " + at.get_lastName());
-        if(at.is_ff())
-        {
             ImageView image = (ImageView) view.findViewById(R.id.user_image);
             URL url;
             try {
-
-                url = new URL("https://graph.facebook.com/"+ AccessToken.getCurrentAccessToken().getUserId() +"/picture?type=large");
+                //        TODO: CHANGE USER ID TO REAL FROM HARDCODED!!!!!!!!!!!!!
+                url = new URL("https://graph.facebook.com/"+ AccessToken.getCurrentAccessToken().getUserId() //at.get_id()
+                        +"/picture?type=square");
                 HttpURLConnection conn;
                 conn = (HttpURLConnection) url.openConnection();
                 HttpURLConnection.setFollowRedirects(true);
@@ -73,7 +72,7 @@ public class AttendeesAdapter extends ArrayAdapter<String>
             //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("friend");
             //at.
             ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_friend);
-        }
+
 //        else
 //            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_icon_not_ff);
 //            //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("not friend");
