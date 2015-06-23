@@ -28,7 +28,9 @@ public class ChatActivity extends ListActivity {
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
     private ChatListAdapter mChatListAdapter;
-
+    private AppData appData;
+    private AttenderBL bl;
+    private EditText inputText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +38,8 @@ public class ChatActivity extends ListActivity {
         Firebase.setAndroidContext(this);
 
         // Make sure we have a mUsername
-        AppData appData = (AppData) getApplicationContext();
-        AttenderBL bl = new AttenderBL();
+        appData = (AppData) getApplicationContext();
+        bl = new AttenderBL();
         mUsername = bl.getUserDetails(appData.get_userToken());
 
         setTitle("Chatting as " + mUsername);
@@ -46,7 +48,7 @@ public class ChatActivity extends ListActivity {
         mFirebaseRef = new Firebase(FIREBASE_URL + getIntent().getStringExtra("EventID")).child("chat");
 
         // Setup our input methods. Enter key on the keyboard or pushing the send button
-        EditText inputText = (EditText) findViewById(R.id.messageInput);
+        inputText = (EditText) findViewById(R.id.messageInput);
         inputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -74,13 +76,6 @@ public class ChatActivity extends ListActivity {
         // Tell our list adapter that we only want 50 messages at a time
         mChatListAdapter = new ChatListAdapter(mFirebaseRef.limit(50), this, R.layout.chat_message, mUsername);
         listView.setAdapter(mChatListAdapter);
-        mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-                listView.setSelection(mChatListAdapter.getCount() - 1);
-            }
-        });
 
         // Finally, a little indication of connection status
         mConnectedListener = mFirebaseRef.getRoot().child(".info/connected").addValueEventListener(new ValueEventListener() {
@@ -92,6 +87,13 @@ public class ChatActivity extends ListActivity {
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 // No-op
+            }
+        });
+        mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                listView.setSelection(mChatListAdapter.getCount() - 1);
             }
         });
     }

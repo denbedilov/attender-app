@@ -26,6 +26,33 @@
     <string name="host">Host</string>
     <string name="url">Event URL</string>
     <string name="description">Description:</string>
+    <string name="attender">ATTENDER</string>
+    <string name="subtext">Search. Attend. Meet.</string>
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="login">Login</string>
+    <string name="loginLabel">Login:</string>
+    <string name="googleBTNtxt">Google</string>
+    <string name="userLoginBTNtxt">User Login</string>
+    <string name="or_LoginPage">OR:</string>
+    <string name="guest_mainpage">Connect As Guest</string>
+    <string name="createAccount">Create An Account</string>
+    <string name="logout">Logout</string>
+    <string name="eventCalendar">Event Calendar</string>
+    <string name="chat_MainPage">Chat</string>
+    <string name="firstName_registration">First Name:</string>
+    <string name="lastName_registration">Last Name:</string>
+    <string name="confirm_registration">Confirm:</string>
+
+
+
+
+
+
+
+
+
+
 
 
 

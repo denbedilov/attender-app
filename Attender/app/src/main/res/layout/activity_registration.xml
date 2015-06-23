@@ -14,7 +14,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#ff292929">
 
@@ -42,7 +42,7 @@
                 <TextView
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
-                    android:text="First Name:"
+                    android:text="@string/firstName_registration"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25sp"
@@ -85,11 +85,10 @@
                 <TextView
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
-                    android:text="Last Name:"
+                    android:text="@string/lastName_registration"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25sp"
-                    android:onClick="checkUpper"
                     android:textColor="#ff0d00a1"
                     android:id="@+id/lName_lbl">
                 </TextView>
@@ -129,7 +128,7 @@
                 <TextView
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
-                    android:text="Email:"
+                    android:text="@string/email"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25sp"
@@ -175,7 +174,7 @@
                 <TextView
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
-                    android:text="Password:"
+                    android:text="@string/password"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25sp"
@@ -220,7 +219,7 @@
                 <TextView
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
-                    android:text="Confirm:"
+                    android:text="@string/confirm_registration"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
                     android:textSize="25sp"

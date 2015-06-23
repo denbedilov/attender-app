@@ -64,7 +64,7 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
             {
                 Random rnd = new Random();
                 color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-                while(map.containsValue(color))
+                while(map.containsValue(color)&&color==Color.RED)
                 {
                     color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 }

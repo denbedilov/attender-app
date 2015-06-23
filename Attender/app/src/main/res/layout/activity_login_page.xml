@@ -24,7 +24,7 @@
             android:gravity="center_horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="ATTENDER"
+            android:text="@string/attender"
             android:id="@+id/attender_main_txt"
             android:textColor="#ff0d00a1"
             android:textSize="45sp"
@@ -40,7 +40,7 @@
             android:gravity="center_horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="search. attend. meet."
+            android:text="@string/subtext"
             android:id="@+id/attender_sub_txt"
             android:textColor="#ff8c8c8c"
             android:textSize="30sp" />
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Email:"
+                android:text="@string/email"
                 android:id="@+id/email_lbl"
                 android:layout_weight="2"
                 android:textColor="#ff757575"
@@ -92,7 +92,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Password:"
+                android:text="@string/password"
                 android:id="@+id/password_lbl"
                 android:layout_weight="2"
                 android:textColor="#ff757575"
@@ -121,7 +121,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/login"
                 android:id="@+id/login_cmd"
                 android:gravity="center"
                 android:onClick="loginPressed"
@@ -152,7 +152,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Login:"
+                    android:text="@string/loginLabel"
                     android:id="@+id/login_txt"
                     android:textColor="#ff757575"
                     android:textSize="20dp"
@@ -176,9 +176,9 @@
                     android:id="@+id/google_plus">
                     <com.google.android.gms.common.SignInButton
                         android:id="@+id/sign_in_button"
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:text="Google"
+                        android:text="@string/googleBTNtxt"
                         android:layout_weight="1"
                         android:background="@drawable/button_pressed"
                         />
@@ -200,7 +200,7 @@
                     <com.facebook.login.widget.LoginButton
                         android:id="@+id/login_button"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
                         android:background="@drawable/button_pressed"
                         android:layout_weight="1"
@@ -226,9 +226,9 @@
                     >
 
                     <Button
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:text="User Login"
+                        android:text="@string/userLoginBTNtxt"
                         android:onClick="userLoginPressed"
                         android:id="@+id/userLogin_cmd"
                         android:nestedScrollingEnabled="false"
@@ -263,7 +263,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OR:"
+                    android:text="@string/or_LoginPage"
                     android:id="@+id/or_txt"
                     android:textColor="#ff757575"
                     android:textSize="20dp"
@@ -286,9 +286,9 @@
                     android:background="#ff00c2bc">
 
                     <Button
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:text="Connect as Guest"
+                        android:text="@string/guest_mainpage"
                         android:onClick="confirmPressed"
                         android:id="@+id/button"
                         android:layout_weight="1"
@@ -311,9 +311,9 @@
                     >
 
                     <Button
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:text="Register"
+                        android:text="@string/createAccount"
                         android:onClick="registerPressed"
                         android:id="@+id/register_cmd"
                         android:layout_weight="1"
