@@ -13,7 +13,7 @@
         android:layout_height="fill_parent">
 
         <Space
-            android:layout_width="20px"
+            android:layout_width="20dp"
             android:layout_height="1sp" />
 
         <LinearLayout
@@ -27,7 +27,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Attend"
+                android:text="@string/attend"
                 android:textStyle="bold|italic"
                 android:layout_weight="1"
                 android:id="@+id/details_TEX"
@@ -44,9 +44,7 @@
                 <Switch
                     android:id="@+id/attend_switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"/>
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -67,7 +65,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Date"
+                android:text="@string/date"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
                 android:textSize="15dp">
@@ -81,9 +79,8 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_height="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_width="fill_parent"
-                    android:text="1/11/1111"
                     android:id="@+id/date_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
@@ -108,7 +105,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="City"
+                android:text="@string/city"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
                 android:textSize="15dp">
@@ -122,9 +119,8 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_height="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_width="fill_parent"
-                    android:text="city name"
                     android:id="@+id/cityName_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
@@ -149,7 +145,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Address"
+                android:text="@string/address"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
                 android:textSize="15dp">
@@ -163,9 +159,8 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_height="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_width="fill_parent"
-                    android:text="address name"
                     android:id="@+id/address_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
@@ -191,7 +186,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Time"
+                android:text="@string/time"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
                 android:textSize="15dp">
@@ -205,9 +200,8 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_height="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_width="fill_parent"
-                    android:text="00:00"
                     android:id="@+id/time_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
@@ -232,7 +226,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Price"
+                android:text="@string/price"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
                 android:textSize="15dp">
@@ -248,7 +242,6 @@
                 <TextView
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
-                    android:text="Free"
                     android:id="@+id/price_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
@@ -273,7 +266,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Attending"
+                android:text="@string/attending"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
                 android:textSize="15dp">
@@ -287,9 +280,8 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_height="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_width="fill_parent"
-                    android:text="80/100"
                     android:id="@+id/attending_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
@@ -314,7 +306,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Host"
+                android:text="@string/host"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
                 android:textSize="15dp">
@@ -330,7 +322,6 @@
                 <TextView
                     android:layout_height="fill_parent"
                     android:layout_width="fill_parent"
-                    android:text="Host name"
                     android:id="@+id/host_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
@@ -355,7 +346,7 @@
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:text="Event URL"
+                android:text="@string/url"
                 android:textStyle="bold|italic"
                 android:layout_weight="3"
                 android:textSize="15dp">
@@ -369,9 +360,8 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_height="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_width="fill_parent"
-                    android:text="URL"
                     android:id="@+id/url_lbl"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
@@ -386,7 +376,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:id="@+id/descriptionLine"
@@ -397,7 +387,7 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
-                android:text="Description:"
+                android:text="@string/description"
                 android:textStyle="bold|italic"
                 android:textSize="15dp"
                 android:id="@+id/desc_txt"
@@ -411,10 +401,9 @@
                 android:gravity="left">
 
                 <TextView
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_width="fill_parent"
                     android:scrollbars = "none"
-                    android:text="Description"
                     android:id="@+id/description_lbl"
                     android:layout_weight="1"
                     android:onClick="onInfoClick"
