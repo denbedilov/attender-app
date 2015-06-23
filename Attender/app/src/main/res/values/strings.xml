@@ -3,6 +3,41 @@
     <string name="facebook_app_id">683953828381840</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="attendees">Attendees</string>
+    <string name="calendar">Calendar</string>
+    <string name="month">month</string>
+    <string name="year2015">2015</string>
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="eventlist">Event List</string>
+    <string name="eventsChatRoom">Events Chat Room</string>
+    <string name="attend">Attend</string>
+    <string name="date">Date</string>
+    <string name="city">City</string>
+    <string name="address">Address</string>
+    <string name="time">Time</string>
+    <string name="price">Price</string>
+    <string name="attending">Attending</string>
+    <string name="host">Host</string>
+    <string name="url">Event URL</string>
+    <string name="description">Description:</string>
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="title_activity_event_page_activity">EventPageActivity</string>
     <string name="title_activity_event__page_">Event_Page_Activity</string>
     <string name="title_activity_calendar_page">CalendarPageActivity</string>
@@ -10,7 +45,6 @@
     <string name="title_activity_event_list_page">EventListPageActivity</string>
     <string name="title_activity_chat_page">Chat</string>
     <string name="title_activity_main_page">MainPage</string>
-    <string name="description"><u><b><i>Click For Description</i></b></u></string>
     <string name="description_close"><u><b><i>Close Description</i></b></u></string>
     <string name="hello">Hello,</string>
     <string name="search_event">Search Event</string>
