@@ -28,10 +28,10 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Hello,"
+                    android:text="@string/hello"
                     android:id="@+id/Hello_textView"
                     android:layout_weight="4"
                     android:textColor="#ffffffff"
@@ -46,10 +46,9 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="SHAI PE&apos;ER!"
                     android:id="@+id/User_Name_textView"
                     android:layout_weight="2"
                     android:textColor="#ffffffff"
@@ -90,7 +89,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Search Event"
+            android:text="@string/search_event"
             android:id="@+id/Search_textView"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"

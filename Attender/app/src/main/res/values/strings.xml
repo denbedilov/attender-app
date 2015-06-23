@@ -12,7 +12,8 @@
     <string name="title_activity_main_page">MainPage</string>
     <string name="description"><u><b><i>Click For Description</i></b></u></string>
     <string name="description_close"><u><b><i>Close Description</i></b></u></string>
-
+    <string name="hello">Hello,</string>
+    <string name="search_event">Search Event</string>
     <string-array name="type_array">
         <item>TYPE&#160;&#160;&#160;&#160;&#160;&#160;&#160;▼</item>
         <item>Career&amp;Business</item>
