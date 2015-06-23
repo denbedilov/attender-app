@@ -43,6 +43,9 @@
     <string name="firstName_registration">First Name:</string>
     <string name="lastName_registration">Last Name:</string>
     <string name="confirm_registration">Confirm:</string>
+    <string name="openChat_eventPage">Open Chat</string>
+    <string name="attendees_eventPage">Attendees:</string>
+
 
 
 

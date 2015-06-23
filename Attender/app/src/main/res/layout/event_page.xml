@@ -15,8 +15,7 @@
 
         <TextView
             android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:text="Event Name"
+            android:layout_width="0dp"
             android:textStyle="bold|italic"
             android:textSize="20dp"
             android:id="@+id/evName_lbl"
@@ -28,7 +27,7 @@
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <include  layout="@layout/activity_event__page_" android:id="@+id/id" />
@@ -56,7 +55,7 @@
             <Button
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
-                android:text="Open Chat"
+                android:text="@string/openChat_eventPage"
                 android:id="@+id/chat_cmd"
                 android:background="@drawable/button_pressed_main_page"
                 android:textColor="#fff6f4ff"
@@ -77,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:textColor="#fff6f4ff"
-                android:text="Attendees"
+                android:text="@string/attendees_eventPage"
                 android:id="@+id/attendees_cmd"
                 android:onClick="attendeesPressed"
                 android:background="@drawable/button_pressed_main_page" />
