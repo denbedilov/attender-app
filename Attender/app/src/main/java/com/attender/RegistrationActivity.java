@@ -20,6 +20,7 @@ AttenderBL bl;
     AppData appData;
     Boolean error = false;
     EditText firstName, lastName,email,password,confPass;
+    DialogAdapter dialog;
     TextWatcher tw = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,6 +108,7 @@ AttenderBL bl;
         lastName.addTextChangedListener(tw);
         password.addTextChangedListener(tw);
         confPass.addTextChangedListener(tw);
+        dialog = new DialogAdapter();
     }
     public void confirmPressed(View v)
     {
@@ -171,7 +173,6 @@ AttenderBL bl;
     }
     private void printToastDialog(String message)
     {
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-        toast.show();
+        dialog.printDialog(message, getApplicationContext());
     }
 }

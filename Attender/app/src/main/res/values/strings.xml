@@ -44,7 +44,7 @@
     <string name="lastName_registration">Last Name:</string>
     <string name="confirm_registration">Confirm:</string>
     <string name="openChat_eventPage">Open Chat</string>
-    <string name="attendees_eventPage">Attendees:</string>
+    <string name="attendees_eventPage">Attendees</string>
     <string name="confirm">Confirm</string>
 
 
@@ -119,6 +119,7 @@
     <string name="title_activity_calendar_grid_cell">CalendarGridCell</string>
     <string name="title_activity_registration">RegistrationActivity</string>
     <string name="title_activity_user_login">UserLoginActivity</string>
+    <string name="title_activity_dialog_adapter">DialogAdapter</string>
 
 
 </resources>

@@ -68,6 +68,7 @@ public class loginPageActivity extends Activity implements
     TextView Main_TV, Sub_TV, Login_TV, Or_TV;
     Typeface tf, tf1;
     LoginButton loginButton;
+    DialogAdapter dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -75,7 +76,7 @@ public class loginPageActivity extends Activity implements
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_page);
         bl = new AttenderBL();
-
+        dialog = new DialogAdapter();
         /* ================== getting saved in file user data ================== */
         appData = (AppData) getApplicationContext();
         appData.getSavedData();
@@ -377,7 +378,6 @@ public class loginPageActivity extends Activity implements
 
 
     private void printDialog(String message) {
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-        toast.show();
+      dialog.printDialog(message, getApplicationContext());
     }
 }

@@ -27,7 +27,7 @@ public class CalendarPageActivity extends Activity
     private Calendar _calendar;
     private int releventDaysGap;
     private ArrayList<Event> eventList;
-
+    private DialogAdapter dialog;
     
     //==============================================================================================
     //                               onCreate
@@ -42,7 +42,7 @@ public class CalendarPageActivity extends Activity
         super.onCreate(savedInstanceState);
         userEvents = new ArrayList<Event>();
         setContentView(R.layout.activity_calendar_page);
-
+        dialog = new DialogAdapter();
         //=========================  Global AppData Set  ===========================================
 
         // Calling Application class (see application tag in AndroidManifest.xml)
@@ -322,8 +322,7 @@ public class CalendarPageActivity extends Activity
 
     private void printToastDialog(String message)
     {
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-        toast.show();
+       dialog.printDialog(message, getApplicationContext());
     }
 
 }

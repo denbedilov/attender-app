@@ -3,6 +3,7 @@ package com.attender;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,6 +21,8 @@ public class MainPageActivity extends Activity {
     private AppData appData;
     private TextView userName;
     private AttenderBL bl;
+    private Toast toast;
+    private DialogAdapter dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,7 +34,7 @@ public class MainPageActivity extends Activity {
 
     private void loadPage() {
         setContentView(R.layout.activity_main_page);
-
+        dialog = new DialogAdapter();
         bl = new AttenderBL();
 
         userName = (TextView) findViewById(R.id.User_Name_textView);
@@ -50,11 +53,11 @@ public class MainPageActivity extends Activity {
     }
 
     private void loadUserName(TextView userName) {
-       if(appData.get_loginType().equals("guest"))
-           userName.setText("Guest");
+        if (appData.get_loginType().equals("guest"))
+            userName.setText("Guest");
         else
-           userName.setText(appData.get_userName());
-       }
+            userName.setText(appData.get_userName());
+    }
 
     public void logOutMethod(View v) {
         switch (appData.get_loginType()) {
@@ -81,7 +84,7 @@ public class MainPageActivity extends Activity {
 
     public void chat_pressed(View v) {
         if (appData.get_loginType().compareTo("guest") == 0)
-            printDialog("Login to use");
+            dialog.printDialog("Login to use", getApplicationContext());
         else {
             Intent intent = new Intent(this, ChatPageActivity.class);
             startActivity(intent);
@@ -90,7 +93,7 @@ public class MainPageActivity extends Activity {
 
     public void event_calendar_pressed(View v) {
         if (appData.get_loginType().compareTo("guest") == 0)
-            printDialog("Login to use");
+            dialog.printDialog("Login to use", getApplicationContext());
         else {
             Intent intent = new Intent(this, CalendarPageActivity.class);
             startActivity(intent);
@@ -108,12 +111,9 @@ public class MainPageActivity extends Activity {
         if (appData.get_loginType().compareTo("guest") == 0)
             finish();
         else
-            printDialog("press logout button to exit");
-    }
-
-    private void printDialog(String message) {
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-        toast.show();
+        {
+            dialog.printDialog("press logout button to exit", getApplicationContext());
+        }
     }
 
     @Override

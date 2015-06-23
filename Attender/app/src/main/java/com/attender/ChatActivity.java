@@ -116,5 +116,4 @@ public class ChatActivity extends ListActivity {
             inputText.setText("");
         }
     }
-
 }

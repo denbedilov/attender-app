@@ -32,7 +32,7 @@ public class ChatPageActivity extends Activity
         if(events == null)
         {
             listView.setAdapter(null);
-            printAlertDialog("No events to show!");
+            printAlertDialog("No Rooms");
         }
         else {
             EventAdapter adapter = new EventAdapter(this, events);

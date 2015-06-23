@@ -33,6 +33,7 @@ public class Event_Page_Activity extends Activity {
     private ArrayList<Event> userEvents;
     private ArrayList<Attendee> attendees;
     private  AppData appData;
+    private DialogAdapter dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,6 +41,7 @@ public class Event_Page_Activity extends Activity {
         super.onCreate(savedInstanceState);
         TextView tv;
         boolean checkedFlag=false;
+        dialog = new DialogAdapter();
         bl = new AttenderBL();
         userEvents=new ArrayList<Event>();
         setContentView(R.layout.event_page);
@@ -265,7 +267,6 @@ public class Event_Page_Activity extends Activity {
 
     private void printToastDialog(String message)
     {
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
-        toast.show();
+        dialog.printDialog(message, getApplicationContext());
     }
 }
