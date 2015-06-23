@@ -125,7 +125,11 @@ public class loginPageActivity extends Activity implements
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
-                appData.resetData("facebook", AccessToken.getCurrentAccessToken().getToken(), Profile.getCurrentProfile().getName());
+                String token = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().getToken());
+                appData.resetData("facebook", token.substring(3), Profile.getCurrentProfile().getName());
+                printDialog(AccessToken.getCurrentAccessToken().getUserId());
+                printDialog(AccessToken.getCurrentAccessToken().getToken());
+                printDialog(token);
             }
 
             @Override
@@ -139,6 +143,11 @@ public class loginPageActivity extends Activity implements
             }
         });
 
+//        printKeyHash();
+    }
+
+
+    private void printKeyHash() {
         //  ======== Print out the key hash "KeyHash" at log ========
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
@@ -152,9 +161,7 @@ public class loginPageActivity extends Activity implements
         } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException ignored) {
 
         }
-        //  ======== login check ========
     }
-
 
     @Override
     protected void onStart() {
@@ -363,7 +370,6 @@ public class loginPageActivity extends Activity implements
             PersonBuffer personBuffer = peopleData.getPersonBuffer();
             try {
                 int count = personBuffer.getCount();
-
             } finally {
                 personBuffer.close();
             }
