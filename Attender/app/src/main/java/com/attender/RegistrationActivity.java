@@ -67,7 +67,7 @@ AttenderBL bl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.registration_scroll);
         bl=new AttenderBL();
         appData = (AppData) getApplicationContext();
         TextView register_lbl=(TextView)findViewById(R.id.register_lbl);
