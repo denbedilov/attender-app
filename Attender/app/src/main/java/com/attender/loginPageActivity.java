@@ -2,7 +2,6 @@ package com.attender;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
@@ -12,7 +11,6 @@ import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.provider.UserDictionary;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +25,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -41,7 +38,6 @@ import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.PersonBuffer;
 
-import java.io.FileInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -127,9 +123,6 @@ public class loginPageActivity extends Activity implements
                 AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
                 String token = bl.loginToServer(AccessToken.getCurrentAccessToken().getUserId(), AccessToken.getCurrentAccessToken().getToken());
                 appData.resetData("facebook", token.substring(3), Profile.getCurrentProfile().getName());
-                printDialog(AccessToken.getCurrentAccessToken().getUserId());
-                printDialog(AccessToken.getCurrentAccessToken().getToken());
-                printDialog(token);
             }
 
             @Override
