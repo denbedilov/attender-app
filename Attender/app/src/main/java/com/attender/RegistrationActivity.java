@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,28 +41,42 @@ AttenderBL bl;
                 firstName.setError("No Spaces Allowed");
                 error = true;
             }
+            else if (!firstName.getText().toString().isEmpty()&&Character.isLowerCase(firstName.getText().toString().charAt(0))) {
+                firstName.setError("First Letter Must Be Upper Cased");
+                error = true;
+            }
             if (lastName.getText().toString().contains(" ")) {
                 lastName.setError("No Spaces Allowed");
                 error = true;
             }
-            if (!firstName.getText().toString().isEmpty()&&Character.isLowerCase(firstName.getText().toString().charAt(0))) {
-                firstName.setError("First Letter Must Be Upper Cased");
-                error = true;
-            }
-            if (!lastName.getText().toString().isEmpty()&&Character.isLowerCase(lastName.getText().toString().charAt(0)) ){
+            else if (!lastName.getText().toString().isEmpty()&&Character.isLowerCase(lastName.getText().toString().charAt(0)) ){
                 lastName.setError("First Letter Must Be Upper Cased");
                 error = true;
             }
-            if (password.getText().toString().contains(" ")) {
+
+            if (password.getText().length()<6)
+            {
+                password.setError("At Least 6 Characters Are Required");
+            }
+            else if (password.getText().toString().contains(" ")) {
                 password.setError("No Spaces Allowed");
             }
             if (confPass.getText().toString().contains(" ")) {
                 confPass.setError("No Spaces Allowed");
                 error = true;
             }
+            else if (password.getText().length()>0&&password.getText().toString().compareTo(confPass.getText().toString()) != 0)
+                confPass.setError("passwords not match");
+            if(!isValidEmail(email.getText().toString()))
+            {
+                email.setError("Not a Valid Mail Address");
+            }
         }
         private String capitalize(final String line) {
             return Character.toUpperCase(line.charAt(0)) + line.substring(1);
+        }
+        public final boolean isValidEmail(CharSequence target) {
+            return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     };
     @Override
@@ -108,8 +123,7 @@ AttenderBL bl;
                     confPass.getText().toString().compareTo("") == 0) {
                 printToastDialog("All Fields Must Be Filled");
                 this.onStart();
-            } else if (password.getText().toString().compareTo(confPass.getText().toString()) != 0)
-                printToastDialog("passwords not match");
+            }
             else {
                 response = bl.userRegistration(firstName.getText().toString(),
                         lastName.getText().toString(),
