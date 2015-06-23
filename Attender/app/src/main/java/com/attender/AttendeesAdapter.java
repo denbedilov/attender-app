@@ -1,6 +1,8 @@
 package com.attender;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.Profile;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -40,9 +49,27 @@ public class AttendeesAdapter extends ArrayAdapter<String>
         ((TextView) view.findViewById(R.id.attendee_name)).setText(at.get_firstName() + " " + at.get_lastName());
         if(at.is_ff())
         {
+            ImageView image = (ImageView) view.findViewById(R.id.user_image);
+            URL url;
+            try {
+
+                url = new URL("https://graph.facebook.com/"+ AccessToken.getCurrentAccessToken().getUserId() +"/picture?type=large");
+                HttpURLConnection conn;
+                conn = (HttpURLConnection) url.openConnection();
+                HttpURLConnection.setFollowRedirects(true);
+                conn.setInstanceFollowRedirects(true);
+                Bitmap fbpicture;
+                fbpicture = BitmapFactory.decodeStream(conn.getInputStream());
+                image.setImageBitmap(fbpicture);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             ImageView iv = new ImageView(getApplicationContext());
             iv.setImageResource(R.drawable.facebook_friend);
-            
+
             //((TextView) view.findViewById(R.id.attendee_is_friend)).setText("friend");
             //at.
             ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_friend);
