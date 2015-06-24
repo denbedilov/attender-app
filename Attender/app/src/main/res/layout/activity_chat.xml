@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
 
     tools:context=".MainActivity"
-    android:background="@drawable/unnamed">
+    android:background="@drawable/chatnabk2">
 
     <LinearLayout
         android:orientation="vertical"
