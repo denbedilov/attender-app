@@ -54,12 +54,14 @@ public class loginPageActivity extends Activity implements
 
     /* Request code used to invoke sign in user interactions. */
     private static final int RC_SIGN_IN = 0;
-
     /* Client used to interact with Google APIs. */
     private GoogleApiClient mGoogleApiClient;
-    private boolean mIntentInProgress;
+    private boolean mIntentInProgress = false;
+
+    private boolean mShouldResolve = false;
+    private boolean mIsResolving = false;
     private static ProgressDialog progress;
-    private boolean cancelGoogle = true;
+    private boolean cancelGoogle = false;
     /* facebook login callback */
     CallbackManager callbackManager;
     AttenderBL bl;
@@ -72,6 +74,7 @@ public class loginPageActivity extends Activity implements
     Typeface tf, tf1;
     LoginButton loginButton;
     DialogAdapter dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -173,12 +176,21 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onClick(View v) {
-        if(isNetworkAvailable())
-            mGoogleApiClient.connect();
-        else
+        if (isNetworkAvailable()) {
+            if (v.getId() == R.id.sign_in_button) {
+                onSignInClicked();
+            }
+        } else
             printDialog("Check your internet connection");
     }
-
+    private void onSignOutClicked() {
+        // Clear the default account so that GoogleApiClient will not automatically
+        // connect in the future.
+        if (mGoogleApiClient.isConnected()) {
+            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+        }
+    }
     //===========================================user register==========================================
     public void registerPressed(View v) {
         Intent intent = new Intent(this, RegistrationActivity.class);
@@ -186,7 +198,15 @@ public class loginPageActivity extends Activity implements
     }
 
     boolean pressed = false;
+    private void onSignInClicked() {
+        // User clicked the sign-in button, so begin the sign-in process and automatically
+        // attempt to resolve any errors that occur.
+        mShouldResolve = true;
+        mGoogleApiClient.connect();
 
+        // Show a message to the user that we are signing in.
+//        mStatusTextView.setText(R.string.signing_in);
+    }
     //=======================================user login=================================================
     public void userLoginPressed(View v) {
         LinearLayout emailLayout = (LinearLayout) findViewById(R.id.email_layout);
@@ -254,15 +274,21 @@ public class loginPageActivity extends Activity implements
     //======================================================================================================
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        if (!mIntentInProgress && result.hasResolution()) {
-            try {
-                mIntentInProgress = true;
-                result.startResolutionForResult(this, RC_SIGN_IN);
-            } catch (SendIntentException e) {
-                // The intent was canceled before it was sent.  Return to the default
-                // state and attempt to connect to get an updated ConnectionResult.
-                mIntentInProgress = false;
-                mGoogleApiClient.connect();
+
+
+        if (!mIntentInProgress && mShouldResolve) {
+            if (result.hasResolution()) {
+
+
+                try {
+                    result.startResolutionForResult(this, RC_SIGN_IN);
+                    mIsResolving = true;
+                } catch (SendIntentException e) {
+                    // The intent was canceled before it was sent.  Return to the default
+                    // state and attempt to connect to get an updated ConnectionResult.
+                    mIsResolving = false;
+                    mGoogleApiClient.connect();
+                }
             }
         }
     }
@@ -270,7 +296,7 @@ public class loginPageActivity extends Activity implements
     @Override
     public void onConnected(Bundle connectionHint) {
         final Intent intent = new Intent(this, MainPageActivity.class);
-
+        mShouldResolve = false;
         if (mGoogleApiClient.isConnected()) {
 
             progress = new ProgressDialog(this);
@@ -281,7 +307,7 @@ public class loginPageActivity extends Activity implements
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     if (mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting())
-                        cancelGoogle = false;
+                        cancelGoogle = true;
                 }
             });
             progress.show();
@@ -311,7 +337,7 @@ public class loginPageActivity extends Activity implements
                             appData.resetData("guest", null, null);
                             printDialog("google login failed");
                         }
-                        if (cancelGoogle)
+                        if (!cancelGoogle)
                             startActivity(intent);
                         else
                             mGoogleApiClient.disconnect();
@@ -344,13 +370,16 @@ public class loginPageActivity extends Activity implements
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+//        callbackManager.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
+            if (resultCode != RESULT_OK) {
+                mShouldResolve = false;
+            }
             mIntentInProgress = false;
 
-            if (!mGoogleApiClient.isConnected()) {
+//            if (!mGoogleApiClient.isConnected()) {
                 mGoogleApiClient.reconnect();
-            }
+//            }
         }
     }
 
@@ -358,12 +387,12 @@ public class loginPageActivity extends Activity implements
     protected void onResume() {
         super.onResume();
         appData.getSavedData();
-        if(!appData.get_loginType().equals("guest"))
-        {
+        if (!appData.get_loginType().equals("guest")) {
             Intent intent = new Intent(this, MainPageActivity.class);
             startActivity(intent);
         }
     }
+
     @Override
     public void onResult(People.LoadPeopleResult peopleData) {
 //        if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
@@ -384,7 +413,7 @@ public class loginPageActivity extends Activity implements
 
 
     private void printDialog(String message) {
-      dialog.printDialog(message, getApplicationContext());
+        dialog.printDialog(message, getApplicationContext());
     }
 
     /* checking internet connection */
