@@ -65,10 +65,14 @@ public class AttendeesAdapter extends ArrayAdapter<String>
                 e.printStackTrace();
             }
 
-        if(at.is_ff()) {
-            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_friend);
+        if(at.is_ff())
+        {
+            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.facebook_icon_ff);
         }
-
+        else
+        {
+            ((ImageView) view.findViewById(R.id.attendee_ff)).setImageResource(R.drawable.blank);
+        }
         return view;
     }
 
