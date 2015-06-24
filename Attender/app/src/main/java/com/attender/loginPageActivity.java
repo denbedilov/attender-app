@@ -2,6 +2,7 @@ package com.attender;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
@@ -9,6 +10,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Base64;
@@ -170,7 +173,10 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onClick(View v) {
-        mGoogleApiClient.connect();
+        if(isNetworkAvailable())
+            mGoogleApiClient.connect();
+        else
+            printDialog("Check your internet connection");
     }
 
     //===========================================user register==========================================
@@ -379,5 +385,13 @@ public class loginPageActivity extends Activity implements
 
     private void printDialog(String message) {
       dialog.printDialog(message, getApplicationContext());
+    }
+
+    /* checking internet connection */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
