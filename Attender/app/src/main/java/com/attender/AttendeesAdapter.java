@@ -50,8 +50,7 @@ public class AttendeesAdapter extends ArrayAdapter<String>
             ImageView image = (ImageView) view.findViewById(R.id.user_image);
             URL url;
             try {
-                //        TODO: CHANGE USER ID TO REAL FROM HARDCODED!!!!!!!!!!!!!
-                url = new URL("https://graph.facebook.com/"+ AccessToken.getCurrentAccessToken().getUserId() //at.get_id()
+                url = new URL("https://graph.facebook.com/"+ at.get_id()
                         +"/picture?type=square");
                 HttpURLConnection conn;
                 conn = (HttpURLConnection) url.openConnection();

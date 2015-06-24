@@ -212,10 +212,8 @@ public class AttenderBL
                 at= new Attendee(
                         childJSONObject.getString("name"),
                         childJSONObject.getString("lastname"),
-                        ff//,
-                        /* TODO: revert after server support it*/
-                        //childJSONObject.getString("id")
-                        ,""
+                        ff,
+                        childJSONObject.getString("id")
                     );
                     attendees.add(at);
                 }
