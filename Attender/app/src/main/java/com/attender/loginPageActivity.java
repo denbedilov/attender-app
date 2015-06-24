@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -28,15 +27,16 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.CommonStatusCodes;
+//import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
-import com.google.android.gms.plus.model.people.PersonBuffer;
+//import com.google.android.gms.plus.model.people.PersonBuffer;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -137,7 +137,7 @@ public class loginPageActivity extends Activity implements
             }
         });
 
-//        printKeyHash();
+        printKeyHash();
     }
 
 
@@ -252,7 +252,6 @@ public class loginPageActivity extends Activity implements
             try {
                 mIntentInProgress = true;
                 result.startResolutionForResult(this, RC_SIGN_IN);
-                printDialog("Check Your Internet Connection");
             } catch (SendIntentException e) {
                 // The intent was canceled before it was sent.  Return to the default
                 // state and attempt to connect to get an updated ConnectionResult.
@@ -361,14 +360,14 @@ public class loginPageActivity extends Activity implements
     }
     @Override
     public void onResult(People.LoadPeopleResult peopleData) {
-        if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
-            PersonBuffer personBuffer = peopleData.getPersonBuffer();
-            try {
-                int count = personBuffer.getCount();
-            } finally {
-                personBuffer.close();
-            }
-        }
+//        if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
+//            PersonBuffer personBuffer = peopleData.getPersonBuffer();
+//            try {
+//                int count = personBuffer.getCount();
+//            } finally {
+//                personBuffer.close();
+//            }
+//        }
     }
 
     public void confirmPressed(View v) {
