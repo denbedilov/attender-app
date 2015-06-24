@@ -43,6 +43,7 @@ public class MainPageActivity extends Activity {
 
         // Calling Application class (see application tag in AndroidManifest.xml)
         appData = (AppData) getApplicationContext();
+        appData.getSavedData();
 
 
         Button logoutUser = (Button) findViewById(R.id.user_logout_cmd);
