@@ -46,8 +46,10 @@ public class AttendeesPage extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
                     Attendee at = attendees.get(position);
-                    Intent facebookIntent = getOpenFacebookIntent(getApplicationContext(), at.get_id());
-                    startActivity(facebookIntent);
+                    if(at.is_ff()) {
+                        Intent facebookIntent = getOpenFacebookIntent(getApplicationContext(), at.get_id());
+                        startActivity(facebookIntent);
+                    }
                 }
         });
         }
