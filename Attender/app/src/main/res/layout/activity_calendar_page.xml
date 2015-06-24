@@ -90,7 +90,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="15dp"
+            android:layout_height="17sp"
             android:layout_gravity="center"
             android:id="@+id/Days">
 
