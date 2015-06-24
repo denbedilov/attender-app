@@ -239,7 +239,7 @@ public class loginPageActivity extends Activity implements
                         this.onStart();
                         break;
                     default:
-                        printDialog("connection error");
+                        printDialog("Check Your Internet Connection");
                 }
             }
         }
@@ -252,6 +252,7 @@ public class loginPageActivity extends Activity implements
             try {
                 mIntentInProgress = true;
                 result.startResolutionForResult(this, RC_SIGN_IN);
+                printDialog("Check Your Internet Connection");
             } catch (SendIntentException e) {
                 // The intent was canceled before it was sent.  Return to the default
                 // state and attempt to connect to get an updated ConnectionResult.
