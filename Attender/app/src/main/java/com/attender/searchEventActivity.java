@@ -2,20 +2,14 @@ package com.attender;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -154,42 +148,14 @@ public class searchEventActivity extends Activity
             }
         }).start();
     }
-    public void itemPressed(View v)
-    {
-        Intent intent=new Intent(this,Event_Page_Activity.class);
-        startActivity(intent);
-    }
-    public void explorePressed(View v)
-    {
-        Intent intent=new Intent(this,CalendarPageActivity.class);
-        startActivity(intent);
-    }
+
+
     public void chatPressed(View v)
     {
         Intent intent=new Intent(this,ChatPageActivity.class);
         startActivity(intent);
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_search_event, menu);
-//        return true;
-//    }
-//
-//        @Override
-//        public boolean onOptionsItemSelected(MenuItem item) {
-//            // Handle action bar item clicks here. The action bar will
-//            // automatically handle clicks on the Home/Up button, so long
-//            // as you specify a parent activity in AndroidManifest.xml.
-//            int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+
     private void printAlertDialog(String message)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
