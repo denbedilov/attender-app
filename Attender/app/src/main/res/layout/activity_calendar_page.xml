@@ -12,7 +12,7 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:text="@string/calendar"
         android:layout_gravity="center"
         android:background="#005a5a5a"
@@ -20,13 +20,12 @@
         android:textSize="35dp"
         android:id="@+id/Calendar_TXT"
         android:gravity="center_horizontal"
-        android:paddingTop="10dp" />
+        android:paddingBottom="5dp" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="#cfffffff"
         android:layout_gravity="left"
         android:id="@+id/Calendar_Layout">
@@ -182,29 +181,25 @@
 
     </LinearLayout>
 
-    <Space
-        android:layout_width="fill_parent"
-        android:layout_height="15dp" />
-
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:text="@string/eventlist"
         android:layout_gravity="center"
         android:background="#005a5a5a"
         android:textColor="#ffffffff"
         android:textSize="35dp"
         android:gravity="center_horizontal"
-        android:id="@+id/Event_List_TXT">
+        android:id="@+id/Event_List_TXT"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
     </TextView>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:paddingTop="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <ListView
             android:id="@+id/listView"
