@@ -25,7 +25,7 @@ public class ChatPageActivity extends Activity
         bl = new AttenderBL();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_page);
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.Chat_Rooms_listView);
         appData = (AppData) getApplicationContext();
 
         events = bl.getUserEvents(appData.get_userToken());

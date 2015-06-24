@@ -32,10 +32,9 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/listView"
+            android:id="@+id/Chat_Rooms_listView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffffff">
+            android:layout_height="wrap_content">
         </ListView>
     </LinearLayout>
 </LinearLayout>
