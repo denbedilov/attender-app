@@ -23,7 +23,8 @@ public class MainPageActivity extends Activity {
     private AttenderBL bl;
     private Toast toast;
     private DialogAdapter dialog;
-
+    private Button logoutUser;
+    private View chat,calender;
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
@@ -38,6 +39,9 @@ public class MainPageActivity extends Activity {
         bl = new AttenderBL();
 
         userName = (TextView) findViewById(R.id.User_Name_textView);
+        chat = findViewById(R.id.Chat_Layout);
+        calender = findViewById(R.id.Event_Calendar_Layout);
+        logoutUser = (Button) findViewById(R.id.user_logout_cmd);
 
         //=============================  Global AppData Set  ======================================
 
@@ -46,7 +50,6 @@ public class MainPageActivity extends Activity {
         appData.getSavedData();
 
 
-        Button logoutUser = (Button) findViewById(R.id.user_logout_cmd);
 
 
         //====================== Main Page login handle ======================================
@@ -55,24 +58,22 @@ public class MainPageActivity extends Activity {
 
     private void loadUserName(TextView userName) {
         if (appData.get_loginType().equals("guest"))
+        {
             userName.setText("Guest");
-        else
+            chat.setAlpha(.5f);
+            calender.setAlpha(.5f);
+            logoutUser.setText("Log In");
+        }
+        else{
             userName.setText(appData.get_userName());
+        }
     }
 
     public void logOutMethod(View v) {
-        switch (appData.get_loginType()) {
-            case "google":
-                userLogoutPressed(v);
-                break;
-            case "facebook":
-                userLogoutPressed(v);
-                AccessToken.setCurrentAccessToken(null);
-                break;
-            case "server":
-                userLogoutPressed(v);
-                break;
+        if (appData.get_loginType().compareTo("facebook")==0) {
+            AccessToken.setCurrentAccessToken(null);
         }
+        userLogoutPressed(v);
     }
 
     public void userLogoutPressed(View v) {
@@ -111,8 +112,7 @@ public class MainPageActivity extends Activity {
     public void onBackPressed() {
         if (appData.get_loginType().compareTo("guest") == 0)
             finish();
-        else
-        {
+        else {
             dialog.printDialog("press logout button to exit", getApplicationContext());
         }
     }

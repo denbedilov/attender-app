@@ -47,8 +47,7 @@ public class searchEventActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Intent myIntent = new Intent(getApplicationContext(), Event_Page_Activity.class);
-                int eventNum = position;
-                myIntent.putExtra("CurrentEvent",events.get(eventNum));
+                myIntent.putExtra("CurrentEvent",events.get(position));
                 startActivity(myIntent);
             }
         });
@@ -149,25 +148,12 @@ public class searchEventActivity extends Activity
         }).start();
     }
 
-
-    public void chatPressed(View v)
-    {
-        Intent intent=new Intent(this,ChatPageActivity.class);
-        startActivity(intent);
-    }
-
     private void printAlertDialog(String message)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("LOGIN DIALOG");
         builder.setMessage(message);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //do things
-            }
-        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 //do things

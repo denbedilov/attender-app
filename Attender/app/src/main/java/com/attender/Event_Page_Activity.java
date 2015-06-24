@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+
 import com.facebook.AccessToken;
 
 import java.util.ArrayList;
@@ -19,29 +20,30 @@ public class Event_Page_Activity extends Activity {
     private Switch attendSwitch;
     private Event currEvent;
     private AttenderBL bl;
-    private  AppData appData;
+    private AppData appData;
     private DialogAdapter dialog;
+    private Button attendeesBTN, chatBTN;
+    private Intent myIntent;
+    private TextView tv;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.event_page);
         ArrayList<Event> userEvents;
         ArrayList<Attendee> attendees;
-        Button attendeesBTN=(Button)findViewById(R.id.attendees_cmd);
-        Button chatBTN=(Button)findViewById(R.id.chat_cmd);
+        attendeesBTN = (Button) findViewById(R.id.attendees_cmd);
+        chatBTN = (Button) findViewById(R.id.chat_cmd);
         appData = (AppData) getApplicationContext();
         super.onCreate(savedInstanceState);
-        TextView tv;
-        boolean checkedFlag=false;
+        boolean checkedFlag = false;
         dialog = new DialogAdapter();
         bl = new AttenderBL();
-        setContentView(R.layout.event_page);
-        Intent myIntent=getIntent();
-        currEvent=  (Event)myIntent.getSerializableExtra("CurrentEvent");
-        if(appData.get_loginType().compareTo("facebook")==0) {
-            attendees=bl.getAttendees(currEvent.getId(),appData.get_userToken(), AccessToken.getCurrentAccessToken().getToken());
-        }
-        else {
-            attendees=bl.getAttendees(currEvent.getId(),appData.get_userToken(),null);
+        myIntent = getIntent();
+        currEvent = (Event) myIntent.getSerializableExtra("CurrentEvent");
+        if (appData.get_loginType().compareTo("facebook") == 0) {
+            attendees = bl.getAttendees(currEvent.getId(), appData.get_userToken(), AccessToken.getCurrentAccessToken().getToken());
+        } else {
+            attendees = bl.getAttendees(currEvent.getId(), appData.get_userToken(), null);
         }
 
         //==========  ATTEND   =====================
@@ -49,28 +51,25 @@ public class Event_Page_Activity extends Activity {
         attendSwitch = (Switch) findViewById(R.id.attend_switch);
         userEvents = appData.get_userEventList();
 
-        if(userEvents!=null)
-        {
-            for(Event ev: userEvents)
-                if(ev.equalscheck(currEvent)) {
+        if (userEvents != null) {
+            for (Event ev : userEvents)
+                if (ev.equalscheck(currEvent)) {
                     attendSwitch.setChecked(true);
                     checkedFlag = true;
                 }
-            if(!checkedFlag) {
+            if (!checkedFlag) {
                 attendSwitch.setChecked(false);
             }
         }
-        if(appData.get_loginType().compareTo("guest")==0)
-        {
+        if (appData.get_loginType().compareTo("guest") == 0) {
             chatBTN.setAlpha(.5f);
             attendeesBTN.setAlpha(.5f);
             attendSwitch.setAlpha(.5f);
 
         }
         attendSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if(appData.get_loginType().compareTo("guest")==0)
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (appData.get_loginType().compareTo("guest") == 0)
                     printToastDialog("For Logged In User Only");
                 else {
                     bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked);
@@ -85,85 +84,83 @@ public class Event_Page_Activity extends Activity {
 
 
         //==========  DATE   ==================
-        tv =(TextView)findViewById(R.id.date_lbl);
+        tv = (TextView) findViewById(R.id.date_lbl);
         tv.setText(currEvent.getDate());
 
         //==========  NAME   ==================
-        tv =(TextView)findViewById(R.id.evName_lbl);
+        tv = (TextView) findViewById(R.id.evName_lbl);
         tv.setText(currEvent.getName());
 
         //==========  TIME   ==================
-        tv =(TextView)findViewById(R.id.time_lbl);
+        tv = (TextView) findViewById(R.id.time_lbl);
         tv.setText(currEvent.getTime());
 
         //==========  CITY   ==================
-        tv =(TextView)findViewById(R.id.cityName_lbl);
+        tv = (TextView) findViewById(R.id.cityName_lbl);
         tv.setText(currEvent.getCity());
 
         //==========  ADDRESS   ==================
-        tv =(TextView)findViewById(R.id.address_lbl);
+        tv = (TextView) findViewById(R.id.address_lbl);
         tv.setText(currEvent.getAddress());
 
         //==========  DESCRIPTION   ==================
-        tv =(TextView)findViewById(R.id.description_lbl);    ///TO ADD
+        tv = (TextView) findViewById(R.id.description_lbl);    ///TO ADD
         tv.setText(currEvent.getDescription());
 
         //==========  EVENT URL   ==================
-        tv =(TextView)findViewById(R.id.url_lbl);
+        tv = (TextView) findViewById(R.id.url_lbl);
         tv.setClickable(true);
         tv.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='"+currEvent.getEventUrl()+"'> Event Info </a>";
+        String text = "<a href='" + currEvent.getEventUrl() + "'> Event Info </a>";
         tv.setText(Html.fromHtml(text));
 
         //==========  HOST   ==================
-        tv =(TextView)findViewById(R.id.host_lbl);
+        tv = (TextView) findViewById(R.id.host_lbl);
         tv.setText(currEvent.getHost());
 
         //==========  PRICE   ==================
-        tv =(TextView)findViewById(R.id.price_lbl);  //chang to price
+        tv = (TextView) findViewById(R.id.price_lbl);  //chang to price
         tv.setText(currEvent.getPrice());
-        if(!(currEvent.getPrice().contains("free"))) {
+        if (!(currEvent.getPrice().contains("free"))) {
             tv.setClickable(true);
             tv.setMovementMethod(LinkMovementMethod.getInstance());
-            text = "<a href='"+currEvent.getPrice()+"'> Price Info </a>";
+            text = "<a href='" + currEvent.getPrice() + "'> Price Info </a>";
             tv.setText(Html.fromHtml(text));
 
         }
         //==========  ATTENDEES   ==================
-        tv =(TextView)findViewById(R.id.attending_lbl);
-        if(attendees!=null)
+        tv = (TextView) findViewById(R.id.attending_lbl);
+        if (attendees != null)
             tv.setText(String.valueOf(attendees.size()));
         else
             tv.setText("no attendees");
 
     }
 
-    public void chatPressed(View v)
-    {
-        if(appData.get_loginType().compareTo("guest")==0)
+    public void chatPressed(View v) {
+        if (appData.get_loginType().compareTo("guest") == 0)
             printToastDialog("For logged-in User Only");
-        else{
-        if (attendSwitch.isChecked()) {
-            Intent myIntent = new Intent(getApplicationContext(), ChatActivity.class);
-            myIntent.putExtra("EventID", currEvent.getId());
-            startActivity(myIntent);
-        } else
-            printToastDialog("You need to attend to open chat");
-    }
-    }
-    public void attendeesPressed(View v)
-    {
-            if(appData.get_loginType().compareTo("guest")==0)
-                printToastDialog("For Logged In User Only");
         else {
-                Intent intent = new Intent(this, AttendeesPage.class);
-                intent.putExtra("eventId", currEvent.getId());
-                startActivity(intent);
-            }
+            if (attendSwitch.isChecked()) {
+                Intent myIntent = new Intent(getApplicationContext(), ChatActivity.class);
+                myIntent.putExtra("EventID", currEvent.getId());
+                startActivity(myIntent);
+            } else
+                printToastDialog("You need to attend to open chat");
+        }
     }
 
-    private void printToastDialog(String message)
-    {
+    public void attendeesPressed(View v) {
+        if (appData.get_loginType().compareTo("guest") == 0)
+            printToastDialog("For Logged In User Only");
+        else {
+            Intent intent = new Intent(this, AttendeesPage.class);
+            intent.putExtra("eventId", currEvent.getId());
+            startActivity(intent);
+        }
+    }
+
+    private void printToastDialog(String message) {
         dialog.printDialog(message, getApplicationContext());
     }
 }
