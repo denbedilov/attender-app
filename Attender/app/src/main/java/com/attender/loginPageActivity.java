@@ -37,6 +37,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.games.internal.game.GameSearchSuggestion;
 import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
 //import com.google.android.gms.plus.model.people.PersonBuffer;
@@ -60,6 +61,8 @@ public class loginPageActivity extends Activity implements
 
     private boolean mShouldResolve = false;
     private boolean mIsResolving = false;
+    private boolean onclickPressed = false;
+
     private static ProgressDialog progress;
     private boolean cancelGoogle = false;
     /* facebook login callback */
@@ -108,6 +111,7 @@ public class loginPageActivity extends Activity implements
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         SignInButton bu = (SignInButton) findViewById(R.id.sign_in_button);
         bu.setColorScheme(SignInButton.COLOR_LIGHT);
+
 
         //================================== internet connection ===============================
 
@@ -166,6 +170,11 @@ public class loginPageActivity extends Activity implements
     @Override
     protected void onStart() {
         super.onStart();
+        Bundle google_state = getIntent().getExtras();
+        if (google_state != null)
+            if (google_state.getString("GOOGLE_LOGOUT_STATE").equals("logout")) {
+                mGoogleApiClient.connect();
+            }
     }
 
     @Override
@@ -183,14 +192,8 @@ public class loginPageActivity extends Activity implements
         } else
             printDialog("Check your internet connection");
     }
-    private void onSignOutClicked() {
-        // Clear the default account so that GoogleApiClient will not automatically
-        // connect in the future.
-        if (mGoogleApiClient.isConnected()) {
-            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-            mGoogleApiClient.disconnect();
-        }
-    }
+
+
     //===========================================user register==========================================
     public void registerPressed(View v) {
         Intent intent = new Intent(this, RegistrationActivity.class);
@@ -198,15 +201,18 @@ public class loginPageActivity extends Activity implements
     }
 
     boolean pressed = false;
+
     private void onSignInClicked() {
         // User clicked the sign-in button, so begin the sign-in process and automatically
         // attempt to resolve any errors that occur.
+        onclickPressed = true;
         mShouldResolve = true;
         mGoogleApiClient.connect();
 
         // Show a message to the user that we are signing in.
 //        mStatusTextView.setText(R.string.signing_in);
     }
+
     //=======================================user login=================================================
     public void userLoginPressed(View v) {
         LinearLayout emailLayout = (LinearLayout) findViewById(R.id.email_layout);
@@ -298,58 +304,65 @@ public class loginPageActivity extends Activity implements
         final Intent intent = new Intent(this, MainPageActivity.class);
         mShouldResolve = false;
         if (mGoogleApiClient.isConnected()) {
-
-            progress = new ProgressDialog(this);
-            progress.setMessage("Logging in, please wait...");
-            progress.setCancelable(false);
-            progress.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    if (mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting())
-                        cancelGoogle = true;
-                }
-            });
-            progress.show();
-
-
-            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-                new Thread(new Runnable() {
-
-                    int status;
-                    String tok;
-
+            if (onclickPressed) {
+                progress = new ProgressDialog(this);
+                progress.setMessage("Logging in, please wait...");
+                progress.setCancelable(false);
+                progress.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void run() {
-                        String firstname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName());
-                        String lastname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
-                        tok = bl.googleLogin(
-                                firstname,
-                                lastname,
-                                Plus.AccountApi.getAccountName(mGoogleApiClient)
-                        );
-                        status = getStatus(tok);
-                        if (status == 200) {
-                            appData.resetData("google", tok.substring(3), firstname + " " + lastname);
-                            intent.putExtra("name", capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName()) + " " +
-                                    capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName()));
-                        } else {
-                            appData.resetData("guest", null, null);
-                            printDialog("google login failed");
-                        }
-                        if (!cancelGoogle)
-                            startActivity(intent);
-                        else
-                            mGoogleApiClient.disconnect();
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progress.dismiss();
-                            }
-                        });
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        if (mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting())
+                            cancelGoogle = true;
                     }
-                }).start();
+                });
+                progress.show();
+
+
+                if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+                    new Thread(new Runnable() {
+
+                        int status;
+                        String tok;
+
+                        @Override
+                        public void run() {
+                            String firstname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName());
+                            String lastname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+                            tok = bl.googleLogin(
+                                    firstname,
+                                    lastname,
+                                    Plus.AccountApi.getAccountName(mGoogleApiClient)
+                            );
+                            status = getStatus(tok);
+                            if (status == 200) {
+                                appData.resetData("google", tok.substring(3), firstname + " " + lastname);
+                                intent.putExtra("name", capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName()) + " " +
+                                        capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName()));
+                            } else {
+                                appData.resetData("guest", null, null);
+                                printDialog("google login failed");
+                            }
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (!cancelGoogle){
+                                        onclickPressed = false;
+                                        startActivity(intent);
+                                    }
+                                    else
+                                        mGoogleApiClient.disconnect();
+                                    progress.dismiss();
+                                }
+                            });
+                        }
+                    }).start();
+                }
+            } else {
+                Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+                mGoogleApiClient.disconnect();
+
             }
         }
     }
@@ -378,7 +391,7 @@ public class loginPageActivity extends Activity implements
             mIntentInProgress = false;
 
 //            if (!mGoogleApiClient.isConnected()) {
-                mGoogleApiClient.reconnect();
+            mGoogleApiClient.connect();
 //            }
         }
     }

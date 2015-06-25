@@ -1,6 +1,7 @@
 package com.attender;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,12 +13,17 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.Profile;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.plus.People;
+import com.google.android.gms.plus.Plus;
 
 /**
  * Created by Shai on 17/05/2015.
  */
 
-public class MainPageActivity extends Activity {
+public class MainPageActivity extends Activity{
     private AppData appData;
     private TextView userName;
     private AttenderBL bl;
@@ -79,9 +85,12 @@ public class MainPageActivity extends Activity {
     public void userLogoutPressed(View v) {
         Intent intent = new Intent(this, loginPageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (appData.get_loginType().compareTo("google")==0) {
+            intent.putExtra("GOOGLE_LOGOUT_STATE", "logout");
+    }
+        appData.resetData("guest", null, null);
         startActivity(intent);
         finish(); // call this to finish the current activity
-        appData.resetData("guest", null, null);
     }
 
     public void chat_pressed(View v) {
