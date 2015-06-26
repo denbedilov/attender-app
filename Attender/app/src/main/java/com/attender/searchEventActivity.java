@@ -27,6 +27,7 @@ public class searchEventActivity extends Activity
     private static ProgressDialog progress;
     private static Context context;
     int lisFlag = 0;
+    boolean cancelPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -93,6 +94,7 @@ public class searchEventActivity extends Activity
 
     public void searchPressed(View v)
     {
+        cancelPressed = false;
         progress = new ProgressDialog(this);
         progress.setMessage("Loading events, please wait...");
         progress.setCancelable(false);
@@ -100,8 +102,7 @@ public class searchEventActivity extends Activity
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                // may we close this page, or dialog only?????
-//                finish();
+                cancelPressed = true;
             }
         });
         progress.show();
@@ -132,14 +133,14 @@ public class searchEventActivity extends Activity
                     @Override
                     public void run()
                     {
-                        if(events == null)
-                        {
-                            listView.setAdapter(null);
-                            printAlertDialog("No events to show!");
-                        }
-                        else {
-                            EventAdapter adapter = new EventAdapter(context, events);
-                            listView.setAdapter(adapter);
+                        if(!cancelPressed) {
+                            if (events == null) {
+                                listView.setAdapter(null);
+                                printAlertDialog("No events to show!");
+                            } else {
+                                EventAdapter adapter = new EventAdapter(context, events);
+                                listView.setAdapter(adapter);
+                            }
                         }
                         progress.dismiss();
                     }
