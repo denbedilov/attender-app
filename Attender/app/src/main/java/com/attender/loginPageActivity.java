@@ -170,14 +170,11 @@ public class loginPageActivity extends Activity implements
     @Override
     protected void onStart() {
         super.onStart();
-        if (getIntent().hasExtra("GOOGLE_LOGOUT_STATE")) {
-            Bundle google_state = getIntent().getExtras();
-            if (google_state != null)
-                if (google_state.getString("GOOGLE_LOGOUT_STATE").equals("logout")) {
-                    mGoogleApiClient.connect();
-                }
-
-        }
+        Bundle google_state = getIntent().getExtras();
+        if (google_state != null)
+            if (google_state.getString("GOOGLE_LOGOUT_STATE").equals("logout")) {
+                mGoogleApiClient.connect();
+            }
     }
 
     @Override
@@ -350,10 +347,11 @@ public class loginPageActivity extends Activity implements
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (!cancelGoogle) {
+                                    if (!cancelGoogle){
                                         onclickPressed = false;
                                         startActivity(intent);
-                                    } else
+                                    }
+                                    else
                                         mGoogleApiClient.disconnect();
                                     progress.dismiss();
                                 }
