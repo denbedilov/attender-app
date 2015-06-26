@@ -176,7 +176,6 @@ public class loginPageActivity extends Activity implements
                 if (google_state.getString("GOOGLE_LOGOUT_STATE").equals("logout")) {
                     mGoogleApiClient.connect();
                 }
-
         }
     }
 
@@ -304,68 +303,75 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        final Intent intent = new Intent(this, MainPageActivity.class);
         mShouldResolve = false;
-        if (mGoogleApiClient.isConnected()) {
+        if (mGoogleApiClient.isConnected())
+        {
             if (onclickPressed) {
-                progress = new ProgressDialog(this);
-                progress.setMessage("Logging in, please wait...");
-                progress.setCancelable(false);
-                progress.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        if (mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting())
-                            cancelGoogle = true;
-                    }
-                });
-                progress.show();
-
-
-                if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-                    new Thread(new Runnable() {
-
-                        int status;
-                        String tok;
-
-                        @Override
-                        public void run() {
-                            String firstname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName());
-                            String lastname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
-                            tok = bl.googleLogin(
-                                    firstname,
-                                    lastname,
-                                    Plus.AccountApi.getAccountName(mGoogleApiClient)
-                            );
-                            status = getStatus(tok);
-                            if (status == 200) {
-                                appData.resetData("google", tok.substring(3), firstname + " " + lastname);
-                                intent.putExtra("name", capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName()) + " " +
-                                        capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName()));
-                            } else {
-                                appData.resetData("guest", null, null);
-                                printDialog("google login failed");
-                            }
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (!cancelGoogle) {
-                                        onclickPressed = false;
-                                        startActivity(intent);
-                                    } else
-                                        mGoogleApiClient.disconnect();
-                                    progress.dismiss();
-                                }
-                            });
-                        }
-                    }).start();
-                }
+                connectToGoogle();
             } else {
                 Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
                 mGoogleApiClient.disconnect();
 
             }
+        }
+    }
+
+    private void connectToGoogle() {
+        final Intent intent = new Intent(this, MainPageActivity.class);
+//        show the progrees bar
+        progress = new ProgressDialog(this);
+        progress.setMessage("Logging in, please wait...");
+        progress.setCancelable(false);
+        progress.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                if (mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting())
+                    cancelGoogle = true;
+            }
+        });
+        progress.show();
+
+
+        if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+            new Thread(new Runnable() {
+
+                int status;
+                String tok;
+
+                @Override
+                public void run() {
+                    //Get User's Data
+                    String firstname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName());
+                    String lastname = capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName());
+                    tok = bl.googleLogin(
+                            firstname,
+                            lastname,
+                            Plus.AccountApi.getAccountName(mGoogleApiClient)
+                    );
+                    status = getStatus(tok);
+                    if (status == 200) {
+                        appData.resetData("google", tok.substring(3), firstname + " " + lastname);
+                        intent.putExtra("name", capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getGivenName()) + " " +
+                                capitalize(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getName().getFamilyName()));
+                    } else {
+                        appData.resetData("guest", null, null);
+                        printDialog("google login failed");
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!cancelGoogle) {
+                                onclickPressed = false;
+                                startActivity(intent);
+                            } else
+                                mGoogleApiClient.disconnect();
+                            progress.dismiss();
+                        }
+                    });
+                }
+            }).start();
         }
     }
 
@@ -385,16 +391,13 @@ public class loginPageActivity extends Activity implements
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        callbackManager.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             if (resultCode != RESULT_OK) {
                 mShouldResolve = false;
             }
             mIntentInProgress = false;
 
-//            if (!mGoogleApiClient.isConnected()) {
             mGoogleApiClient.connect();
-//            }
         }
     }
 
@@ -410,14 +413,7 @@ public class loginPageActivity extends Activity implements
 
     @Override
     public void onResult(People.LoadPeopleResult peopleData) {
-//        if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
-//            PersonBuffer personBuffer = peopleData.getPersonBuffer();
-//            try {
-//                int count = personBuffer.getCount();
-//            } finally {
-//                personBuffer.close();
-//            }
-//        }
+
     }
 
     public void confirmPressed(View v) {
