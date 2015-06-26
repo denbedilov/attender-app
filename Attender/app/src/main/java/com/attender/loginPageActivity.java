@@ -392,6 +392,7 @@ public class loginPageActivity extends Activity implements
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             if (resultCode != RESULT_OK) {
                 mShouldResolve = false;
