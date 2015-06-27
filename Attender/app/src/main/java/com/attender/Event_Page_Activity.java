@@ -70,14 +70,19 @@ public class Event_Page_Activity extends Activity {
         attendSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (appData.get_loginType().compareTo("guest") == 0)
-                    printToastDialog("For Logged In User Only");
+                {
+                    if (attendSwitch.isChecked()) {
+                        attendSwitch.setChecked(false);
+                        printToastDialog("For Logged In User Only");
+                    }
+                }
                 else {
                     bl.Attend(appData.get_userToken(), currEvent.getId(), isChecked);
                     appData.set_userEventList(bl.getUserEvents(appData.get_userToken()));
                     if (isChecked)
                         printToastDialog("Attending");
                     else
-                        printToastDialog("Unattending");
+                        printToastDialog("Not Attending");
                 }
             }
         });
