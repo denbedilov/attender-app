@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.StrictMode;
 import android.util.Base64;
 import android.util.Log;
@@ -65,6 +66,7 @@ public class loginPageActivity extends Activity implements
 
     private static ProgressDialog progress;
     private boolean cancelGoogle = false;
+    private boolean pressedTwice = false;
     /* facebook login callback */
     CallbackManager callbackManager;
     AttenderBL bl;
@@ -374,6 +376,26 @@ public class loginPageActivity extends Activity implements
                 }
             }).start();
         }
+    }
+    @Override
+    public void onBackPressed(){
+        if(pressedTwice)
+        {
+            super.onBackPressed();
+            finish();
+        }
+        pressedTwice = true;
+        printDialog("Press Again to Exit");
+
+        new CountDownTimer(2000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                pressedTwice = false;
+            }
+        }.start();
     }
 
     protected static String capitalize(final String line) {
